@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/join.css">
+</head>
+
+<body>
+    <div class="background">
+        <div class="mobile-container">
+            <button type="button" class="btn-close" aria-label="Close"></button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-2"></div>
+                    <div class="col-lg-6 col-md-8 join-box">
+                        <div class="col-lg-12 join-key">
+                            <i class="fa fa-key" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-lg-12 join-title">
+                            <img src="../img/logo.png">
+                        </div>
+
+                        <div class="col-lg-12 join-form">
+                            <div class="col-lg-12 join-form">
+                                <form>
+                                    <div class="form-group join-email">
+                                        <label class="form-control-label">E-mail을 입력해주세요</label>
+                                        <input type="text" class="form-control">
+                                        <button class="duplicate_check_button">중복확인</button>
+                                        <p id="result"></p>
+                                    </div>
+                                    <div class="form-group join-birth-date">
+                                        <label class="form-control-label">생년월일을 입력해주세요</label>
+                                        <div class="resident-id-input">
+                                            <input type="text" id="residentIdFront" name="residentIdFront"
+                                                pattern="\d{6}" maxlength="6" placeholder="YYMMDD" required
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                            <span class="hyphen">-</span>
+                                            <input type="password" id="residentIdBack" name="residentIdBack"
+                                                pattern="[1-4]{1}" maxlength="1" placeholder="1~4" required
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                            <span class="mask">******</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group join-email">
+                                        <label class="form-control-label">이름을 입력해주세요</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                    <div class="form-group join-email">
+                                        <label class="form-control-label">비밀번호를 입력해주세요</label>
+                                        <input type="password" class="form-control">
+                                    </div>
+                                    <div class="col-lg-12 joinbttm">
+                                        <div class="col-lg-6 join-btm join-text">
+                                            <!-- Error Message -->
+                                        </div>
+                                        <div class="col-lg-6 join-btm join-button">
+                                            <button type="submit" class="btn btn-outline-primary">JOIN</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="another-join-form">
+                                <span>or</span>
+                            </div>
+                            <div class="google-join-form">
+                                <!-- 구글 회원가입 폼 자리 -->
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-2"></div>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                    crossorigin="anonymous"></script>
+</body>
+
+</html>
