@@ -540,10 +540,73 @@ span, a {
     margin-top: 20px;
 }
 
-.guild-list {
-    height: 200px;
+.guild-info {
+    height: 220px;
     margin: 30px auto;
     margin-top: 5px;
     background-color: rgba(249, 247, 247, 1);
     overflow: hidden;
+    border-radius: 10px;
+}
+
+.guild-title {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+.guild-icon {
+    width: 90px;
+    height: auto;
+}
+
+.tier-icon {
+    width: 30px;
+    height: auto;
+    position: relative;
+    left: 20px;
+}
+
+.guild-title-name {
+    margin-left: 20px;
+}
+
+.guild-count {
+    position: relative;
+    left: 170px;
+}
+
+.guild-leader-name {
+    position: relative;
+    left: 30px;
+    top: 30px;
+    font-size: 12px;
+}
+
+.guild-info-txt {
+    position: relative;
+    left: 20px;
+    top: 50px;
+}
+
+.guild-introduction {
+    position: relative;
+    left: 10px;
+}
+
+.guild-tier {
+    position: relative;
+    font-size: 13px;
+    left: -100px;
+    top: 40px;
+}
+
+.need-line {
+    position: relative;
+    font-size: 13px;
+    left: 20px;
+    top: 40px;
 }
