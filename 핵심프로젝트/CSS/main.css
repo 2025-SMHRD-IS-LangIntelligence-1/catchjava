@@ -13,6 +13,7 @@ span, a {
     background-size: cover;
 }
 
+/* 모바일 컨테이너 */
 .mobile-container {
     width: 100%;
     max-width: 480px;
@@ -82,23 +83,121 @@ span, a {
     height: 100px;
 }
 
-.profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: none;
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
 }
 
 .login {
     object-fit: cover;
     text-decoration-line: none;
     color: rgba(24, 23, 28, 1);
-    height: 40px;
-    padding-top: 8px;
+    display: block;
 }
 
 .login:hover {
+    color: rgba(24, 23, 28, 1);
+}
+
+.profile {
+    position: relative;
+    border: none;
+    object-fit: cover;
+    font-size: 45px;
+    color: rgba(225, 25, 35, 1);
+    display: none;
+}
+
+/* user프로필 누르면 나오는 창 */
+.user-profile {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 350px;
+    height: 100vh;
+    background-color: rgba(238, 238, 238, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 20px;
+    z-index: 1;
+    display: none;
+}
+
+.user-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.back {
+    border: none;
+    margin-left: 15px;
+    background-color: rgba(238, 238, 238, 1);
+    font-size: 30px;
+}
+
+.user-info {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.gear {
+    border: none;
+    margin-right: 15px;
+    background-color: rgba(238, 238, 238, 1);
+    font-size: 25px;
+}
+
+.user-profile-info {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: relative;
+    left: 20px;
+    top: 25px;
+}
+
+.user-profile-info .profile {
+    font-size: 60px;
+}
+
+.user-profile-info .user-name {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.user-profile-info .custom-line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+.user-profile-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    position: relative;
+    left: 20px;
+    top: 5px;
+}
+
+.user-profile-list span {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.user-profile-list span a {
+    text-decoration-line: none;
+}
+
+.user-profile-list span a:hover {
     color: rgba(24, 23, 28, 1);
 }
 
@@ -138,7 +237,7 @@ span, a {
 
 /* 오늘의 길드 추천 */
 .today-guild-recommend {
-    display: none;;
+    display: block;
 }
 
 .main-content-title {
@@ -149,6 +248,8 @@ span, a {
 #carouselExampleIndicators {
     width: 450px;
     margin: 0 auto;
+    position: relative;
+    z-index: -1;
 }
 
 .carousel-indicators button {
@@ -163,6 +264,7 @@ span, a {
     overflow: hidden;
     position: relative;
     overflow-x: hidden;
+    z-index: -1;
 }
 
 .carousel-itme {
@@ -534,6 +636,11 @@ span, a {
     margin: 0 10px;
 }
 
+/* 길드 없을 때 페이지 */
+.without-a-guild-page {
+    display: none;
+}
+
 .guild-list-box {
     width: 450px;
     margin: 0 auto;
@@ -609,4 +716,169 @@ span, a {
     font-size: 13px;
     left: 20px;
     top: 40px;
+}
+
+/* 길드 있을 때 페이지 */
+.having-a-guild-page {
+    display: none;
+}
+
+.own-guild-box {
+    width: 450px;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+.own-guild {
+    height: auto;
+    margin: 30px auto;
+    margin-top: 5px;
+    background-color: rgba(249, 247, 247, 1);
+    overflow: hidden;
+}
+
+.own-guild-title {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.own-guild-icon {
+    width: 100px;
+    height: auto;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+.own-guild-name {
+    position: relative;
+    left: 30px;
+    top: 10px;
+    font-size: 20px;
+}
+
+.own-guild-count {
+    position: relative;
+    left: 200px;
+    top: 5px;
+}
+
+.own-guild-tier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 25px;
+    top: 20px;
+}
+
+.own-guild-tier-img {
+    width: 40px;
+    height: auto;
+}
+
+.progreess {
+    background-color: rgba(249, 247, 247, 1);
+    width: 250px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin-left: 5px;
+}
+
+.progress-bar {
+    width: 40%;
+    background-color: rgba(225, 25, 35, 1);
+    color: rgba(24, 23, 28, 1);
+    font-weight: bold;
+}
+
+.own-guild-introduction {
+    background-color: rgba(249, 247, 247, 1);
+    width: 89%;
+    height: 140px;
+    position: relative;
+    left: 20px;
+    top: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+}
+
+.own-guild-introduction-title {
+    position: relative;
+    left: 20px;
+    top: 10px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.own-guild-introduction-content {
+    position: relative;
+    left: 20px;
+    top: 10px;
+}
+
+.own-guild-introduction-box .custom-line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.guild-mem-title {
+    position: relative;
+    left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.guild-mem-list-box {
+    background-color: rgba(249, 247, 247, 1);
+    width: 89%;
+    height: 75px;
+    position: relative;
+    left: 20px;
+    top: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+}
+
+.guild-list-profile {
+    width: 50px;
+    height: auto;
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+.guild-list-user-tier {
+    width: 30px;
+    height: auto;
+    position: relative;
+    left: 10px;
+}
+
+.guild-list-username {
+    position: relative;
+    left: 10px;
+    top: 3px;
+}
+
+.guild-list-user-state {
+    position: relative;
+    left: 220px;
+    top: 3px;
+    font-size: 12px;
+}
+
+.guild-list-main-line {
+    position: relative;
+    top: 30px;
+    left: -100px;
+}
+
+.guild-list-secondary-line {
+    position: relative;
+    top: 30px;
+    left: -90px;
 }

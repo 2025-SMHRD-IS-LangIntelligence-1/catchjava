@@ -20,8 +20,35 @@
                     <img src="../img/logo.png" class="logo">
                 </div>
                 <div class="right">
-                    <img src="../img/profile.jpg" class="profile">
+                    <button class="profile" type="submit">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </button>
                     <a href="login.html" class="login">로그인</a>
+                    <!-- 유저 프로필 -->
+                    <div class="user-profile">
+                        <div class="user-profile-header">
+                            <button class="back" type="submit">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <span class="user-info">내정보</span>
+                            <button class="gear" type="submit">
+                                <i class="fa-solid fa-gear"></i>
+                            </button>
+                        </div>
+                        <div class="user-profile-info">
+                            <button class="profile" type="submit">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </button>
+                            <span class="user-name">유저 이름</span>
+                        </div>
+                        <div class="custom-line"></div>
+                        <div class="user-profile-list">
+                            <span><a href="#">개인정보 수정</a></span>
+                            <span><a href="#">게임프로필 수정</a></span>
+                            <span><a href="#">최근 본 글</a></span>
+                            <span><a href="#">로그아웃</a></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 메뉴바 -->
@@ -245,7 +272,46 @@
             </div>
             <!-- 길드 있을 때 페이지 -->
             <div class="having-a-guild-page">
-
+                <div class="own-guild-box">
+                    <div class="own-guild">
+                        <div class="own-guild-title">
+                            <img src="../img/guild-icon.png" class="own-guild-icon">
+                            <div class="own-guild-explanation">
+                                <span class="own-guild-name">길드 이름</span>
+                                <span class="own-guild-count">1/5</span>
+                                <div class="own-guild-tier">
+                                    <img src="../img/guild-tier.png" class="own-guild-tier-img">
+                                    <div class="progreess">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="1"
+                                        aria-valuemin="0" aria-valuemax="5">
+                                            2승
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="own-guild-introduction">
+                            <div class="own-guild-introduction-box">
+                                <span class="own-guild-introduction-title">공지제목</span>
+                                <div class="custom-line"></div>
+                                <span class="own-guild-introduction-content">공지내용</span>
+                            </div>
+                        </div>
+                        <div class="guild-mem">
+                            <span class="guild-mem-title">길드 멤버</span>
+                            <div class="guild-mem-list-box">
+                                <div class="guild-list">
+                                    <img src="../img/profile.jpg" class="guild-list-profile">
+                                    <img src="../img/guild-tier.png" class="guild-list-user-tier">
+                                    <span class="guild-list-username">이름</span>
+                                    <span class="guild-list-user-state">길드장</span>
+                                    <span class="guild-list-main-line">주라인 : 미드</span>
+                                    <span class="guild-list-secondary-line">부라인 : 원딜</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
