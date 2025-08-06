@@ -1,16 +1,20 @@
-span, a {
+/* 기본 텍스트 스타일 */
+span,
+a {
     color: rgba(24, 23, 28, 1);
 }
 
+/* 배경 설정 */
 .background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
     background-image: url("../img/유미.jpg");
     background-size: cover;
+    background-position: center;
+    z-index: -1;
 }
 
 /* 모바일 컨테이너 */
@@ -19,26 +23,20 @@ span, a {
     max-width: 480px;
     margin: 0 auto;
     height: 100vh;
-
     background-color: rgba(238, 238, 238, 1);
     padding: 0px;
     box-sizing: border-box;
-
     position: relative;
     margin-left: auto;
     margin-right: 25vw;
     z-index: 1;
-
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
-    /* 스크롤 가능하게 설정 */
     overflow-y: auto;
     overflow-x: hidden;
-    -ms-overflow-style: none;  /* IE, Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-/* Chrome, Safari에서 스크롤바 안 보이게 */
 .mobile-container::-webkit-scrollbar {
     display: none;
 }
@@ -49,7 +47,8 @@ span, a {
     }
 }
 
-.top-bar {
+/* 헤더 부분 */
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,11 +58,12 @@ span, a {
     margin-top: 0px;
 }
 
-.left, .right {
+.header__left,
+.header__right {
     width: 100px;
 }
 
-.center {
+.header__center {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -71,19 +71,7 @@ span, a {
     font-weight: bold;
 }
 
-.right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-}
-
-.logo {
-    width : 100px;
-    height: 100px;
-}
-
-.right {
+.header__right {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,18 +79,23 @@ span, a {
     height: 80px;
 }
 
-.login {
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+.link--login {
     object-fit: cover;
     text-decoration-line: none;
     color: rgba(24, 23, 28, 1);
     display: block;
 }
 
-.login:hover {
+.link--login:hover {
     color: rgba(24, 23, 28, 1);
 }
 
-.profile {
+.button--profile {
     position: relative;
     border: none;
     object-fit: cover;
@@ -111,8 +104,8 @@ span, a {
     display: none;
 }
 
-/* user프로필 누르면 나오는 창 */
-.user-profile {
+/* user 프로필 패널 */
+.user-panel {
     position: absolute;
     top: -3px;
     right: -3px;
@@ -122,35 +115,35 @@ span, a {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 20px;
     z-index: 1;
-    display: none;
+    display: block;
 }
 
-.user-profile-header {
+.user-panel__header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
 
-.back {
+.button--close {
     border: none;
     margin-left: 15px;
     background-color: rgba(238, 238, 238, 1);
     font-size: 30px;
 }
 
-.user-info {
+.user-panel__title {
     font-size: 20px;
     font-weight: bold;
 }
 
-.gear {
+.button--settings {
     border: none;
     margin-right: 15px;
     background-color: rgba(238, 238, 238, 1);
     font-size: 25px;
 }
 
-.user-profile-info {
+.user-panel__info {
     display: flex;
     justify-content: left;
     align-items: center;
@@ -159,49 +152,51 @@ span, a {
     top: 25px;
 }
 
-.user-profile-info .profile {
+.user-panel__profile-view-btn {
+    border: none;
     font-size: 60px;
+    background-color: rgba(238, 238, 238, 1);
+    color: rgba(225, 25, 35, 1);
 }
 
-.user-profile-info .user-name {
-    margin-left: 10px;
-    margin-bottom: 30px;
+.user-panel__name {
     font-weight: bold;
+    font-size: 20px;
+    margin-top: -30px;
+    margin-left: 10px;
 }
 
-.user-profile-info .custom-line {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.2);
+.user-panel .divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
-.user-profile-list {
+.user-panel__menu {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: baseline;
     position: relative;
     left: 20px;
-    top: 5px;
 }
 
-.user-profile-list span {
+.user-panel__menu a {
     font-size: 16px;
     font-weight: bold;
     margin-top: 7px;
     margin-bottom: 7px;
-}
-
-.user-profile-list span a {
     text-decoration-line: none;
 }
 
-.user-profile-list span a:hover {
+.user-panel__menu a:hover {
     color: rgba(24, 23, 28, 1);
 }
 
-.menu-bar {
+/* 네비게이션 바 */
+.nav-bar {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -209,7 +204,7 @@ span, a {
     margin-right: 50px;
 }
 
-.menu {
+.nav-bar__item {
     width: 240px;
     height: 50px;
     display: flex;
@@ -217,30 +212,46 @@ span, a {
     align-items: center;
 }
 
-.home-menu {
-    border-bottom: 2px solid rgba(24, 23, 28, 1);
-}
-
-.menu-text {
-    text-decoration-line: none;
+.nav-bar__link {
+    position: relative;
+    display: inline-block;
     text-align: center;
-    color: rgba(24, 23, 28, 1)
+    color: rgba(24, 23, 28, 1);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 50px;
 }
 
-.menu-text:hover {
+.nav-bar__link:hover {
     color: rgba(24, 23, 28, 1);
 }
 
-.home-menu-text {
-    font-weight: 700;
+/* 밑줄 효과 */
+.nav-bar__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* 밑줄을 아래로 */
+    width: 100%;
+    height: 2px;
+    background-color: rgba(225, 25, 35, 1);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
 }
 
+.nav-bar__link:hover::after {
+    transform: scaleX(1);
+}
+
+/* 메인 탭 */
 /* 오늘의 길드 추천 */
-.today-guild-recommend {
-    display: block;
+.guild-recommend {
+    margin-top: 20px;
+    display: none;
 }
 
-.main-content-title {
+.section-title {
     margin-left: 30px;
     margin-top: 50px;
 }
@@ -249,7 +260,7 @@ span, a {
     width: 450px;
     margin: 0 auto;
     position: relative;
-    z-index: -1;
+    z-index: 0;
 }
 
 .carousel-indicators button {
@@ -267,35 +278,27 @@ span, a {
     z-index: -1;
 }
 
-.carousel-itme {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.carousel-img {
+.guild-card__image {
     width: 100px;
     height: 100px;
     margin-top: 20px;
     margin-left: 20px;
 }
 
-.recommend-guild {
+.guild-card {
     display: flex;
-    justify-content: flex-start;
+    justify-content: left;
     align-items: center;
 }
 
 /* esports 경기 일정 */
-.esports-scadule {
-    margin-top: -20px;
+.esports-schedule {
+    margin-top: 20px;
     display: none;
 }
 
-.esports-calendar {
+/* calendar 영역 */
+.calendar {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -309,269 +312,274 @@ span, a {
     padding-right: 2px;
 }
 
-.esports-calendar-btn {
+.calendar__day {
     width: 100px;
-    height: 50px;
+    height: 60px;
     margin: 0 5px;
     background-color: white;
     border: none;
     font-size: 18px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
 }
 
-.esports-calendar-middle-btn {
-    width: 130px;
-    height: 80px;
+.calendar__day--highlight {
     background-color: rgba(225, 25, 35, 1);
-    font-size: 20px;
-    border-radius: 15px;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 120px;
+    height: 80px;
 }
 
-.esports-scadule-header {
+/* schedule header */
+.schedule-header {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: 20px;
+    padding: 0 20px;
 }
 
-.esports-scadule-title {
+.schedule-header__title {
+    font-size: 20px;
+    font-weight: bold;
     position: relative;
-    top: 15px;
-    left: 30px;
+    margin-left: 10px;
 }
 
-.esports-scadule-category {
+.schedule-header__category {
     position: relative;
-    left: 350px;
-    bottom: 13px;
 }
 
-.esports-scadule-category-btn {
+.category__toggle {
     position: relative;
-    top: 28px;
-    right: 120px;
     width: 80px;
     border-radius: 5px;
 }
 
-/* 리그 누르면 나오는 */
-.esports-scadule-category-list {
-    position: absolute;
-    width: 450px;
-    height: auto;
-    top: 73px;
-    right: 87px;
-    z-index: 1;
-    display: none;
-}
-
-.row1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.row1-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    height: 60px;
-    border: 1px solid rgba(24, 23, 28, 1);
-    background-color: rgba(249, 247, 247, 1);
-}
-
-.row2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.row2-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    height: 60px;
-    border: 1px solid rgba(24, 23, 28, 1);
-    background-color: rgba(249, 247, 247, 1);
-}
-
-.esports-scadule-box {
-    width: 450px;
-    margin: 0 auto;
-    margin-top: 30px;
-}
-
-.esports-scadule-box1 {
-    height: 200px;
-    margin: 30px auto;
-    margin-top: 5px;
-    background-color: rgba(249, 247, 247, 1);
-    overflow: hidden;
-    position: relative;
-}
-
-.esports-scadule-box-time {
-    position: relative;
-    top: 20px;
-    left: 20px;
-    font-size: 12px;
-}
-
-.result-button {
-    font-size: 12px;
+.category__toggle {
+    padding: 8px 12px;
     border-radius: 5px;
-    position: relative;
-    bottom: 1px;
-    left: 350px;
+    border: 1px solid rgba(24, 23, 28, 1);
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
 }
 
+/* 리그 버튼 누르면 나오는 리스트 */
+.category__list {
+    position: absolute;
+    top: 50px;
+    left: -95px;
+    background-color: white;
+    border: 1px solid rgba(24, 23, 28, 1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 10;
+    display: none; /* 필요에 따라 토글 JS로 show/hide */
+}
+
+.category__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.category__item {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.category__item:hover {
+    border-color: rgba(24, 23, 28, 1);
+    background-color: rgba(249, 247, 247, 1);
+}
+
+/* schedule box */
+.schedule-box {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+/* match */
+.match {
+    border: 1px solid rgba(24, 23, 28, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: rgba(249, 247, 247, 1);
+}
+
+.match-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 5px;
+}
+
+.match__time {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.match__result-button {
+    float: right;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(225, 25, 35, 1);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.match__content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+/* team */
 .team {
     display: flex;
-    justify-content: left;
+    flex-direction: column;
     align-items: center;
-    position: relative;
-    top: 30px;
-    left: 20px;
-    margin-bottom: 30px;
 }
 
-.team-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.team__logo img {
     width: 50px;
     height: 50px;
-    border-radius: 90px;
-    border: 1px solid rgba(24, 23, 28, 1);
-    margin-right: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
 }
 
-.team-name {
-    width: 50px;
-    text-align: center;
+.team__name {
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.result-after {
-    position: relative;
-    left: 230px;
+.team__score span {
+    font-size: 20px;
+    font-weight: bold;
 }
 
+/* vs 텍스트 */
 .vs {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-top: -21px;
-    margin-left: 43px;
-    width: 330px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0 15px;
+    align-self: center;
     position: relative;
-    top: 25px;
-    left: 60px;
-    font-size: 11px;
-    color: rgba(0, 0, 0, 0.5);
-}
-
-.vs::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-    margin-top: 5px;
-    margin-left: -3px;
-}
-
-.vs span {
-    padding: 0 10px;
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 14px;
-    white-space: nowrap;
 }
 
 /* esports 뉴스 */
 .esports-news {
-    display: none;
     margin-top: 20px;
+    display: none;
 }
 
-.esports-news-title {
+.news-category {
     position: relative;
-    top: 15px;
-    left: 30px;
+    margin-top: 25px;
+    margin-left: 30px;
 }
 
-.esports-news-category {
-    position: relative;
-    top: 25px;
-    left: 30px;
-}
-
-.esports-news-category-btns button{
-    padding: 2px 12px 2px 12px;
+.news-category__button {
+    padding: 2px 12px;
     margin-right: 10px;
-    border-color: rgba(24, 23, 28, 1);
+    border: 1px solid rgba(24, 23, 28, 1);
+    background-color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    color: rgba(24, 23, 28, 1);
 }
 
-.esports-news-box {
-    width: 450px;
-    margin: 0 auto;
-    margin-top: 45px;
-}
-
-.esports-news-box1 {
-    height: 200px;
-    margin: 30px auto;
-    margin-top: 5px;
+.news-category__button:hover {
     background-color: rgba(249, 247, 247, 1);
+}
+
+/* 뉴스 카드 전체 박스 */
+.news {
+    width: 450px;
+    margin: 45px auto 0 auto;
+}
+
+/* 뉴스 카드 */
+.news__card {
+    background-color: rgba(249, 247, 247, 1);
+    border-radius: 10px;
     overflow: hidden;
+    margin-bottom: 20px;
+    margin-top: -30px;
+    padding: 15px;
 }
 
-.esports-news-box-top {
+/* 카드 상단 (이미지 + 메타 정보) */
+.news__header {
     display: flex;
-    justify-content: left;
     align-items: center;
-    position: relative;
-    top: 20px;
+    margin-bottom: 10px;
 }
 
-.esports-news-box-img img {
+.news__image {
     width: 100px;
     height: 100px;
-    margin-bottom: 60px;
-    margin-left: 20px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
 }
 
-.esports-news-box-title h4{
-    position: relative;
-    left: 10px;
-    bottom: 40px;
+.news__meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.time {
-    position: relative;
-    left: 10px;
-    bottom: 10px;
+.news__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.time img {
-    width: 18px;
+.news__time {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: rgba(100, 100, 100, 1);
+}
+
+.news__time img {
+    width: 16px;
     height: auto;
+    margin-right: 5px;
 }
 
-.time span {
-    position: relative;
-    top: 2px;
+/* 뉴스 본문 */
+.news__body {
+    font-size: 14px;
+    color: rgba(50, 50, 50, 1);
+    padding-top: 10px;
 }
 
-.esports-news-content {
-    position: relative;
-    left: 25px;
-    bottom: 10px;
+/* 길드 탭 */
+.guild-section--none {
+    display: none;
 }
 
-.guild-find-title {
+.guild-section__title {
     position: relative;
     top: 40px;
     left: 30px;
@@ -583,7 +591,7 @@ span, a {
     bottom: -2px;
 }
 
-.search-box {
+.guild-search__form {
     display: flex;
     align-items: center;
     height: 30px;
@@ -594,7 +602,7 @@ span, a {
     border: 1px solid rgba(24, 23, 28, 1);
 }
 
-.search-txt {
+.guild-search__input {
     border: none;
     background: none;
     outline: none;
@@ -606,7 +614,7 @@ span, a {
     width: 150px;
 }
 
-.search-btn {
+.guild-search__button {
     color: rgba(225, 25, 35, 1);
     float: right;
     width: 40px;
@@ -621,115 +629,112 @@ span, a {
     margin-left: 50px;
 }
 
-.custom-line {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
+.guild-section--none .divider {
+    width: 90%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: 20px;
 }
 
-.custom-line::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    margin: 0 10px;
-}
-
-/* 길드 없을 때 페이지 */
-.without-a-guild-page {
-    display: none;
-}
-
-.guild-list-box {
+.guild-list {
     width: 450px;
     margin: 0 auto;
     margin-top: 20px;
 }
 
-.guild-info {
-    height: 220px;
-    margin: 30px auto;
-    margin-top: 5px;
+.guild-card {
+    padding-bottom: 25px;
     background-color: rgba(249, 247, 247, 1);
     overflow: hidden;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: first baseline;
+    align-items: first baseline;
 }
 
-.guild-title {
+.guild-card__header {
     display: flex;
     justify-content: left;
     align-items: center;
     position: relative;
-    left: 20px;
-    top: 20px;
+    margin-top: 15px;
+    margin-left: 15px;
 }
 
-.guild-icon {
+.guild-card__icon {
     width: 90px;
     height: auto;
 }
 
-.tier-icon {
+.guild-card__top {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.guild-card__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.guild-card__tier-icon {
     width: 30px;
     height: auto;
-    position: relative;
-    left: 20px;
 }
 
-.guild-title-name {
-    margin-left: 20px;
+.guild-card__name {
+    margin-left: 3px;
+    margin-bottom: 3px;
 }
 
-.guild-count {
-    position: relative;
-    left: 170px;
+.guild-card__count {
+    margin-left: 185px;
+    margin-bottom: 3px;
 }
 
-.guild-leader-name {
+.guild-card__leader {
     position: relative;
-    left: 30px;
-    top: 30px;
     font-size: 12px;
+    margin-top: 2cqh;
+    margin-left: 175px;
 }
 
-.guild-info-txt {
-    position: relative;
-    left: 20px;
-    top: 50px;
+.guild-card__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
 }
 
-.guild-introduction {
-    position: relative;
-    left: 10px;
+.guild-card__intro {
+    margin-top: 20px;
+    margin-left: -280px;
 }
 
-.guild-tier {
-    position: relative;
+.guild-card__need {
     font-size: 13px;
-    left: -100px;
-    top: 40px;
-}
-
-.need-line {
-    position: relative;
-    font-size: 13px;
-    left: 20px;
-    top: 40px;
+    margin-top: 20px;
+    margin-left: 360px;
 }
 
 /* 길드 있을 때 페이지 */
-.having-a-guild-page {
+.guild-section--have {
     display: none;
 }
 
-.own-guild-box {
+.guild-own {
     width: 450px;
     margin: 0 auto;
-    margin-top: 45px;
+    margin-top: 20px;
 }
 
-.own-guild {
+.guild-own__container {
     height: auto;
     margin: 30px auto;
     margin-top: 5px;
@@ -737,62 +742,79 @@ span, a {
     overflow: hidden;
 }
 
-.own-guild-title {
+.guild-own__header {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.guild-own__meta {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+}
+
+.guild-own__icon {
+    width: 100px;
+    height: auto;
+}
+
+.guild-own__info {
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
-.own-guild-icon {
-    width: 100px;
-    height: auto;
-    position: relative;
-    left: 10px;
-    top: 10px;
-}
-
-.own-guild-name {
-    position: relative;
-    left: 30px;
-    top: 10px;
+.guild-own__name {
     font-size: 20px;
+    margin-left: 20px;
 }
 
-.own-guild-count {
-    position: relative;
-    left: 200px;
-    top: 5px;
+.guild-own__count {
+    margin-left: 175px;
 }
 
-.own-guild-tier {
+.guild-own__tier {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    position: relative;
-    left: 25px;
-    top: 20px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
-.own-guild-tier-img {
+.guild-own__tier-icon {
     width: 40px;
     height: auto;
+    margin-left: 10px;
 }
 
-.progreess {
+.progress {
     background-color: rgba(249, 247, 247, 1);
-    width: 250px;
+    width: 240px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     margin-left: 5px;
+    height: 20px; /* 높이 설정 필요 */
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
 }
 
 .progress-bar {
-    width: 40%;
+    height: 100%;
     background-color: rgba(225, 25, 35, 1);
     color: rgba(24, 23, 28, 1);
     font-weight: bold;
+    width: 40%; /* 승 수에 비례해 조정 (예: 2승 / 5승이면 40%) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s ease;
 }
 
-.own-guild-introduction {
+.notice-box {
     background-color: rgba(249, 247, 247, 1);
     width: 89%;
     height: 140px;
@@ -803,7 +825,7 @@ span, a {
     margin-bottom: 40px;
 }
 
-.own-guild-introduction-title {
+.notice-box__title {
     position: relative;
     left: 20px;
     top: 10px;
@@ -811,28 +833,28 @@ span, a {
     font-size: 20px;
 }
 
-.own-guild-introduction-content {
-    position: relative;
-    left: 20px;
-    top: 10px;
-}
-
-.own-guild-introduction-box .custom-line {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: rgba(0, 0, 0, 0.2);
+.notice-box .divider {
+    width: 95%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.3);
     margin-top: 20px;
+    margin-left: 10px;
 }
 
-.guild-mem-title {
+.notice-box__content {
+    position: relative;
+    left: 20px;
+    top: 10px;
+}
+
+.guild-members__title {
     position: relative;
     left: 20px;
     font-size: 20px;
     font-weight: bold;
 }
 
-.guild-mem-list-box {
+.guild-member {
     background-color: rgba(249, 247, 247, 1);
     width: 89%;
     height: 75px;
@@ -843,7 +865,7 @@ span, a {
     margin-bottom: 40px;
 }
 
-.guild-list-profile {
+.guild-member__profile {
     width: 50px;
     height: auto;
     position: relative;
@@ -851,34 +873,36 @@ span, a {
     top: 10px;
 }
 
-.guild-list-user-tier {
+.guild-member__tier {
     width: 30px;
     height: auto;
     position: relative;
     left: 10px;
 }
 
-.guild-list-username {
+.guild-member__name {
     position: relative;
     left: 10px;
     top: 3px;
 }
 
-.guild-list-user-state {
+.guild-member__role {
     position: relative;
     left: 220px;
     top: 3px;
     font-size: 12px;
 }
 
-.guild-list-main-line {
+.guild-member__line-main {
     position: relative;
     top: 30px;
     left: -100px;
+    font-size: 13px;
 }
 
-.guild-list-secondary-line {
+.guild-member__line-sub {
     position: relative;
     top: 30px;
     left: -90px;
+    font-size: 13px;
 }

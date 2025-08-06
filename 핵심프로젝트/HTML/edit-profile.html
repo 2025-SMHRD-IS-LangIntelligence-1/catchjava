@@ -14,39 +14,52 @@
 <body>
     <div class="background">
         <div class="mobile-container">
-            <button class="back" type="submit">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <span class="edit-profile-title">프로필 편집</span>
-            <div class="edit-profile">
-                <button class="profile" type="submit">
-                    <i class="fa-solid fa-circle-user"></i>
+            <header class="header">
+                <button class="button--close" type="button">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
-                <form class="join-form">
-                    <div class="form-group join-email">
-                        <label class="form-control-label">변경할 이름을 입력해주세요</label>
-                        <input type="text" class="form-control" value="김도형">
+                <div class="divider"> </div>
+                <span>Edit Profile</span>
+            </header>
+            <main>
+                <div class="edit-profile">
+                    <div class="edit_profile_img">
+                        <button class="button--profile" type="button">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </button>
                     </div>
-                    <div class="form-group join-email">
-                        <label class="form-control-label">변경할 E-mail을 입력해주세요</label>
-                        <input type="text" class="form-control" value="ehgud7821@naver.com">
-                        <button class="duplicate_check_button">중복확인</button>
-                        <p id="result"></p>
+                    <div class="edit-profile-form">
+                        <form>
+                            <!-- 이메일 입력 -->
+                            <div class="input input-email">
+                                <label for="email" class="form-label">E-mail을 입력해주세요</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="email" value="ehgud7821@naver.com"/>
+                                    <button type="button" class="duplicate-check-btn">중복확인</button>
+                                </div>
+                                <p id="result" class="form-text"></p>
+                            </div>
+
+                            <!-- 이름 입력 -->
+                            <div class="input input-name">
+                                <label for="name" class="form-label">이름을 입력해주세요</label>
+                                <input type="text" class="form-control" id="name" value="김도형"/>
+                            </div>
+
+                            <!-- 비밀번호 입력 -->
+                            <div class="input input-password">
+                                <label for="password" class="form-label">비밀번호를 입력해주세요</label>
+                                <input type="password" class="form-control" id="password" value="123456789"/>
+                            </div>
+
+                            <!-- 가입 버튼 -->
+                            <div class="save-btn">
+                                <button type="submit" class="btn btn-outline-primary">저장</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group join-email">
-                        <label class="form-control-label">변경할 비밀번호를 입력해주세요</label>
-                        <input type="password" class="form-control" value="123456789">
-                    </div>
-                    <div class="col-lg-12 joinbttm">
-                        <div class="col-lg-6 join-btm join-text">
-                            <!-- Error Message -->
-                        </div>
-                        <div class="col-lg-6 join-btm join-button">
-                            <button type="submit" class="btn btn-outline-primary">저장</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </main>
         </div>
     </div>
 

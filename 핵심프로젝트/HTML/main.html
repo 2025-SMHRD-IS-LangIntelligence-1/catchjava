@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -14,305 +14,256 @@
 <body>
     <div class="background">
         <div class="mobile-container">
-            <div class="top-bar">
-                <div class="left"></div>
-                <div class="center">
-                    <img src="../img/logo.png" class="logo">
+            <!-- 헤더 - 로고, 로그인(프로필) -->
+            <header class="header">
+                <div class="header__left"></div>
+                <div class="header__center">
+                    <img src="../img/logo.png" class="logo" alt="로고">
                 </div>
-                <div class="right">
-                    <button class="profile" type="submit">
+                <div class="header__right">
+                    <button class="button--profile" type="button">
                         <i class="fa-solid fa-circle-user"></i>
                     </button>
-                    <a href="login.html" class="login">로그인</a>
-                    <!-- 유저 프로필 -->
-                    <div class="user-profile">
-                        <div class="user-profile-header">
-                            <button class="back" type="submit">
+                    <a href="login.html" class="link--login">로그인</a>
+                    <!-- 프로필 클릭 시 나오는 -->
+                    <div class="user-panel">
+                        <div class="user-panel__header">
+                            <button class="button--close" type="button">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
-                            <span class="user-info">내정보</span>
-                            <button class="gear" type="submit">
+                            <span class="user-panel__title">내정보</span>
+                            <button class="button--settings" type="button">
                                 <i class="fa-solid fa-gear"></i>
                             </button>
                         </div>
-                        <div class="user-profile-info">
-                            <button class="profile" type="submit">
+                        <div class="user-panel__info">
+                            <button class="user-panel__profile-view-btn" type="button">
                                 <i class="fa-solid fa-circle-user"></i>
                             </button>
-                            <span class="user-name">유저 이름</span>
+                            <span class="user-panel__name">유저 이름</span>
                         </div>
-                        <div class="custom-line"></div>
-                        <div class="user-profile-list">
-                            <span><a href="#">개인정보 수정</a></span>
-                            <span><a href="#">게임프로필 수정</a></span>
-                            <span><a href="#">최근 본 글</a></span>
-                            <span><a href="#">로그아웃</a></span>
+                        <div class="divider"></div>
+                        <div class="user-panel__menu">
+                            <a href="#">개인정보 수정</a>
+                            <a href="#">게임프로필 수정</a>
+                            <a href="#">최근 본 글</a>
+                            <a href="#">고객센터</a>
+                            <a href="#">로그아웃</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- 메뉴바 -->
-            <div class="menu-bar">
-                <div class="menu home-menu"><a href="#" class="menu-text home-menu-text">홈</a></div>
-                <div class="menu guild-menu"><a href="#" class="menu-text guild-menu-text">길드</a></div>
-            </div>
-            <!-- carousel - 오늘의 길드 추천 기능 -->
-            <div class="today-guild-recommend">
-                <div class="main-content-title">
-                    <h2>오늘의 길드 추천</h2>
-                </div>
-                <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                            class="active carousel-move-button" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                            class="carousel-move-button" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                            class="carousel-move-button" aria-label="Slide 3"></button>
+            </header>
+            <!-- 네비게이션 바 -->
+            <nav class="nav-bar">
+                <div class="nav-bar__item"><a href="#" class="nav-bar__link">홈</a></div>
+                <div class="nav-bar__item"><a href="#" class="nav-bar__link">길드</a></div>
+            </nav>
+            <main>
+                <!-- 오늘의 길드 추천 -->
+                <section class="section guild-recommend">
+                    <div class="section__title">
+                        <h2>오늘의 길드 추천</h2>
                     </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="recommend-guild">
-                                <img src="../img/루미.webp" class="carousel-img">
-                                <div class="guild-name">
-                                    길드이름1<br>
-                                    길드설명
-                                </div>
-                                <br>
-                            </div>
+                    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active indicator-button" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                class="indicator-button" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                class="indicator-button" aria-label="Slide 3"></button>
                         </div>
-                        <div class="carousel-item">
-                            <div class="recommend-guild">
-                                <img src="../img/미라.webp" class="carousel-img">
-                                <div class="guild-name">
-                                    길드이름2<br>
-                                    길드설명
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="guild-card">
+                                    <img src="../img/루미.webp" class="guild-card__image" alt="루미 길드 이미지">
+                                    <div class="guild-card__info">길드이름1<br>길드설명</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="recommend-guild">
-                                <img src="../img/조이.webp" class="carousel-img">
-                                <div class="guild-name">
-                                    길드이름3<br>
-                                    길드설명
+                            <div class="carousel-item">
+                                <div class="guild-card">
+                                    <img src="../img/미라.webp" class="guild-card__image" alt="미라 길드 이미지">
+                                    <div class="guild-card__info">길드이름2<br>길드설명</div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="guild-card">
+                                    <img src="../img/조이.webp" class="guild-card__image" alt="조이 길드 이미지">
+                                    <div class="guild-card__info">길드이름3<br>길드설명</div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Esports 경기 일정 기능 -->
-            <div class="esports-scadule">
-                <div class="main-content-title">
-                    <h2>Esports 경기 일정</h2>
-                </div>
-                <div class="esports-calendar">
-                    <button class="esports-calendar-btn">29<br>Tue</button>
-                    <button class="esports-calendar-btn">30<br>Wed</button>
-                    <button class="esports-calendar-btn">31<br>Thu</button>
-                    <button class="esports-calendar-btn esports-calendar-middle-btn">1<br>Fri</button>
-                    <button class="esports-calendar-btn">2<br>Sat</button>
-                    <button class="esports-calendar-btn">3<br>Sun</button>
-                    <button class="esports-calendar-btn">4<br>Mon</button>
-                </div>
-                <div class="esports-scadule-header">
-                    <div class="esports-scadule-title">
-                        <span>Leage of Legend</span>
+                </section>
+                <!-- esports 경기 일정 -->
+                <section class="section esports-schedule">
+                    <div class="section__title">
+                        <h2>Esports 경기 일정</h2>
                     </div>
-                    <div class="esports-scadule-category">
-                        <button class="esports-scadule-category-btn">리그</button>
-                        <div class="esports-scadule-category-list">
-                            <div class="row1">
-                                <div class="row1-col col1">
-                                    <span>1</span>
+                    <div class="calendar">
+                        <button class="calendar__day">29<br>Tue</button>
+                        <button class="calendar__day">30<br>Wed</button>
+                        <button class="calendar__day">31<br>Thu</button>
+                        <button class="calendar__day calendar__day--highlight">1<br>Fri</button>
+                        <button class="calendar__day">2<br>Sat</button>
+                        <button class="calendar__day">3<br>Sun</button>
+                        <button class="calendar__day">4<br>Mon</button>
+                    </div>
+                    <div class="schedule-header">
+                        <div class="schedule-header__title">League of Legend</div>
+                        <div class="schedule-header__category">
+                            <button class="category__toggle">리그</button>
+                            <div class="category__list">
+                                <div class="category__row">
+                                    <span class="category__item">1</span>
+                                    <span class="category__item">2</span>
+                                    <span class="category__item">3</span>
+                                    <span class="category__item">4</span>
+                                    <span class="category__item">5</span>
                                 </div>
-                                <div class="row1-col col2">
-                                    <span>2</span>
-                                </div>
-                                <div class="row1-col col3">
-                                    <span>3</span>
-                                </div>
-                                <div class="row1-col col4">
-                                    <span>4</span>
-                                </div>
-                                <div class="row1-col col5">
-                                    <span>5</span>
+                                <div class="category__row">
+                                    <span class="category__item">6</span>
+                                    <span class="category__item">7</span>
+                                    <span class="category__item">8</span>
+                                    <span class="category__item">9</span>
+                                    <span class="category__item">10</span>
                                 </div>
                             </div>
-                            <div class="row2">
-                                <div class="row2-col col1">
-                                    <span>6</span>
-                                </div>
-                                <div class="row2-col col2">
-                                    <span>7</span>
-                                </div>
-                                <div class="row2-col col3">
-                                    <span>8</span>
-                                </div>
-                                <div class="row2-col col4">
-                                    <span>9</span>
-                                </div>
-                                <div class="row2-col col5">
-                                    <span>10</span>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-                <div class="esports-scadule-box">
-                    <div class="esports-scadule-box1">
-                        <div class="esports-scadule-box-time">
-                            <span>today, 5:00 PM</span>
                         </div>
-                        <!-- 버튼 누르면 경기 결과 보여주기 -->
-                        <button class="result-button">경기결과</button>
-                        <div class="esports-scadule-box-content">
-                            <div class="team">
-                                <div class="team-logo">
-                                    <img src="#">
+                    </div>
+                    <div class="schedule-box">
+                        <div class="match">
+                            <div class="match-header">
+                                <div class="match__time">today, 5:00 PM</div>
+                                <button class="match__result-button">경기결과</button>
+                            </div>
+                            <div class="match__content">
+                                <div class="team">
+                                    <div class="team__logo"><img src="#" alt="GEN 로고"></div>
+                                    <div class="team__name">GEN</div>
+                                    <div class="team__score"><span>0</span></div>
                                 </div>
-                                <div class="team-name">
-                                    <span>GEN</span>
+                                <div class="vs">vs</div>
+                                <div class="team">
+                                    <div class="team__logo"><img src="#" alt="KT 로고"></div>
+                                    <div class="team__name">KT</div>
+                                    <div class="team__score"><span>0</span></div>
                                 </div>
-                                <div class="result-before">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- esports 뉴스 -->
+                <section class="section esports-news">
+                    <div class="section__title">
+                        <h2>Esports 뉴스</h2>
+                    </div>
+                    <div class="news-category">
+                        <button class="news-category__button">All</button>
+                        <button class="news-category__button">T1</button>
+                        <button class="news-category__button">GEN</button>
+                        <button class="news-category__button">DK</button>
+                    </div>
+                    <div class="news">
+                        <div class="news__card">
+                            <div class="news__header">
+                                <img src="../img/히나.webp" alt="뉴스 이미지" class="news__image">
+                                <div class="news__meta">
+                                    <h4 class="news__title">뉴스 제목</h4>
+                                    <div class="news__time">
+                                        <img src="../img/time.png" alt="시계 아이콘">
+                                        <span>1h ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="news__body">뉴스 내용</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 길드 페이지 -->
+                <section class="guild-section">
+                    <!-- 길드 없을 때 -->
+                    <div class="guild-section--none">
+                        <div class="guild-section__title">
+                            <h3>길드 찾기</h3>
+                        </div>
+                        <div class="guild-search">
+                            <form class="guild-search__form" action="" method="get">
+                                <input class="guild-search__input" type="text" name="" placeholder="길드를 입력하세요">
+                                <button class="guild-search__button" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="guild-list">
+                            <div class="guild-card">
+                                <div class="guild-card__header">
+                                    <img src="../img/guild-icon.png" class="guild-card__icon">
+                                    <div class="guild-card__top">
+                                        <div class="guild-card__info">
+                                            <img src="../img/guild-tier.png" class="guild-card__tier-icon">
+                                            <span class="guild-card__name">길드 이름</span>
+                                            <span class="guild-card__count">1/5</span>
+                                        </div>
+                                        <span class="guild-card__leader">(길드 개설자 이름)의 길드</span>
+                                    </div>
+                                </div>
+                                <div class="guild-card__body">
+                                    <span class="guild-card__intro">길드 한줄 소개</span>
+                                    <span class="guild-card__need">필요 라인</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- 길드 있을 때 -->
+                    <div class="guild-section--have">
+                        <div class="guild-own">
+                            <div class="guild-own__container">
+                                <div class="guild-own__header">
+                                    <img src="../img/guild-icon.png" class="guild-own__icon">
+                                    <div class="guild-own__meta">
+                                        <div class="guild-own__info">
+                                            <span class="guild-own__name">길드 이름</span>
+                                            <span class="guild-own__count">1/5</span>
+                                        </div>
+                                        <div class="guild-own__tier">
+                                            <img src="../img/guild-tier.png" class="guild-own__tier-icon">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="2"
+                                                aria-valuemin="0" aria-valuemax="5">
+                                                    2승
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="result-after">
-                                    <span>0</span>
+                                <div class="guild-own__notice">
+                                    <div class="notice-box">
+                                        <span class="notice-box__title">공지제목</span>
+                                        <div class="divider"></div>
+                                        <span class="notice-box__content">공지내용</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="vs">
-                                <span>vs</span>
-                            </div>
-                            <div class="team">
-                                <div class="team-logo">
-                                    <img src="#">
-                                </div>
-                                <div class="team-name">
-                                    <span>KT</span>
-                                </div>
-                                <div class="result-before">
-
-                                </div>
-                                <div class="result-after">
-                                    <span>0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- esports 뉴스 기능 -->
-            <div class="esports-news">
-                <div class="esports-news-title">
-                    <h2>Esports 뉴스</h2>
-                </div>
-                <div class="esports-news-category">
-                    <div class="esports-news-category-btns">
-                        <button><span>All</span></button>
-                        <button><span>T1</span></button>
-                        <button><span>GEN</span></button>
-                        <button><span>DK</span></button>
-                    </div>
-                </div>
-                <div class="esports-news-box">
-                    <div class="esports-news-box1">
-                        <div class="esports-news-box-top">
-                            <div class="esports-news-box-img">
-                                <img src="../img/히나.webp">
-                            </div>
-                            <div class="esports-news-box-title">
-                                <h4>뉴스 제목</h4>
-                                <div class="time">
-                                    <img src="../img/time.png">
-                                    <span>1h ago</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="esports-news-content">
-                            <span>뉴스 내용</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 길드 페이지 -->
-            <!-- 길드 없을 때 페이지 -->
-            <div class="without-a-guild-page">
-                <div class="guild-find-title">
-                    <h3>길드 찾기</h3>
-                </div>
-                <div class="guild-search">
-                    <form class="search-box" action="" method="get">
-                        <input class="search-txt" type="text" name="" placeholder="길드를 입력하세요">
-                        <button class="search-btn" type="submit">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                </div>
-                <div class="custom-line"></div>
-                <div class="guild-list-box">
-                    <div class="guild-list">
-                        <div class="guild-info">
-                            <div class="guild-title">
-                                <img src="../img/guild-icon.png" class="guild-icon">
-                                <img src="../img/guild-tier.png" class="tier-icon">
-                                <span class="guild-title-name">길드 이름</span>
-                                <span class="guild-count">1/5</span>
-                                <span class="guild-leader-name">(길드 개설자 이름)의 길드</span>
-                            </div>
-                            <div class="guild-info-txt">
-                                <span class="guild-introduction">길드 한줄 소개</span>
-                                <span class="guild-tier">길드 평균 티어</span>
-                                <span class="need-line">필요 라인</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 길드 있을 때 페이지 -->
-            <div class="having-a-guild-page">
-                <div class="own-guild-box">
-                    <div class="own-guild">
-                        <div class="own-guild-title">
-                            <img src="../img/guild-icon.png" class="own-guild-icon">
-                            <div class="own-guild-explanation">
-                                <span class="own-guild-name">길드 이름</span>
-                                <span class="own-guild-count">1/5</span>
-                                <div class="own-guild-tier">
-                                    <img src="../img/guild-tier.png" class="own-guild-tier-img">
-                                    <div class="progreess">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="1"
-                                        aria-valuemin="0" aria-valuemax="5">
-                                            2승
+                                <div class="guild-members">
+                                    <span class="guild-members__title">길드 멤버</span>
+                                    <div class="guild-members__list">
+                                        <div class="guild-member">
+                                            <img src="../img/profile.jpg" class="guild-member__profile">
+                                            <img src="../img/guild-tier.png" class="guild-member__tier">
+                                            <span class="guild-member__name">이름</span>
+                                            <span class="guild-member__role">길드장</span>
+                                            <span class="guild-member__line-main">주라인 : 미드</span>
+                                            <span class="guild-member__line-sub">부라인 : 원딜</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="own-guild-introduction">
-                            <div class="own-guild-introduction-box">
-                                <span class="own-guild-introduction-title">공지제목</span>
-                                <div class="custom-line"></div>
-                                <span class="own-guild-introduction-content">공지내용</span>
-                            </div>
-                        </div>
-                        <div class="guild-mem">
-                            <span class="guild-mem-title">길드 멤버</span>
-                            <div class="guild-mem-list-box">
-                                <div class="guild-list">
-                                    <img src="../img/profile.jpg" class="guild-list-profile">
-                                    <img src="../img/guild-tier.png" class="guild-list-user-tier">
-                                    <span class="guild-list-username">이름</span>
-                                    <span class="guild-list-user-state">길드장</span>
-                                    <span class="guild-list-main-line">주라인 : 미드</span>
-                                    <span class="guild-list-secondary-line">부라인 : 원딜</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </div>
+                </section>
+            </main>
         </div>
     </div>
 
