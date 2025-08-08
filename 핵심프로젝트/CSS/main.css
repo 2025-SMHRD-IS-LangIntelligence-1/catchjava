@@ -263,56 +263,21 @@ a {
     display: block;
 }
 
-/* 오늘의 길드 추천 */
-.guild-recommend {
-    margin-top: 20px;
-    display: none;
-}
-
-.section-title {
-    margin-left: 30px;
-    margin-top: 50px;
-}
-
-#carouselExampleIndicators {
-    width: 450px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 0;
-}
-
-.carousel-indicators button {
-    background-color: rgba(238, 238, 238, 1);
-}
-
-.carousel-inner {
-    max-width: 100%;
-    height: 200px;
-    margin: 10px auto;
-    background-color: rgba(249, 247, 247, 1);
-    overflow: hidden;
-    position: relative;
-    overflow-x: hidden;
-    z-index: -1;
-}
-
-.guild-card__image {
-    width: 100px;
-    height: 100px;
-    margin-top: 20px;
-    margin-left: 20px;
-}
-
-.guild-card {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
 /* esports 경기 일정 */
 .esports-schedule {
     margin-top: 20px;
     display: none;
+}
+
+.section__title {
+    margin: 28px 20px 12px;  /* 좌우 여백 검색창과 맞춤 */
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.section__title p {
+    font-weight: bold;
+    font-size: 25px;
 }
 
 /* calendar 영역 */
@@ -889,157 +854,173 @@ a {
 }
 
 /* 길드 찾기 페이지 */
-.guild-find {
-    display: none;
+.guild-find { 
+    display: none; 
 }
 
+/* 제목은 위치 고정 대신 정상적인 여백으로 */
 .guild-section__title {
-    position: relative;
-    top: 40px;
-    left: 30px;
+    margin: 28px 20px 12px;  /* 좌우 여백 검색창과 맞춤 */
+    font-size: 1.6rem;
+    font-weight: 700;
 }
 
+.guild-section__title p {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+/* 검색바: 가운데 정렬, 반응형 폭 */
 .guild-search {
-    position: relative;
-    left: 200px;
-    bottom: -2px;
+    display:flex; 
+    justify-content:center;
+    margin: 10px 0 18px;
 }
 
 .guild-search__form {
-    display: flex;
-    align-items: center;
-    height: 30px;
-    width: 250px;
-    background: rgba(249, 247, 247, 1);
-    border-radius: 40px;
-    padding: 10px;
-    border: 1px solid rgba(24, 23, 28, 1);
+    display:flex; 
+    align-items:center; 
+    gap:8px;
+    width: 90%; 
+    max-width: 420px; 
+    height: 44px;
+    padding: 0 12px;
+    background:#fff;
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 9999px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
 }
 
+/* 입력창: 가독성 있는 색상/패딩 */
 .guild-search__input {
-    border: none;
-    background: none;
-    outline: none;
-    float: none;
-    padding: 0px;
-    color: rgba(249, 247, 247, 1);
-    font-size: 16px;
-    line-height: 30px;
-    width: 150px;
+    flex:1;
+    border:none; outline:none; background:transparent;
+    font-size:16px; color:#111827;
+    padding: 0 4px;
+}
+.guild-search__input::placeholder{ 
+    color:#9ca3af; 
 }
 
+/* 검색 버튼 */
 .guild-search__button {
-    color: rgba(225, 25, 35, 1);
-    float: right;
-    width: 40px;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(249, 247, 247, 1);
-    border: none;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 50px;
+    display:flex; 
+    align-items:center; 
+    justify-content:center;
+    width: 36px; 
+    height: 36px;
+    border:none; 
+    border-radius:9999px;
+    background:#fff; 
+    color:#E11923;
+    cursor:pointer;
+}
+.guild-search__button:hover { 
+    background:#fff3f3; 
 }
 
+/* 구분선 */
 .guild-section--none .divider {
-    width: 90%;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.3);
-    margin-top: 40px;
-    margin-bottom: 40px;
-    margin-left: 20px;
+    width:90%; 
+    height:1px; 
+    margin: 18px auto 16px;
+    background: rgba(0,0,0,.12);
 }
 
+/* 리스트 래퍼 */
 .guild-list {
-    width: 450px;
-    margin: 0 auto;
-    margin-top: 20px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 24px;
+    padding: 0 14px;
 }
 
+/* 카드 */
 .guild-card {
-    padding-bottom: 25px;
-    background-color: rgba(249, 247, 247, 1);
-    overflow: hidden;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: first baseline;
-    align-items: first baseline;
+    background:#fff;
+    border:1px solid rgba(0,0,0,.12);
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.04);
 }
 
+/* 헤더 영역 */
 .guild-card__header {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    position: relative;
-    margin-top: 15px;
-    margin-left: 15px;
+    display:flex; 
+    gap:12px; 
+    align-items:center;
+    margin: 0 0 8px;
+}
+.guild-card__icon { 
+    width:72px; 
+    height:auto; 
+    border-radius:10px; 
 }
 
-.guild-card__icon {
-    width: 90px;
-    height: auto;
-}
-
-.guild-card__top {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: center;
-    margin-left: 10px;
+.guild-card__top { 
+    flex:1; 
+    display:flex; 
+    flex-direction:column; 
+    gap:6px; 
 }
 
 .guild-card__info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display:flex; 
+    align-items:center; 
+    gap:8px;
 }
 
-.guild-card__tier-icon {
-    width: 30px;
-    height: auto;
+.guild-card__tier-icon { 
+    width:22px; 
+    height:auto; 
 }
 
-.guild-card__name {
-    margin-left: 3px;
-    margin-bottom: 3px;
+.guild-card__name { 
+    font-weight:800; 
 }
 
 .guild-card__count {
-    margin-left: 185px;
-    margin-bottom: 3px;
+    margin-left:auto; /* 고정폭 대신 자동 밀어내기 */
+    font-size:13px; color:#6b7280;
 }
 
+/* 개설자 표기 */
 .guild-card__leader {
-    position: relative;
-    font-size: 12px;
-    margin-top: 2cqh;
-    margin-left: 175px;
+    font-size:12px; color:#6b7280; margin:0;
 }
 
+/* 바디 */
 .guild-card__body {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    align-items: center;
+    display:flex; 
+    flex-direction:column; 
+    gap:8px;
 }
 
 .guild-card__intro {
-    margin-top: 20px;
-    margin-left: -280px;
+    align-self:flex-start; 
+    margin:0;
+    font-size:14px;
 }
 
 .guild-card__need {
-    font-size: 13px;
-    margin-top: 20px;
-    margin-left: 360px;
+    align-self:flex-end;
+    font-size:12px;
+    color:#374151;
+    background:#f3f4f6; 
+    border:1px solid #e5e7eb;
+    border-radius:999px; 
+    padding:4px 10px;
+}
+
+/* 호버 효과(선택) */
+.guild-card:hover{
+    border-color: rgba(0,0,0,.18);
+    box-shadow: 0 4px 12px rgba(0,0,0,.06);
 }
 
 /* 길드 있을 때 페이지 */
 .guild-section--have {
-    display: block;
+    display: none;
 }
 
 /* 기본 세팅 */
@@ -1049,7 +1030,7 @@ a {
     height: 100vh;
     margin: 0 auto;
     position: relative;
-    background-color: #f9f7f7;
+    background-color: #f9fafb;
     overflow: hidden;
     margin-top: 20px;
 }
