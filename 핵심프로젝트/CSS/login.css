@@ -21,27 +21,22 @@ a {
 .mobile-container {
     width: 100%;
     max-width: 480px;
-    margin: 0 auto;
-    height: 100vh;
-
-    background-color: rgba(238, 238, 238, 1);
-    padding: 0px;
-    box-sizing: border-box;
-
-    position: relative;
     margin-left: auto;
-    margin-right: 25vw;
+    margin-right: auto;
+    height: 100vh;
+    background-color: #f9fafb;
+    padding: 0px;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+    position: relative;
     z-index: 1;
-
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
     /* 스크롤 가능하게 설정 */
     overflow-y: auto;
     overflow-x: hidden;
-    -ms-overflow-style: none;
-    /* IE, Edge */
-    scrollbar-width: none;
-    /* Firefox */
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; 
 }
 
 /* Chrome, Safari에서 스크롤바 안 보이게 */
@@ -67,7 +62,7 @@ a {
 
 /* 로그인 박스 */
 .login-box {
-    background-color: rgba(238, 238, 238, 1);
+    background-color: #f9fafb;
     padding: 20px;
     text-align: center;
     position: relative;
@@ -110,7 +105,7 @@ a {
 /* 입력 필드 */
 input[type="text"],
 input[type="password"] {
-    background-color: rgba(238, 238, 238, 1);
+    background-color: #f9fafb;
     border: none;
     border-bottom: 2px solid rgba(225, 25, 35, 1);
     border-radius: 0;
@@ -126,7 +121,7 @@ input[type="text"]:focus,
 input[type="password"]:focus {
     box-shadow: none;
     border-color: rgba(225, 25, 35, 1);
-    background-color: rgba(238, 238, 238, 1);
+    background-color: #f9fafb;
 }
 
 .form-control {
@@ -160,7 +155,7 @@ input[type="password"]:focus {
 
 .btn-outline-primary:hover {
     background-color: rgba(225, 25, 35, 1);
-    color: rgba(238, 238, 238, 1);
+    color: #f9fafb;
 }
 
 /* 구분선 및 텍스트 */

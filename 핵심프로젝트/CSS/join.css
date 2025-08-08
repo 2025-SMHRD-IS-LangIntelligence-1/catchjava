@@ -1,5 +1,6 @@
 /* 기본 텍스트 스타일 */
-span, a {
+span,
+a {
     color: rgba(24, 23, 28, 1);
 }
 
@@ -20,25 +21,22 @@ span, a {
 .mobile-container {
     width: 100%;
     max-width: 480px;
-    margin: 0 auto;
-    height: 100vh;
-
-    background-color: rgba(238, 238, 238, 1);
-    padding: 0px;
-    box-sizing: border-box;
-
-    position: relative;
     margin-left: auto;
-    margin-right: 25vw;
+    margin-right: auto;
+    height: 100vh;
+    background-color: #f9fafb;
+    padding: 0px;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+    position: relative;
     z-index: 1;
-
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
     /* 스크롤 가능하게 설정 */
     overflow-y: auto;
     overflow-x: hidden;
-    -ms-overflow-style: none;  /* IE, Edge */
-    scrollbar-width: none;     /* Firefox */
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; 
 }
 
 /* Chrome, Safari에서 스크롤바 안 보이게 */
@@ -64,7 +62,7 @@ span, a {
 
 /* 가입 박스 */
 .join-box {
-    background-color: rgba(238, 238, 238, 1);
+    background-color: #f9fafb;
     padding: 20px;
     text-align: center;
     position: relative;
@@ -113,7 +111,7 @@ span, a {
 /* 입력 필드 */
 input[type="text"],
 input[type="password"] {
-    background-color: rgba(238, 238, 238, 1);
+    background-color: #f9fafb;
     border: none;
     border-bottom: 2px solid rgba(225, 25, 35, 1);
     border-radius: 0;
@@ -129,7 +127,7 @@ input[type="text"]:focus,
 input[type="password"]:focus {
     box-shadow: none;
     border-color: rgba(225, 25, 35, 1);
-    background-color: rgba(238, 238, 238, 1);
+    background-color: #f9fafb;
 }
 
 .form-control {
@@ -142,13 +140,14 @@ input[type="password"]:focus {
     bottom: 0px;
     border-color: rgba(225, 25, 35, 1);
     color: rgba(225, 25, 35, 1);
-    font-size: small;
+    background-color: #f9fafb;
+    font-size: 12px;
     height: 38px;
 }
 
 .duplicate-check-btn:hover {
     background-color: rgba(225, 25, 35, 1);
-    color: rgba(238, 238, 238, 1);
+    color: #f9fafb;
     border-color: rgba(225, 25, 35, 1);
 }
 
@@ -194,7 +193,7 @@ input[type="password"]:focus {
 
 .btn-outline-primary:hover {
     background-color: rgba(225, 25, 35, 1);
-    color: rgba(238, 238, 238, 1);
+    color: #f9fafb;
 }
 
 /* 구글 회원가입 */
