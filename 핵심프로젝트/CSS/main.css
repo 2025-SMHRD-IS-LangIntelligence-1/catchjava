@@ -25,6 +25,7 @@ a {
     height: 100vh;
     background-color: rgba(238, 238, 238, 1);
     padding: 0px;
+    padding-bottom: 70px;
     box-sizing: border-box;
     position: relative;
     margin-left: auto;
@@ -115,7 +116,7 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 20px;
     z-index: 1;
-    display: block;
+    display: none;
 }
 
 .user-panel__header {
@@ -231,7 +232,8 @@ a {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -4px; /* 밑줄을 아래로 */
+    bottom: -4px;
+    /* 밑줄을 아래로 */
     width: 100%;
     height: 2px;
     background-color: rgba(225, 25, 35, 1);
@@ -245,6 +247,9 @@ a {
 }
 
 /* 메인 탭 */
+.main-section {
+    display: none;
+}
 /* 오늘의 길드 추천 */
 .guild-recommend {
     margin-top: 20px;
@@ -264,7 +269,7 @@ a {
 }
 
 .carousel-indicators button {
-  background-color: rgba(238, 238, 238, 1);
+    background-color: rgba(238, 238, 238, 1);
 }
 
 .carousel-inner {
@@ -383,7 +388,8 @@ a {
     border-radius: 5px;
     padding: 10px;
     z-index: 10;
-    display: none; /* 필요에 따라 토글 JS로 show/hide */
+    display: none;
+    /* 필요에 따라 토글 JS로 show/hide */
 }
 
 .category__row {
@@ -575,7 +581,308 @@ a {
 }
 
 /* 길드 탭 */
-.guild-section--none {
+.guild-section {
+    display: block;
+}
+
+/* 게임 프로필 탭 */
+.game-profile-intro {
+    position: absolute;
+    width: 480px;
+    height: auto;
+    margin-top: 80px;
+    z-index: 1;
+    display: none;
+}
+
+/* 게임 프로필 입력 폼 */
+.game-profile-form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: rgba(225, 25, 35, 1);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+/* 입력 필드 */
+.game-profile-form-input input[type="text"] {
+    background-color: rgba(238, 238, 238, 1);
+    border: none;
+    border-bottom: 2px solid rgba(225, 25, 35, 1);
+    border-radius: 0;
+    font-weight: bold;
+    outline: none;
+    padding-left: 3px;
+    width: 330px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.game-profile-form-input input[type="text"]:focus {
+    box-shadow: none;
+    border-color: rgba(225, 25, 35, 1);
+    background-color: rgba(238, 238, 238, 1);
+}
+
+/* 저장 버튼 */
+.btn-outline-primary {
+    width: 330px;
+    height: 40px;
+    border-color: rgba(225, 25, 35, 1);
+    color: rgba(225, 25, 35, 1);
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn-outline-primary:hover {
+    background-color: rgba(225, 25, 35, 1);
+    color: rgba(238, 238, 238, 1);
+}
+
+.input-line {
+    width: 70%;
+    height: 65px;
+    margin-bottom: 25px;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(200, 200, 200, 0.7);
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.input-line:hover {
+    border-color: rgba(225, 25, 35, 1);
+    box-shadow: 0 4px 8px rgba(225, 25, 35, 0.1);
+    cursor: pointer;
+}
+
+.input-line-box {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.input-line-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    width: 290px;
+}
+
+.line {
+    color: rgba(24, 23, 28, 1);
+}
+
+.line-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(24, 23, 28, 1);
+}
+
+.my-line {
+    font-size: 14px;
+    color: rgba(150, 150, 150, 1);
+}
+
+.input-position-btn {
+    font-size: 20px;
+    color: rgba(200, 200, 200, 1);
+    transition: color 0.2s;
+}
+
+.input-line:hover .input-position-btn {
+    color: rgba(225, 25, 35, 1);
+}
+
+/* 모달 시작 */
+/* js로 .modal-step--main은 display:none으로,
+   .modal-step--sub는 disply:block으로 바꾸면 됨 */
+.modal-step {
+    width: 100%;
+    max-width: 480px;
+    background: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* 처음엔 부포지션 모달은 숨김 */
+.modal-step--main {
+    display: none;
+}
+
+.modal-step--sub {
+    display: none;
+}
+
+.modal-step--time {
+    display: none;
+}
+
+/* 모달 전체 배경 (어두운 반투명) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 전체 모바일 화면 덮음 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 회색 반투명 */
+    z-index: 10;
+    justify-content: center;
+    align-items: flex-end;
+    /* 하단에 고정 */
+    display: none;
+    /* JS로 display: flex 처리 */
+}
+
+/* 모달 박스 내용 */
+.modal-content {
+    width: 100%;
+    max-width: 100%;
+    /* 480px 대신 100%로 설정 */
+    background: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* 모달 슬라이드 애니메이션 */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+/* 메인 버튼들 */
+.modal-buttons--main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 서브 버튼들 */
+.modal-buttons--sub {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+/* 요일 버튼들 */
+.day-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.day-option {
+    padding: 8px 12px;
+    margin: 4px;
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid rgba(225, 25, 35, 1);
+    color: rgba(225, 25, 35, 1);
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.day-option:hover {
+    background-color: rgba(225, 25, 35, 1);
+    color: rgba(238, 238, 238, 1);
+}
+
+.form-time {
+    margin-bottom: 50px;
+}
+
+.day-option.selected {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+.position-option {
+    flex: 0 0 calc(33.333% - 12px);
+    padding: 20px 0;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    border: 1.5px solid rgba(180, 180, 180, 0.6);
+    text-align: center;
+    font-weight: 500;
+    color: #18171C;
+    transition: all 0.2s ease;
+}
+
+.position-option:hover {
+    background-color: rgba(225, 25, 35, 0.06);
+    border-color: #E11923;
+    color: #E11923;
+    cursor: pointer;
+}
+
+.modal-skip-button {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+.skip {
+    flex: 0 0 calc(33.333% - 12px);
+    padding: 8px 0;
+    background-color: #f5f5f5;
+    border: 1.5px solid rgba(180, 180, 180, 0.6);
+    text-align: center;
+    font-weight: 500;
+    color: #18171C;
+    transition: all 0.2s ease;
+}
+
+.skip:hover {
+    background-color: rgba(225, 25, 35, 0.06);
+    border-color: #E11923;
+    color: #E11923;
+    cursor: pointer;
+}
+
+/* 제목 */
+.modal-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+/* 길드 찾기 페이지 */
+.guild-find {
     display: none;
 }
 
@@ -725,24 +1032,30 @@ a {
 
 /* 길드 있을 때 페이지 */
 .guild-section--have {
-    display: none;
+    display: block;
 }
 
-.guild-own {
-    width: 450px;
+/* 기본 세팅 */
+.guild-page {
+    width: 100%;
+    max-width: 450px;
+    height: 100vh;
     margin: 0 auto;
+    position: relative;
+    background-color: #f9f7f7;
+    overflow: hidden;
     margin-top: 20px;
 }
 
-.guild-own__container {
-    height: auto;
-    margin: 30px auto;
-    margin-top: 5px;
-    background-color: rgba(249, 247, 247, 1);
-    overflow: hidden;
+/* 스크롤 영역 */
+.guild-scroll-area {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 80px; /* 매칭 버튼 공간 확보 */
+    box-sizing: border-box;
 }
 
-.guild-own__header {
+.guild-header {
     display: flex;
     justify-content: left;
     align-items: center;
@@ -796,7 +1109,8 @@ a {
     width: 240px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     margin-left: 5px;
-    height: 20px; /* 높이 설정 필요 */
+    height: 20px;
+    /* 높이 설정 필요 */
     position: relative;
     overflow: hidden;
     border-radius: 5px;
@@ -807,7 +1121,8 @@ a {
     background-color: rgba(225, 25, 35, 1);
     color: rgba(24, 23, 28, 1);
     font-weight: bold;
-    width: 40%; /* 승 수에 비례해 조정 (예: 2승 / 5승이면 40%) */
+    width: 40%;
+    /* 승 수에 비례해 조정 (예: 2승 / 5승이면 40%) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -819,7 +1134,7 @@ a {
     width: 89%;
     height: 140px;
     position: relative;
-    left: 20px;
+    left: 25px;
     top: 20px;
     border: 1px solid rgba(0, 0, 0, 0.5);
     margin-bottom: 40px;
@@ -847,62 +1162,87 @@ a {
     top: 10px;
 }
 
+/* 매칭 버튼 */
+.guild-matching-button-wrapper {
+    display: flex; /* 길드 매칭버튼 유저가 길드장일 때 flex 아니면 none */
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.matching-button {
+    width: 90%;
+    max-width: 400px;
+    padding: 16px 0;
+    background-color: #ef4444;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.matching-button:hover {
+    background-color: #dc2626;
+}
+
+/* 멤버 섹션 */
+.guild-members {
+    padding: 5px 20px 20px;
+}
+
 .guild-members__title {
-    position: relative;
-    left: 20px;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.guild-members__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .guild-member {
-    background-color: rgba(249, 247, 247, 1);
-    width: 89%;
-    height: 75px;
-    position: relative;
-    left: 20px;
-    top: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    margin-bottom: 40px;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .guild-member__profile {
-    width: 50px;
-    height: auto;
-    position: relative;
-    left: 10px;
-    top: 10px;
+    width: 60px;
+    margin-right: 10px;
+}
+
+.guild-member-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.guild-member-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .guild-member__tier {
-    width: 30px;
-    height: auto;
-    position: relative;
-    left: 10px;
+    width: 24px;
+    margin-right: 8px;
 }
 
 .guild-member__name {
-    position: relative;
-    left: 10px;
-    top: 3px;
+    font-weight: bold;
 }
 
 .guild-member__role {
-    position: relative;
-    left: 220px;
-    top: 3px;
     font-size: 12px;
+    color: gray;
 }
 
-.guild-member__line-main {
-    position: relative;
-    top: 30px;
-    left: -100px;
+.guild-member-lines {
     font-size: 13px;
-}
-
-.guild-member__line-sub {
-    position: relative;
-    top: 30px;
-    left: -90px;
-    font-size: 13px;
+    margin-top: 4px;
 }

@@ -63,18 +63,54 @@ a {
     top: 10px;
 }
 
-.header .divider {
-    width: 100%;
-    height: 1px;
-    background-color: rgba(0, 0, 0, 0.3);
-    margin-top: 20px;
+/* 네비게이션 바 */
+.nav-bar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
 }
 
-.header span {
-    font-size: 40px;
+.nav-bar__item {
+    width: 240px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar__link {
     position: relative;
-    top: 20px;
-    left: 20px;
+    display: inline-block;
+    text-align: center;
+    color: rgba(24, 23, 28, 1);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 50px;
+}
+
+.nav-bar__link:hover {
+    color: rgba(24, 23, 28, 1);
+}
+
+/* 밑줄 효과 */
+.nav-bar__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* 밑줄을 아래로 */
+    width: 100%;
+    height: 2px;
+    background-color: rgba(225, 25, 35, 1);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+.nav-bar__link:hover::after {
+    transform: scaleX(1);
 }
 
 .edit-profile {
@@ -82,7 +118,12 @@ a {
     padding: 0px 50px 50px;
     text-align: center;
     position: relative;
-    top: 50px;
+    top: 30px;
+}
+
+.profile-section__title {
+    font-size: 25px;
+    font-weight: bold;
 }
 
 .button--profile {
@@ -90,6 +131,11 @@ a {
     color: rgba(225, 25, 35, 1);
     border: none;
     font-size: 130px;
+}
+
+/* 프로필 수정 섹션 */
+.profile-section--personal {
+    display: none;
 }
 
 /* 프로필 수정 폼 */
@@ -179,7 +225,7 @@ input[type="password"]:focus {
     color: rgba(24, 23, 28, 1);
 }
 
-/* 가입 버튼 */
+/* 저장 버튼 */
 .btn-outline-primary {
     width: 100%;
     height: 40px;
@@ -194,4 +240,306 @@ input[type="password"]:focus {
 .btn-outline-primary:hover {
     background-color: rgba(225, 25, 35, 1);
     color: rgba(238, 238, 238, 1);
+}
+
+/* 게임 프로필 탭 */
+.edit-game-profile {
+    position: relative;
+    top: 30px;
+    justify-content: center;
+    display: flex;
+}
+
+.edit-game-profile-form {
+    position: absolute;
+    width: 480px;
+    height: auto;
+    margin-top: 100px;
+    z-index: 1;
+}
+
+/* 게임 프로필 입력 폼 */
+.edit-game-profile-form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-label {
+    font-size: 10px;
+    font-weight: bold;
+    color: rgba(225, 25, 35, 1);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+/* 입력 필드 */
+.edit-game-profile-form-input input[type="text"] {
+    background-color: rgba(238, 238, 238, 1);
+    border: none;
+    border-bottom: 2px solid rgba(225, 25, 35, 1);
+    border-radius: 0;
+    font-weight: bold;
+    outline: none;
+    padding-left: 3px;
+    width: 330px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.edit-game-profile-form-input input[type="text"]:focus {
+    box-shadow: none;
+    border-color: rgba(225, 25, 35, 1);
+    background-color: rgba(238, 238, 238, 1);
+}
+
+/* 저장 버튼 */
+.btn-outline-primary {
+    width: 330px;
+    height: 40px;
+    border-color: rgba(225, 25, 35, 1);
+    color: rgba(225, 25, 35, 1);
+    border-radius: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.btn-outline-primary:hover {
+    background-color: rgba(225, 25, 35, 1);
+    color: rgba(238, 238, 238, 1);
+}
+
+.input-line {
+    width: 70%;
+    height: 65px;
+    margin-bottom: 25px;
+    padding: 12px 16px;
+    border: 1.5px solid rgba(200, 200, 200, 0.7);
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.input-line:hover {
+    border-color: rgba(225, 25, 35, 1);
+    box-shadow: 0 4px 8px rgba(225, 25, 35, 0.1);
+    cursor: pointer;
+}
+
+.input-line-box {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.input-line-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    width: 290px;
+}
+
+.line {
+    color: rgba(24, 23, 28, 1);
+}
+
+.line-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(24, 23, 28, 1);
+}
+
+.my-line {
+    font-size: 14px;
+    color: rgba(150, 150, 150, 1);
+}
+
+.input-position-btn {
+    font-size: 20px;
+    color: rgba(200, 200, 200, 1);
+    transition: color 0.2s;
+}
+
+.input-line:hover .input-position-btn {
+    color: rgba(225, 25, 35, 1);
+}
+
+/* 모달 시작 */
+/* js로 .modal-step--main은 display:none으로,
+   .modal-step--sub는 disply:block으로 바꾸면 됨 */
+.modal-step {
+    width: 100%;
+    max-width: 480px;
+    background: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* 처음엔 부포지션 모달은 숨김 */
+.modal-step--main {
+    display: none;
+}
+
+.modal-step--sub {
+    display: none;
+}
+
+.modal-step--time {
+    display: none;
+}
+
+/* 모달 전체 배경 (어두운 반투명) */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 전체 모바일 화면 덮음 */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 회색 반투명 */
+    z-index: 10;
+    justify-content: center;
+    align-items: flex-end;
+    /* 하단에 고정 */
+    display: none;
+    /* JS로 display: flex 처리 */
+}
+
+/* 모달 박스 내용 */
+.modal-content {
+    width: 100%;
+    max-width: 100%;
+    /* 480px 대신 100%로 설정 */
+    background: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    animation: slideUp 0.3s ease-out;
+}
+
+/* 모달 슬라이드 애니메이션 */
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
+
+/* 메인 버튼들 */
+.modal-buttons--main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* 서브 버튼들 */
+.modal-buttons--sub {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+/* 요일 버튼들 */
+.day-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.day-option {
+    padding: 8px 12px;
+    margin: 4px;
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid rgba(225, 25, 35, 1);
+    color: rgba(225, 25, 35, 1);
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.day-option:hover {
+    background-color: rgba(225, 25, 35, 1);
+    color: rgba(238, 238, 238, 1);
+}
+
+.form-time {
+    margin-bottom: 50px;
+}
+
+.day-option.selected {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+.position-option {
+    flex: 0 0 calc(33.333% - 12px);
+    padding: 20px 0;
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    border: 1.5px solid rgba(180, 180, 180, 0.6);
+    text-align: center;
+    font-weight: 500;
+    color: #18171C;
+    transition: all 0.2s ease;
+}
+
+.position-option:hover {
+    background-color: rgba(225, 25, 35, 0.06);
+    border-color: #E11923;
+    color: #E11923;
+    cursor: pointer;
+}
+
+.modal-skip-button {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+}
+
+.skip {
+    flex: 0 0 calc(33.333% - 12px);
+    padding: 8px 0;
+    background-color: #f5f5f5;
+    border: 1.5px solid rgba(180, 180, 180, 0.6);
+    text-align: center;
+    font-weight: 500;
+    color: #18171C;
+    transition: all 0.2s ease;
+}
+
+.skip:hover {
+    background-color: rgba(225, 25, 35, 0.06);
+    border-color: #E11923;
+    color: #E11923;
+    cursor: pointer;
+}
+
+/* 제목 */
+.modal-title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 8px;
 }

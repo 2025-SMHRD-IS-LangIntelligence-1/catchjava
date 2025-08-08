@@ -1,0 +1,18 @@
+.scroll-picker-container {
+  height: 150px; /* Example height */
+  overflow-y: scroll;
+  border: 1px solid #ccc;
+  /* Further styling for appearance */
+}
+
+.scroll-picker-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.scroll-picker-item {
+  padding: 10px;
+  text-align: center;
+  /* Further styling for individual items */
+}

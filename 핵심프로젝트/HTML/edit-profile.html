@@ -7,62 +7,184 @@
     <title>main</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="../CSS/edit-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../CSS/edit-profile.css">
 </head>
 
 <body>
     <div class="background">
         <div class="mobile-container">
+            <!-- 포지션 모달 오버레이 -->
+            <div class="modal-overlay" id="Modal">
+
+                <!-- 주포지션 모달 -->
+                <div class="modal-content modal-step modal-step--main">
+                    <div class="modal-title">주포지션을 선택해주세요</div>
+                    <div class="modal-buttons--main">
+                        <button class="position-option" data-value="탑">탑</button>
+                        <button class="position-option" data-value="정글">정글</button>
+                        <button class="position-option" data-value="미드">미드</button>
+                        <button class="position-option" data-value="원딜">원딜</button>
+                        <button class="position-option" data-value="서포터">서포터</button>
+                        <button class="position-option" data-value="올라운더">올라운더</button>
+                    </div>
+                </div>
+
+                <!-- 부포지션 모달 -->
+                <div class="modal-content modal-step modal-step--sub">
+                    <div class="modal-title">부포지션을 선택해주세요</div>
+                    <div class="modal-buttons--sub">
+                        <button class="position-option" data-value="탑">탑</button>
+                        <button class="position-option" data-value="정글">정글</button>
+                        <button class="position-option" data-value="미드">미드</button>
+                        <button class="position-option" data-value="원딜">원딜</button>
+                        <button class="position-option" data-value="서포터">서포터</button>
+                    </div>
+                    <div class="modal-skip-button">
+                        <button class="skip">
+                            SKIP
+                            <i class="fa-solid fa-angles-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 시간대 선택 모달 -->
+                <div class="modal-content modal-step modal-step--time">
+                    <div class="modal-title">주로 게임하는 시간대를 선택해주세요</div>
+                    <div class="day-buttons">
+                        <button class="day-option" data-day="월">월</button>
+                        <button class="day-option" data-day="화">화</button>
+                        <button class="day-option" data-day="수">수</button>
+                        <button class="day-option" data-day="목">목</button>
+                        <button class="day-option" data-day="금">금</button>
+                        <button class="day-option" data-day="토">토</button>
+                        <button class="day-option" data-day="일">일</button>
+                    </div>
+                    <!-- 시간 선택 스크롤 피커 UI -->
+
+                    <form class="max-w-[16rem] mx-auto grid grid-cols-2 gap-4 form-time">
+                        <div>
+                            <label for="start-time"
+                                class="block mb-2 text-sm font-bold text-gray-900 text-center dark:text-white">Start time</label>
+                            <div class="relative">
+                                <input type="time" id="start-time"
+                                    class="font-bold bg-gray-50 border leading-none border-gray-300 text-gray-900 text-center text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
+                                    min="09:00" max="18:00" value="00:00" required />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="end-time"
+                                class="block mb-2 text-sm font-bold text-gray-900 text-center dark:text-white">End time</label>
+                            <div class="relative">
+                                <input type="time" id="end-time"
+                                    class="font-bold bg-gray-50 border leading-none border-gray-300 text-gray-900 text-center text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    min="09:00" max="18:00" value="00:00" required />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <header class="header">
                 <button class="button--close" type="button">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
-                <div class="divider"> </div>
-                <span>Edit Profile</span>
             </header>
+            <!-- 네비게이션 바 -->
+            <nav class="nav-bar">
+                <div class="nav-bar__item"><a href="#" class="nav-bar__link">개인 프로필</a></div>
+                <div class="nav-bar__item"><a href="#" class="nav-bar__link">게임 프로필</a></div>
+            </nav>
             <main>
-                <div class="edit-profile">
-                    <div class="edit_profile_img">
-                        <button class="button--profile" type="button">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </button>
-                    </div>
-                    <div class="edit-profile-form">
-                        <form>
-                            <!-- 이메일 입력 -->
-                            <div class="input input-email">
-                                <label for="email" class="form-label">E-mail을 입력해주세요</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="email" value="ehgud7821@naver.com"/>
-                                    <button type="button" class="duplicate-check-btn">중복확인</button>
+                <section class="profile-section profile-section--personal">
+                    <div class="edit-profile">
+                        <span class="profile-section__title">개인 프로필 수정</span>
+                        <div class="edit_profile_img">
+                            <button class="button--profile" type="button">
+                                <i class="fa-solid fa-circle-user"></i>
+                            </button>
+                        </div>
+                        <div class="edit-profile-form">
+                            <form>
+                                <!-- 이메일 입력 -->
+                                <div class="input input-email">
+                                    <label for="email" class="form-label">E-mail을 입력해주세요</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="email" value="ehgud7821@naver.com"/>
+                                        <button type="button" class="duplicate-check-btn">중복확인</button>
+                                    </div>
+                                    <p id="result" class="form-text"></p>
                                 </div>
-                                <p id="result" class="form-text"></p>
-                            </div>
-
-                            <!-- 이름 입력 -->
-                            <div class="input input-name">
-                                <label for="name" class="form-label">이름을 입력해주세요</label>
-                                <input type="text" class="form-control" id="name" value="김도형"/>
-                            </div>
-
-                            <!-- 비밀번호 입력 -->
-                            <div class="input input-password">
-                                <label for="password" class="form-label">비밀번호를 입력해주세요</label>
-                                <input type="password" class="form-control" id="password" value="123456789"/>
-                            </div>
-
-                            <!-- 가입 버튼 -->
-                            <div class="save-btn">
-                                <button type="submit" class="btn btn-outline-primary">저장</button>
-                            </div>
-                        </form>
+    
+                                <!-- 이름 입력 -->
+                                <div class="input input-name">
+                                    <label for="name" class="form-label">이름을 입력해주세요</label>
+                                    <input type="text" class="form-control" id="name" value="김도형"/>
+                                </div>
+    
+                                <!-- 비밀번호 입력 -->
+                                <div class="input input-password">
+                                    <label for="password" class="form-label">비밀번호를 입력해주세요</label>
+                                    <input type="password" class="form-control" id="password" value="123456789"/>
+                                </div>
+    
+                                <!-- 가입 버튼 -->
+                                <div class="save-btn">
+                                    <button type="submit" class="btn btn-outline-primary">저장</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                </section>
+                <section class="profile-section profile-section--game">
+                    <div class="edit-game-profile">
+                        <span class="profile-section__title">게임 프로필 수정</span>
+                        <div class="edit-game-profile-form">
+                                <form>
+                                    <div class="edit-game-profile-form-input">
+                                        <!-- 게임 닉네임 -->
+                                        <div class="input input-name">
+                                            <label for="name" class="form-label">소환사이름님, 닉네임을 수정하실 수 있어요.</label>
+                                            <input type="text" class="form-control" id="name"
+                                                placeholder="소환사이름#0000" value="소환사이름#1234"/>
+                                        </div>
+                                        <!-- hidden input: 서버 전송용 -->
+                                        <input type="hidden" id="PositionInput" name="position" value="">
+                                        <!-- 주포지션 -->
+                                        <button type="button" class="input input-line input-line-main">
+                                            <div class="input-line-box">
+                                                <div class="input-line-question">
+                                                    <span class="line line-question">포지션: 미드 / 정글  </span>
+                                                </div>
+                                                <i class="fa-solid fa-angle-right input-position-btn"></i>
+                                            </div>
+                                        </button>
+
+                                        <!-- hidden input: 서버 전송용 -->
+                                        <input type="hidden" id="mainPositionInput" name="sub_position" value="">
+                                        <!-- 시간대 선택 -->
+                                        <button type="button" class="input input-line input-line-sub">
+                                            <div class="input-line-box">
+                                                <div class="input-line-question">
+                                                    <span class="line line-question">게임 시간대: 오후 6시 ~ 10시</span>
+                                                </div>
+                                                <i class="fa-solid fa-angle-right input-position-btn"></i>
+                                            </div>
+                                        </button>
+
+                                        <!-- 저장 버튼 -->
+                                        <div class="save-btn">
+                                            <button type="submit" class="btn btn-outline-primary">저장</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                </section>
             </main>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
