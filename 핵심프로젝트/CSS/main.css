@@ -1039,7 +1039,7 @@ a {
 
 /* 길드 있을 때 페이지 */
 .guild-section--have {
-    display: none;
+    display: block;
 }
 
 /* 기본 세팅 */
@@ -1176,29 +1176,38 @@ a {
 }
 
 /* 매칭 버튼 */
+/* 매칭 버튼 래퍼 */
 .guild-matching-button-wrapper {
-    display: flex; /* 길드 매칭버튼 유저가 길드장일 때 flex 아니면 none */
-    justify-content: center;
-    margin: 20px 0;
+    position: fixed; /* 화면 하단에 고정 */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px; /* 모바일 컨테이너 폭 */
+    padding: 0; /* 흰 배경 제거 */
+    background: none; /* 배경 제거 */
 }
 
+/* 매칭 버튼 */
 .matching-button {
-    width: 90%;
-    max-width: 400px;
-    padding: 16px 0;
+    width: 100%;
+    height: 56px;
     background-color: #ef4444;
     color: white;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 0; /* 전체 빨간색 느낌 위해 모서리 제거 */
     cursor: pointer;
     transition: background-color 0.2s ease;
+    border-radius: 12px 12px 0 0;
 }
 
 .matching-button:hover {
     background-color: #dc2626;
 }
+
+
 
 /* 로딩 오버레이 */
 .loading-overlay {
@@ -1406,7 +1415,7 @@ a {
 }
 
 .guild-member__profile {
-    width: 60px;
+    width: 70px;
     margin-right: 10px;
 }
 
@@ -1418,12 +1427,13 @@ a {
 .guild-member-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: left;
+    margin-left: 10px;
 }
 
 .guild-member__tier {
     width: 24px;
-    margin-right: 8px;
+    margin-right: 3px;
 }
 
 .guild-member__name {
@@ -1433,11 +1443,17 @@ a {
 .guild-member__role {
     font-size: 12px;
     color: gray;
+    margin-left: 68px;
 }
 
 .guild-member-lines {
     font-size: 13px;
-    margin-top: 4px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.guild-member-lines span {
+    margin-right: 5px;
 }
 
 /* 매칭 화면 섹션 */
