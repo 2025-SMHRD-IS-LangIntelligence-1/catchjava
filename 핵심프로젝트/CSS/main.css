@@ -91,7 +91,7 @@ a {
     object-fit: cover;
     text-decoration-line: none;
     color: rgba(24, 23, 28, 1);
-    display: block;
+    display: none;
 }
 
 .link--login:hover {
@@ -104,7 +104,7 @@ a {
     object-fit: cover;
     font-size: 45px;
     color: rgba(225, 25, 35, 1);
-    display: none;
+    display: block;
 }
 
 /* user 프로필 패널 */
@@ -266,7 +266,7 @@ a {
 /* esports 경기 일정 */
 .esports-schedule {
     margin-top: 20px;
-    display: none;
+    display: block;
 }
 
 .section__title {
@@ -470,91 +470,117 @@ a {
 /* esports 뉴스 */
 .esports-news {
     margin-top: 20px;
-    display: none;
+    padding: 0 16px;
+    display: block;
 }
 
+/* 카테고리 버튼 영역 */
 .news-category {
-    position: relative;
-    margin-top: 25px;
-    margin-left: 30px;
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    overflow-x: auto; /* 모바일에서 버튼 많을 때 스크롤 */
+    padding-bottom: 6px;
+}
+
+.news-category::-webkit-scrollbar {
+    display: none; /* 스크롤바 숨김 */
 }
 
 .news-category__button {
-    padding: 2px 12px;
-    margin-right: 10px;
-    border: 1px solid rgba(24, 23, 28, 1);
+    padding: 6px 14px;
+    border: 1px solid #ddd;
     background-color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 999px;
     font-size: 14px;
-    color: rgba(24, 23, 28, 1);
+    color: #18171c;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
 }
 
 .news-category__button:hover {
-    background-color: rgba(249, 247, 247, 1);
+    background-color: #f3f4f6;
+    border-color: #bbb;
 }
 
-/* 뉴스 카드 전체 박스 */
+/* 선택된 카테고리 스타일 */
+.news-category__button.active {
+    background-color: #ef4444;
+    color: white;
+    border-color: #ef4444;
+}
+
+/* 뉴스 카드 전체 */
 .news {
-    width: 450px;
-    margin: 45px auto 0 auto;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 /* 뉴스 카드 */
 .news__card {
-    background-color: rgba(249, 247, 247, 1);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    margin-top: -30px;
-    padding: 15px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* 카드 상단 (이미지 + 메타 정보) */
+.news__card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* 카드 상단 (이미지 + 정보) */
 .news__header {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    gap: 12px;
+    align-items: flex-start;
 }
 
 .news__image {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
-    border-radius: 10px;
-    margin-right: 15px;
+    border-radius: 8px;
+    flex-shrink: 0;
 }
 
 .news__meta {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .news__title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
 }
 
 .news__time {
     display: flex;
     align-items: center;
-    font-size: 14px;
-    color: rgba(100, 100, 100, 1);
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 6px;
 }
 
 .news__time img {
-    width: 16px;
-    height: auto;
-    margin-right: 5px;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
 }
 
 /* 뉴스 본문 */
 .news__body {
     font-size: 14px;
-    color: rgba(50, 50, 50, 1);
-    padding-top: 10px;
+    color: #4b5563;
+    margin-top: 10px;
+    line-height: 1.4;
 }
 
 /* 길드 탭 */
@@ -567,9 +593,21 @@ a {
     position: absolute;
     width: 480px;
     height: auto;
-    margin-top: 80px;
+    margin-top: 60px;
     z-index: 1;
     display: none;
+}
+
+.guild-profile-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.guild-profile-title p {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 /* 게임 프로필 입력 폼 */
@@ -624,7 +662,8 @@ a {
     color: #f9fafb;
 }
 
-.input-line {
+.input-line,
+.input-time {
     width: 70%;
     height: 65px;
     margin-bottom: 25px;
@@ -639,19 +678,22 @@ a {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.input-line:hover {
+.input-line:hover,
+.input-time:hover {
     border-color: rgba(225, 25, 35, 1);
     box-shadow: 0 4px 8px rgba(225, 25, 35, 0.1);
     cursor: pointer;
 }
 
-.input-line-box {
+.input-line-box,
+.input-time-box {
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
-.input-line-question {
+.input-line-question,
+.input-time-question {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -659,28 +701,33 @@ a {
     width: 290px;
 }
 
-.line {
+.line,
+.time {
     color: rgba(24, 23, 28, 1);
 }
 
-.line-question {
+.line-question,
+.time-question {
     font-size: 15px;
     font-weight: 600;
     color: rgba(24, 23, 28, 1);
 }
 
-.my-line {
+.my-line,
+.my-time {
     font-size: 14px;
     color: rgba(150, 150, 150, 1);
 }
 
-.input-position-btn {
+.input-position-btn,
+.input-time-btn {
     font-size: 20px;
     color: rgba(200, 200, 200, 1);
     transition: color 0.2s;
 }
 
-.input-line:hover .input-position-btn {
+.input-line:hover .input-position-btn,
+.input-time:hover .input-time-btn {
     color: rgba(225, 25, 35, 1);
 }
 
@@ -777,29 +824,32 @@ a {
 .day-option {
     padding: 8px 12px;
     margin: 4px;
-    width: 100%;
-    height: 50px;
+    width: calc(33.33% - 8px); /* 한 줄에 3개 배치 */
+    height: 44px;
     border-radius: 8px;
-    border: 1px solid rgba(225, 25, 35, 1);
+    border: 1.5px solid rgba(225, 25, 35, 1);
     color: rgba(225, 25, 35, 1);
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
+/* 마우스 오버 시 */
 .day-option:hover {
-    background-color: rgba(225, 25, 35, 1);
-    color: rgba(238, 238, 238, 1);
+    background-color: rgba(225, 25, 35, 0.1);
+    transform: translateY(-1px);
 }
 
-.form-time {
-    margin-bottom: 50px;
-}
-
+/* 선택 상태 */
 .day-option.selected {
-    background-color: #333;
-    color: white;
-    font-weight: bold;
+    background-color: rgba(225, 25, 35, 1);
+    color: #fff;
+    border-color: rgba(225, 25, 35, 1);
+    box-shadow: 0 3px 6px rgba(225, 25, 35, 0.3);
+    transform: translateY(-1px);
 }
 
 .position-option {
@@ -844,6 +894,51 @@ a {
     color: #E11923;
     cursor: pointer;
 }
+
+/* 요일 취소, 저장 버튼 */
+/* 버튼 컨테이너 */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* 공통 버튼 스타일 */
+.btn {
+    flex: 1; /* 두 버튼이 동일한 너비 차지 */
+    max-width: 150px;
+    height: 44px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* 취소 버튼 */
+.btn-cancel {
+    background-color: #e5e7eb; /* 연회색 */
+    color: #374151; /* 진한 회색 글씨 */
+}
+.btn-cancel:hover {
+    background-color: #d1d5db;
+}
+
+/* 저장 버튼 */
+.btn-save {
+    background-color: #ef4444; /* 빨강 */
+    color: white;
+}
+.btn-save:hover {
+    background-color: #dc2626;
+}
+
+/* 클릭 시 살짝 눌리는 효과 */
+.btn:active {
+    transform: translateY(1px);
+}
+
 
 /* 제목 */
 .modal-title {
@@ -1187,8 +1282,6 @@ a {
 .matching-button:hover {
     background-color: #dc2626;
 }
-
-
 
 /* 로딩 오버레이 */
 .loading-overlay {

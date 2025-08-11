@@ -245,6 +245,10 @@ input[type="password"]:focus {
     color: #f9fafb;
 }
 
+.profile-section--game {
+    display: none;
+}
+
 /* 게임 프로필 탭 */
 .edit-game-profile {
     position: relative;

@@ -22,12 +22,12 @@
                 <div class="modal-content modal-step modal-step--main">
                     <div class="modal-title">주포지션을 선택해주세요</div>
                     <div class="modal-buttons--main">
-                        <button class="position-option" data-value="탑">탑</button>
-                        <button class="position-option" data-value="정글">정글</button>
-                        <button class="position-option" data-value="미드">미드</button>
-                        <button class="position-option" data-value="원딜">원딜</button>
-                        <button class="position-option" data-value="서포터">서포터</button>
-                        <button class="position-option" data-value="올라운더">올라운더</button>
+                        <button class="position-option main-option" data-value="탑">탑</button>
+                        <button class="position-option main-option" data-value="정글">정글</button>
+                        <button class="position-option main-option" data-value="미드">미드</button>
+                        <button class="position-option main-option" data-value="원딜">원딜</button>
+                        <button class="position-option main-option" data-value="서포터">서포터</button>
+                        <button class="position-option main-option" data-value="올라운더">올라운더</button>
                     </div>
                 </div>
 
@@ -35,11 +35,11 @@
                 <div class="modal-content modal-step modal-step--sub">
                     <div class="modal-title">부포지션을 선택해주세요</div>
                     <div class="modal-buttons--sub">
-                        <button class="position-option" data-value="탑">탑</button>
-                        <button class="position-option" data-value="정글">정글</button>
-                        <button class="position-option" data-value="미드">미드</button>
-                        <button class="position-option" data-value="원딜">원딜</button>
-                        <button class="position-option" data-value="서포터">서포터</button>
+                        <button class="position-option sub-option" data-value="탑">탑</button>
+                        <button class="position-option sub-option" data-value="정글">정글</button>
+                        <button class="position-option sub-option" data-value="미드">미드</button>
+                        <button class="position-option sub-option" data-value="원딜">원딜</button>
+                        <button class="position-option sub-option" data-value="서포터">서포터</button>
                     </div>
                     <div class="modal-skip-button">
                         <button class="skip">
@@ -80,11 +80,17 @@
                                 time</label>
                             <div class="relative">
                                 <input type="time" id="end-time"
-                                    class="font-bold bg-gray-50 border leading-none border-gray-300 text-gray-900 text-center text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="font-bold bg-gray-50 border leading-none border-gray-300 text-gray-900 text-center text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5"
                                     min="09:00" max="18:00" value="00:00" required />
                             </div>
                         </div>
                     </form>
+                    <!-- 선택된 요일을 ,로 합쳐서 담음 (예: 월,수,금) -->
+                    <input type="hidden" id="daysInput" name="days" value="">
+                    <div class="modal-actions">
+                        <button class="btn btn-cancel">취소</button>
+                        <button class="btn btn-save">저장</button>
+                    </div>
                 </div>
             </div>
             <!-- 헤더 - 로고, 로그인(프로필) -->
@@ -131,8 +137,8 @@
             </header>
             <!-- 네비게이션 바 -->
             <nav class="nav-bar">
-                <div class="nav-bar__item"><a href="#" class="nav-bar__link">홈</a></div>
-                <div class="nav-bar__item"><a href="#" class="nav-bar__link">길드</a></div>
+                <div class="nav-bar__item btn-home"><a href="#" class="nav-bar__link">홈</a></div>
+                <div class="nav-bar__item btn-guild"><a href="#" class="nav-bar__link">길드</a></div>
             </nav>
             <main>
                 <section class="main-section">
@@ -229,6 +235,10 @@
                         <!-- 게임프로필 미작성시 길드 페이지 들어오면 작성 -->
                         <div class="game-profile-intro">
                             <div class="game-profile-form">
+                                <div class="guild-profile-title">
+                                    <p>길드에 참여하려면 먼저</p>
+                                    <p>나만의 게임 프로필 만들어 주세요!</p>
+                                </div>
                                 <form>
                                     <div class="game-profile-form-input">
                                         <!-- 게임 닉네임 -->
@@ -240,7 +250,7 @@
                                         <!-- hidden input: 서버 전송용 -->
                                         <input type="hidden" id="PositionInput" name="position" value="">
                                         <!-- 주포지션 -->
-                                        <button type="button" class="input input-line input-line-main">
+                                        <button type="button" class="input input-line">
                                             <div class="input-line-box">
                                                 <div class="input-line-question">
                                                     <span class="line line-question">주/부포지션을 선택해주세요</span>
@@ -253,13 +263,13 @@
                                         <!-- hidden input: 서버 전송용 -->
                                         <input type="hidden" id="mainPositionInput" name="sub_position" value="">
                                         <!-- 시간대 선택 -->
-                                        <button type="button" class="input input-line input-line-sub">
-                                            <div class="input-line-box">
-                                                <div class="input-line-question">
-                                                    <span class="line line-question">주로 게임하는 시간대를 골라주세요!</span>
-                                                    <span class="line my-line">주 시간대 : ㅇㅇ</span>
+                                        <button type="button" class="input input-time">
+                                            <div class="input-time-box">
+                                                <div class="input-time-question">
+                                                    <span class="time time-question">주로 게임하는 시간대를 골라주세요!</span>
+                                                    <span class="time my-time">주 시간대 : ㅇㅇ</span>
                                                 </div>
-                                                <i class="fa-solid fa-angle-right input-position-btn"></i>
+                                                <i class="fa-solid fa-angle-right input-time-btn"></i>
                                             </div>
                                         </button>
 

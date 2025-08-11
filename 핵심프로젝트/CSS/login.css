@@ -183,7 +183,7 @@ input[type="password"]:focus {
 /* 회원가입 안내 */
 .question-join {
     font-size: 12px;
-    margin-top: 150px;
+    margin-top: 130px;
 }
 
 .question-join a {
