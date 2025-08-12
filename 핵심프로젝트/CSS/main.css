@@ -108,17 +108,47 @@ a {
 }
 
 /* user 프로필 패널 */
+/* 오버레이 (패널 뒤 어둡게) */
+.user-panel__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 1400;               /* 패널(1500) 바로 아래 */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.user-panel__overlay.is-show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 패널 열릴 때 배경 스크롤 잠금 */
+.mobile-container.no-scroll { overflow: hidden; }
+
+/* user 프로필 패널 - 슬라이드 드로어 */
 .user-panel {
-    position: absolute;
-    top: -3px;
-    right: -3px;
+    position: absolute;      /* 화면 기준 */
+    top: 0;
+    right: 0;
     width: 350px;
     height: 100vh;
     background-color: #f9fafb;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #111;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    z-index: 1500;
     padding-top: 20px;
-    z-index: 3;
-    display: none;
+
+    /* 슬라이드: 처음엔 화면 밖 */
+    transform: translateX(100%);
+    transition: transform .28s ease;
+    display: block;       /* 전환 위해 block 유지 */
+}
+
+/* 열림 상태 */
+.user-panel.is-open {
+    transform: translateX(0);
 }
 
 .user-panel__header {
@@ -283,7 +313,7 @@ a {
 /* calendar 영역 */
 .calendar {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     background-color: white;
     margin-top: 30px;
@@ -291,8 +321,23 @@ a {
     border: 1px solid rgba(0, 0, 0, 0.2);
     margin-left: 5px;
     margin-right: 5px;
-    padding-left: 2px;
-    padding-right: 2px;
+    padding-inline: calc(50% - 50px);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 10px;
+
+    /* 스크롤 바 없애기 */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.calendar::-webkit-scrollbar {
+    display: none;
+}
+
+.calendar__spacer {
+    flex: 0 0 var(--gutter, 0px);
+    pointer-events: none;
 }
 
 .calendar__day {
@@ -308,6 +353,8 @@ a {
     align-items: center;
     color: rgba(0, 0, 0, 0.7);
     cursor: pointer;
+    transition: transform .2s ease;
+    flex: 0 0 auto;
 }
 
 .calendar__day--highlight {
@@ -315,8 +362,9 @@ a {
     color: white;
     font-weight: bold;
     border-radius: 10px;
-    width: 120px;
-    height: 80px;
+    /* width: 120px;
+    height: 80px; */
+    transform: scale(1.1);
 }
 
 /* schedule header */
@@ -1791,4 +1839,117 @@ a {
 
 .btn:hover { 
     filter:brightness(.97); 
+}
+
+.fab-create-guild {
+    position: fixed;
+    z-index: 2000;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: max(16px, calc(50% - 240px + 16px)); /* 480px 프레임 고려 */
+}
+
+/* === 길드 생성 FAB === */
+.fab-btn {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: #ef4444;
+    color: #fff;
+    font-size: 22px;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 20px rgba(239, 68, 68, .35), 0 2px 6px rgba(0,0,0,.18);
+    cursor: pointer;
+    transition: transform .08s ease, filter .15s ease, box-shadow .15s ease;
+}
+.fab-btn:active { 
+    transform: translateY(1px) scale(.98); 
+}
+
+.fab-btn:hover { 
+    filter: brightness(.96); 
+}
+
+/* 길드 생성 모달 */
+/* 길드 생성 모달 기본 숨김 */
+.modal-step--guildcreate { 
+    display: none; 
+}
+
+/* 모달 열릴 때 배경 스크롤 잠금 */
+.mobile-container.modal-open { 
+    overflow: hidden; 
+}
+
+/* === 길드 생성 모달 전용 스타일 === */
+.modal-step--guildcreate {
+    max-width: 440px;
+    background: #fff;
+    border-radius: 16px 16px 0 0; /* 하단 시트 느낌 */
+    padding: 24px 20px;
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
+    animation: slideUp 0.25s ease-out;
+}
+
+/* 제목 */
+.modal-step--guildcreate .modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 입력 필드 스타일 */
+.modal-step--guildcreate .form-control.input-plain {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-bottom: 16px;
+    background: #fafafa;
+    transition: border-color 0.2s ease;
+}
+.modal-step--guildcreate .form-control.input-plain:focus {
+    border-color: #ef4444;
+    outline: none;
+    background: #fff;
+}
+
+/* 필요 라인 버튼 */
+.line-select-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.line-select-buttons button {
+    flex: 0 0 calc(33.333% - 8px); /* 항상 3개 크기로 고정 */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fafafa;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.line-select-buttons button.active {
+    border-color: #ef4444;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-weight: bold;
+}
+
+
+/* 버튼 영역 */
+.modal-step--guildcreate .modal-actions {
+    margin-top: 10px;
+}
+.modal-step--guildcreate .btn {
+    height: 44px;
+    border-radius: 8px;
+    font-weight: bold;
 }

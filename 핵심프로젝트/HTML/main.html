@@ -92,6 +92,38 @@
                         <button class="btn btn-save">저장</button>
                     </div>
                 </div>
+                <!-- 길드 생성 모달 -->
+                <div class="modal-content modal-step modal-step--guildcreate">
+                    <div class="modal-title">새 길드 만들기</div>
+                    <form onsubmit="return handleQuickCreate(event)">
+                        <label class="form-label" for="guildName">길드 이름</label>
+                        <input id="guildName" type="text" class="form-control input-plain" placeholder="길드 이름"
+                            maxlength="20" required>
+
+                        <label class="form-label" for="guildIntro">한 줄 소개</label>
+                        <input id="guildIntro" type="text" class="form-control input-plain" placeholder="예: 매너 환영!"
+                            maxlength="30">
+
+                        <label class="form-label">필요 라인</label>
+                        <div class="line-select-buttons">
+                            <button type="button" data-line="탑">탑</button>
+                            <button type="button" data-line="정글">정글</button>
+                            <button type="button" data-line="미드">미드</button>
+                            <button type="button" data-line="원딜">원딜</button>
+                            <button type="button" data-line="서포터">서포터</button>
+                        </div>
+
+                        <!-- 실제 데이터 전송용 hidden input -->
+                        <input type="hidden" id="guildNeed" name="guildNeed">
+
+                        <div class="modal-actions" style="display:flex;gap:10px;">
+                            <button type="button" class="btn btn-cancel" onclick="closeGuildCreate()">취소</button>
+                            <button type="submit" class="btn btn-save">만들기</button>
+                        </div>
+                    </form>
+                </div>
+
+
             </div>
             <!-- 헤더 - 로고, 로그인(프로필) -->
             <header class="header">
@@ -135,6 +167,8 @@
                     </div>
                 </div>
             </header>
+            <!-- 유저 패널 바깥 클릭 감지용 오버레이 -->
+            <div class="user-panel__overlay"></div>
             <!-- 네비게이션 바 -->
             <nav class="nav-bar">
                 <div class="nav-bar__item btn-home"><a href="#" class="nav-bar__link">홈</a></div>
@@ -147,16 +181,17 @@
                         <div class="section__title">
                             <p>Esports 경기 일정</p>
                         </div>
-                        <!-- <div class="calendar"></div> -->
-                        <div class="calendar">
+                        <div class="calendar"></div>
+                        <!-- <div class="calendar">
                             <button class="calendar__day" data-date="2025-07-29">29<br>Tue</button>
                             <button class="calendar__day" data-date="2025-07-30">30<br>Wed</button>
                             <button class="calendar__day" data-date="2025-07-31">31<br>Thu</button>
-                            <button class="calendar__day calendar__day--highlight" data-date="2025-08-01">1<br>Fri</button>
+                            <button class="calendar__day calendar__day--highlight"
+                                data-date="2025-08-01">1<br>Fri</button>
                             <button class="calendar__day" data-date="2025-08-02">2<br>Sat</button>
                             <button class="calendar__day" data-date="2025-08-03">3<br>Sun</button>
                             <button class="calendar__day" data-date="2025-08-04">4<br>Mon</button>
-                        </div>
+                        </div> -->
                         <div class="schedule-header">
                             <div class="schedule-header__title">League of Legend</div>
                             <div class="schedule-header__category">
@@ -325,6 +360,12 @@
                                         <button class="sign-up-btn">가입</button>
                                     </div>
                                 </div>
+                            </div>
+                            <!-- 길드 생성 플로팅 버튼 -->
+                            <div class="fab-create-guild" aria-hidden="false">
+                                <button class="fab-btn" type="button" aria-label="길드 생성" onclick="openCreateGuild()">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -572,7 +613,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <section class="roster">
                             <h4 class="roster__title">블루 진형 라인업</h4>
                             <ul class="roster__list">
@@ -640,6 +680,7 @@
                     </footer>
                 </section>
             </main>
+
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
