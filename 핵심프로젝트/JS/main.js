@@ -217,164 +217,16 @@ sign_up_btn.addEventListener("click", () => {
     guild_section__have.style.display = "block";
 })
 
-// esports 캘린더 
-// 날짜 자동 생성
+// === Esports Calendar ===
 document.addEventListener('DOMContentLoaded', () => {
-  const calendarEl = document.querySelector('.calendar');
-
-  // YYYY-MM-DD (로컬 기준) 포맷터
-  function ymd(d) {
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const dd = String(d.getDate()).padStart(2, '0');
-    return `${y}-${m}-${dd}`;
-  }
-
-  // 버튼 생성 (예: "1<br>Fri")
-  function createDayButton(date) {
-    const btn = document.createElement('button');
-    btn.className = 'calendar__day';
-    btn.dataset.date = ymd(date);
-    const day = date.getDate();
-    const w = date.toLocaleDateString('en-US', { weekday: 'short' }); // Tue, Wed...
-    btn.innerHTML = `${day}<br>${w}`;
-    return btn;
-  }
-
-  // 가운데로 스크롤
-  function scrollToCenter(target) {
-    const left = target.offsetLeft - (calendarEl.clientWidth - target.clientWidth) / 2;
-    const max = calendarEl.scrollWidth - calendarEl.clientWidth;
-    const clamped = Math.max(0, Math.min(max, left));
-    calendarEl.scrollTo({ left: clamped, behavior: 'smooth' });
-  }
-
-  // 날짜 자동 생성 (기본: 과거 7일 ~ 미래 7일)
-  function generateCalendar(pastDays = 7, futureDays = 7) {
-    if (!calendarEl) return;
-    calendarEl.innerHTML = '';
-
-    const today = new Date();
-    const start = new Date(today);  start.setDate(today.getDate() - pastDays);
-    const end   = new Date(today);  end.setDate(today.getDate() + futureDays);
-
-    const frag = document.createDocumentFragment();
-
-    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-      const cur = new Date(d);               // 날짜 객체 복제
-      const btn = createDayButton(cur);
-      if (ymd(cur) === ymd(today)) btn.classList.add('calendar__day--highlight');
-      frag.appendChild(btn);
-    }
-
-    calendarEl.appendChild(frag);
-
-    // 초기: 오늘 버튼 가운데 이동 + 일정 렌더(있으면)
-    const todayBtn = calendarEl.querySelector('.calendar__day--highlight') || calendarEl.querySelector('.calendar__day');
-    if (todayBtn) {
-      // 첫 로드시도 부드럽게 이동하고 싶지 않으면 behavior:'auto'로 변경
-      scrollToCenter(todayBtn);
-      if (typeof renderMatches === 'function') {
-        renderMatches(todayBtn.dataset.date);
-      }
-    }
-  }
-
-  // 클릭 이벤트(위임): 가운데 스크롤 + 하이라이트 이동 + 일정 렌더
-  calendarEl.addEventListener('click', (e) => {
-    const btn = e.target.closest('.calendar__day');
-    if (!btn) return;
-
-    scrollToCenter(btn);
-
-    calendarEl.querySelectorAll('.calendar__day').forEach(b => b.classList.remove('calendar__day--highlight'));
-    btn.classList.add('calendar__day--highlight');
-
-    if (typeof renderMatches === 'function') {
-      renderMatches(btn.dataset.date);
-    }
-  });
-
-  // 실행
-  generateCalendar(7, 7);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const calendarEl = document.querySelector('.calendar');
-
-  // ① 좌우 스페이서가 없으면 만들어 붙임
-  function ensureGutters() {
-    if (!calendarEl) return;
-
-    // 이미 있으면 재사용, 없으면 생성
-    let left = calendarEl.querySelector('.calendar__spacer--left');
-    let right = calendarEl.querySelector('.calendar__spacer--right');
-
-    if (!left) {
-      left = document.createElement('div');
-      left.className = 'calendar__spacer calendar__spacer--left';
-      calendarEl.prepend(left);
-    }
-    if (!right) {
-      right = document.createElement('div');
-      right.className = 'calendar__spacer calendar__spacer--right';
-      calendarEl.appendChild(right);
-    }
-    updateGutters(); // 생성 후 즉시 폭 계산
-  }
-
-  // ② 컨테이너 폭의 절반을 스페이서 폭으로 사용 (버튼 크기 상관없이 항상 충분)
-  function updateGutters() {
-    const gutter = Math.ceil(calendarEl.clientWidth / 2);
-    calendarEl.style.setProperty('--gutter', `${gutter}px`);
-  }
-
-  // ③ 가운데로 스크롤하는 함수 (기존 쓰던 함수 그대로 써도 됨)
-  function scrollToCenter(target) {
-    const left =
-      target.offsetLeft - (calendarEl.clientWidth - target.clientWidth) / 2;
-    const max = calendarEl.scrollWidth - calendarEl.clientWidth;
-    const clamped = Math.max(0, Math.min(max, left));
-    calendarEl.scrollTo({ left: clamped, behavior: 'smooth' });
-  }
-
-  // 초기 세팅
-  ensureGutters();
-  window.addEventListener('resize', updateGutters);
-
-  // 처음 하이라이트된 버튼이 있으면 가운데로
-  const initial = calendarEl.querySelector('.calendar__day--highlight')
-               || calendarEl.querySelector('.calendar__day');
-  if (initial) scrollToCenter(initial);
-
-  // 클릭 시도 동일하게 가운데로
-  calendarEl.addEventListener('click', (e) => {
-    const btn = e.target.closest('.calendar__day');
-    if (!btn) return;
-
-    scrollToCenter(btn);
-
-    // 하이라이트 이동 (네가 이미 하고 있으면 이 부분은 스킵)
-    calendarEl.querySelectorAll('.calendar__day')
-      .forEach(b => b.classList.remove('calendar__day--highlight'));
-    btn.classList.add('calendar__day--highlight');
-
-    // 일정 렌더 함수가 있으면 호출
-    if (typeof renderMatches === 'function' && btn.dataset.date) {
-      renderMatches(btn.dataset.date);
-    }
-  });
-});
-
-
-
-// 캘린더
-document.addEventListener('DOMContentLoaded', () => {
-    const calendar = document.querySelector('.calendar');
-    const dayButtons = calendar.querySelectorAll('.calendar__day'); // 이미 있는 버튼들
+    const calendarEl = document.querySelector('.calendar');
     const scheduleBox = document.querySelector('.schedule-box');
+    if (!calendarEl || !scheduleBox) return;
 
-    // [A] 날짜별 경기 데이터 (예시)
+    const PAST_DAYS = 12;   // 오늘 기준 과거
+    const FUTURE_DAYS = 7;  // 오늘 기준 미래
+
+    // ---- (A) 예시 데이터: 실제 데이터로 교체해 써도 됨 ----
     const scheduleData = {
         "2025-08-01": [
             {
@@ -401,29 +253,31 @@ document.addEventListener('DOMContentLoaded', () => {
         "2025-08-03": []
     };
 
-    // [B] 버튼 순서에 맞춰 날짜키 매핑 (HTML 건드리기 싫으면 이렇게)
-    //   → 화면에 보이는 29/Tue, 30/Wed... 순서에 대응시켜주세요.
-    const dateKeys = [
-        "2025-07-29",
-        "2025-07-30",
-        "2025-07-31",
-        "2025-08-01",
-        "2025-08-02",
-        "2025-08-03",
-        "2025-08-04"
-    ];
-    dayButtons.forEach((btn, i) => {
-        btn.dataset.date = dateKeys[i]; // HTML 수정 없이 data-date 주입
-    });
+    // ---- (B) 유틸/템플릿/렌더 ----
+    const ymd = (d) => {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        return `${y}-${m}-${dd}`;
+    };
 
-    // 유틸: 오늘/그외 라벨
-    const todayKey = new Date().toISOString().split('T')[0];
-    const dateLabel = (dateKey) =>
-        dateKey === todayKey
+    function createDayButton(date) {
+        const btn = document.createElement('button');
+        btn.className = 'calendar__day';
+        btn.dataset.date = ymd(date);
+        const dayNum = date.getDate();
+        const w = date.toLocaleDateString('en-US', { weekday: 'short' }); // Sun, Mon...
+        btn.innerHTML = `${dayNum}<br>${w}`;
+        return btn;
+    }
+
+    function dateLabel(dateKey) {
+        const todayKey = ymd(new Date());
+        return dateKey === todayKey
             ? 'today'
             : new Date(dateKey).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric', weekday: 'short' });
+    }
 
-    // [C] 경기 카드 템플릿
     function matchTemplate(dateKey, m) {
         return `
       <div class="match">
@@ -449,7 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     }
 
-    // [D] 렌더 함수
     function renderMatches(dateKey) {
         const list = scheduleData[dateKey] || [];
         scheduleBox.innerHTML = list.length
@@ -457,64 +310,84 @@ document.addEventListener('DOMContentLoaded', () => {
             : `<div class="match match--empty">해당 날짜에 경기가 없습니다.</div>`;
     }
 
-    // [E] 하이라이트 이동
-    function setActiveDay(btn) {
-        dayButtons.forEach(b => b.classList.remove('calendar__day--highlight'));
-        btn.classList.add('calendar__day--highlight');
+    // ---- (C) 스페이서/스크롤 ----
+    function updateGutters() {
+        const active = calendarEl.querySelector('.calendar__day--highlight');
+        const sample = active || calendarEl.querySelector('.calendar__day');
+        const itemW = sample ? sample.getBoundingClientRect().width : 100;
+        const gutter = Math.max(0, Math.round((calendarEl.clientWidth - itemW) / 2));
+        calendarEl.style.setProperty('--gutter', `${gutter}px`);
     }
 
-    // [F] 클릭 이벤트: 하이라이트 + 렌더
-    calendar.addEventListener('click', (e) => {
+    function scrollToCenter(target) {
+        const left = target.offsetLeft - (calendarEl.clientWidth - target.clientWidth) / 2;
+        const max = calendarEl.scrollWidth - calendarEl.clientWidth;
+        calendarEl.scrollTo({ left: Math.max(0, Math.min(max, left)), behavior: 'smooth' });
+    }
+
+    // ---- (D) 날짜 자동 생성 (+ 좌우 스페이서 추가) ----
+    function generateCalendar(past = PAST_DAYS, future = FUTURE_DAYS) {
+        calendarEl.innerHTML = '';
+
+        // 좌/우 스페이서(가짜 여백) 추가: 끝 날짜도 중앙으로 올 수 있게
+        const leftSpacer = document.createElement('div');
+        const rightSpacer = document.createElement('div');
+        leftSpacer.className = 'calendar__spacer calendar__spacer--left';
+        rightSpacer.className = 'calendar__spacer calendar__spacer--right';
+        calendarEl.appendChild(leftSpacer);
+
+        const today = new Date();
+        const start = new Date(today); start.setDate(today.getDate() - past);
+        const end = new Date(today); end.setDate(today.getDate() + future);
+
+        const frag = document.createDocumentFragment();
+        for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
+            const cur = new Date(d);
+            const btn = createDayButton(cur);
+            if (ymd(cur) === ymd(today)) btn.classList.add('calendar__day--highlight');
+            frag.appendChild(btn);
+        }
+        calendarEl.appendChild(frag);
+        calendarEl.appendChild(rightSpacer);
+
+        updateGutters();
+
+        const active = calendarEl.querySelector('.calendar__day--highlight') || calendarEl.querySelector('.calendar__day');
+        if (active) {
+            scrollToCenter(active);
+            renderMatches(active.dataset.date);
+        }
+    }
+
+    // 클릭: 가운데 스크롤 + 하이라이트 + 일정 렌더
+    calendarEl.addEventListener('click', (e) => {
         const btn = e.target.closest('.calendar__day');
         if (!btn) return;
-        setActiveDay(btn);
-        renderMatches(btn.dataset.date);
+
+        // 하이라이트 이동
+        calendarEl.querySelectorAll('.calendar__day').forEach(b => b.classList.remove('calendar__day--highlight'));
+        btn.classList.add('calendar__day--highlight');
+
+        // 크기가 변한 뒤 계산하도록 다음 프레임에서 실행
+        requestAnimationFrame(() => {
+            updateGutters();
+            scrollToCenter(btn);
+        });
+
+        if (typeof renderMatches === 'function') renderMatches(btn.dataset.date);
     });
 
-    // [G] 초기 렌더: 기존 하이라이트 버튼 또는 첫 버튼
-    const initialBtn = calendar.querySelector('.calendar__day--highlight') || dayButtons[0];
-    const initialDate = initialBtn?.dataset.date || dateKeys[0];
-    if (initialBtn) setActiveDay(initialBtn);
-    renderMatches(initialDate);
+
+    // 리사이즈 대응
+    window.addEventListener('resize', () => {
+        updateGutters();
+        const active = calendarEl.querySelector('.calendar__day--highlight');
+        if (active) scrollToCenter(active);
+    });
+
+    // 실행
+    generateCalendar();
 });
-
-// 캘린더 버튼 가운데로
-document.addEventListener('DOMContentLoaded', () => {
-  const calendarEl = document.querySelector('.calendar');
-  if (!calendarEl) return;
-
-  // 가운데로 스크롤하는 함수 (안정적, 모든 브라우저)
-  function scrollToCenter(target) {
-    const left =
-      target.offsetLeft - (calendarEl.clientWidth - target.clientWidth) / 2;
-    const max = calendarEl.scrollWidth - calendarEl.clientWidth;
-    const clamped = Math.max(0, Math.min(max, left));
-    calendarEl.scrollTo({ left: clamped, behavior: 'smooth' });
-  }
-
-  // 초기: 하이라이트가 있다면 그것을 중앙으로
-  const initial = calendarEl.querySelector('.calendar__day--highlight');
-  if (initial) scrollToCenter(initial);
-
-  // 클릭 시: 중앙 스크롤 + 하이라이트 이동 + (있다면) 일정 렌더
-  calendarEl.addEventListener('click', (e) => {
-    const btn = e.target.closest('.calendar__day');
-    if (!btn) return;
-
-    scrollToCenter(btn);
-
-    // 하이라이트 이동
-    calendarEl.querySelectorAll('.calendar__day')
-      .forEach(b => b.classList.remove('calendar__day--highlight'));
-    btn.classList.add('calendar__day--highlight');
-
-    // 네가 쓰는 렌더 함수가 있다면 호출
-    if (btn.dataset.date && typeof renderMatches === 'function') {
-      renderMatches(btn.dataset.date);
-    }
-  });
-});
-
 
 // 길드 생성 모달
 (function () {

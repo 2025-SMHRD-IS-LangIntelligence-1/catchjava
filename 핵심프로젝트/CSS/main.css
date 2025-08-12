@@ -311,13 +311,17 @@ a {
 }
 
 /* calendar 영역 */
+:root {
+    --brand: #E11923;
+}
+
 .calendar {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
     margin-top: 30px;
-    height: 70px;
+    height: 90px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     margin-left: 5px;
     margin-right: 5px;
@@ -325,6 +329,9 @@ a {
     overflow-x: auto;
     scroll-behavior: smooth;
     gap: 10px;
+    position: relative;
+    overflow-x: auto;
+    overflow-y: visible;
 
     /* 스크롤 바 없애기 */
     -ms-overflow-style: none;
@@ -341,8 +348,10 @@ a {
 }
 
 .calendar__day {
-    width: 100px;
-    height: 60px;
+    --day-w: 80px;
+    --day-h: 56px;
+    width: var(--day-w);
+    height: var(--day-h);
     margin: 0 5px;
     background-color: white;
     border: none;
@@ -353,18 +362,32 @@ a {
     align-items: center;
     color: rgba(0, 0, 0, 0.7);
     cursor: pointer;
-    transition: transform .2s ease;
+    transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
     flex: 0 0 auto;
+    border-radius: 10px;
+    position: relative;
 }
 
 .calendar__day--highlight {
     background-color: rgba(225, 25, 35, 1);
     color: white;
     font-weight: bold;
-    border-radius: 10px;
+    border-radius: 12px;
     /* width: 120px;
     height: 80px; */
-    transform: scale(1.1);
+    transform: scale(1.08);
+    background: #E11923;
+    box-shadow: 0 6px 16px rgba(225, 25, 35, .25);
+
+    /* 보더를 넘겨 보이게 하는 핵심 */
+    --bleed: 10px; /* 위/아래로 얼마나 넘길지 */
+    z-index: 2; /* 캘린더 보더 위로 올라오게 */
+    margin-block: calc(var(--bleed) * -1); /* 위아래 음수 마진 */
+    height: calc(var(--day-h) + (var(--bleed) * 2)); /* 내부 정렬 유지 */
+}
+
+.calendar__day--highlight:active {
+    transform: scale(1.04);
 }
 
 /* schedule header */
