@@ -169,13 +169,9 @@
                                     <div class="input input-name">
                                             <label for="summoner-name" class="form-label">게임 닉네임을 입력해주세요</label>
                                             <div class="input-group nickname-combo underline-row">
-                                                <input type="text" class="form-control input-plain" id="summoner-name"
-                                                    name="summonerName" value="소환사이름" autocomplete="username"
-                                                    maxlength="16" required />
-                                                <span class="hash-sep">#</span>
-                                                <input type="text" class="form-control input-plain tag" id="tagline"
-                                                    name="tagline" value="0000" inputmode="text"
-                                                    pattern="[0-9A-Za-z]{3,5}" maxlength="5" aria-label="태그" required />
+                                                <input type="text" class="form-control input-plain" id="riot-id"
+                                                    name="riotId" value="소환사이름#태그" autocomplete="username"
+                                                    maxlength="40" inputmode="text" required pattern="^[^#\s].{1,30}#[A-Za-z0-9]{3,5}$"/>
                                             </div>
                                         </div>
                                     <!-- hidden input: 서버 전송용 -->
