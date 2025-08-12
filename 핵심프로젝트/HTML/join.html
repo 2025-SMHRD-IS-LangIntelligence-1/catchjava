@@ -39,11 +39,11 @@
                             <!-- 이메일 입력 -->
                             <div class="input input-email">
                                 <label for="email" class="form-label">E-mail을 입력해주세요</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="email" />
+                                <div class="input-group underline-row">
+                                    <input type="email" class="form-control input-plain" id="email" name = "email" autocomplete="email"/>
                                     <button type="button" class="duplicate-check-btn">중복확인</button>
                                 </div>
-                                <p id="result" class="form-text"></p>
+                                <p id="email-result" class="form-email"></p>
                             </div>
 
                             <!-- 생년월일 입력 -->
@@ -52,11 +52,11 @@
                                 <div class="input-birth-group">
                                     <input type="text" id="residentIdFront" maxlength="6" placeholder="YYMMDD" required
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                        class="form-control w-50" />
+                                        class="form-control w-50" name="birthFront" autocomplete="bday"/>
                                     <span class="hyphen">-</span>
                                     <input type="password" id="residentIdBack" maxlength="1" placeholder="1~4" required
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                        class="form-control w-25" />
+                                        class="form-control w-25" name="birthBack" autocomplete="bday"/>
                                     <span class="mask">******</span>
                                 </div>
                             </div>
@@ -64,22 +64,28 @@
                             <!-- 닉네임입력 -->
                             <div class="input input-nickname">
                                 <label for="nickname" class="form-label">사용하실 닉네임을 입력해주세요</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="nickname" />
+                                <div class="input-group underline-row">
+                                    <input type="text" class="form-control input-plain" id="nickname" name="nickname" autocomplete="username"/>
                                     <button type="button" class="duplicate-check-btn">중복확인</button>
                                 </div>
-                                <p id="result" class="form-text"></p>
+                                <p id="nickname-result" class="form-text"></p>
                             </div>
 
                             <!-- 비밀번호 입력 -->
                             <div class="input input-password">
                                 <label for="password" class="form-label">비밀번호를 입력해주세요</label>
-                                <input type="password" class="form-control" id="password" />
+                                <input type="password" class="form-control" id="password" name="password" autocomplete="new-password"/>
+                            </div>
+
+                            <!-- 비밀번호 재확인 입력 -->
+                            <div class="input input-password input-confirm-password">
+                                <label for="confirm-password" class="form-label">비밀번호 재확인</label>
+                                <input type="password" class="form-control" id="confirm-password" name="confirmPassword" autocomplete="new-password"/>
                             </div>
 
                             <!-- 가입 버튼 -->
                             <div class="join-btn">
-                                <button type="submit" class="btn btn-outline-primary">JOIN</button>
+                                <button type="submit" class="btn btn-outline-primary">회원가입</button>
                             </div>
                         </form>
 

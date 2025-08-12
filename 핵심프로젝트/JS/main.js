@@ -54,6 +54,8 @@ const loading_overlay = document.querySelector(".loading-overlay");
 const category__toggle = document.querySelector(".category__toggle");
 // 리그 버튼 리스트
 const category__list = document.querySelector(".category__list");
+// 길드 가입 버튼
+const sign_up_btn = document.querySelector(".sign-up-btn");
 
 
 
@@ -182,7 +184,7 @@ dayButtons.forEach(btn => {
 
 // 요일 버튼 취소, 저장 누르면 초기화
 const cancelBtn = document.querySelector('.modal-actions .btn-cancel');
-const saveBtn   = document.querySelector('.modal-actions .btn-save');
+const saveBtn = document.querySelector('.modal-actions .btn-save');
 
 function resetDays() {
   dayButtons.forEach(b => {
@@ -215,4 +217,119 @@ save_btn.addEventListener("click", () => {
 // 매칭 완료되면 매칭 수락 창
 matching_button.addEventListener("click", () => {
     loading_overlay.style.display = "flex";
+});
+
+sign_up_btn.addEventListener("click", () => {
+    guild_find.style.display = "none";
+    guild_section__have.style.display = "block";
+})
+
+// esports 캘린더 
+document.addEventListener('DOMContentLoaded', () => {
+  const calendar = document.querySelector('.calendar');
+  const dayButtons = calendar.querySelectorAll('.calendar__day'); // 이미 있는 버튼들
+  const scheduleBox = document.querySelector('.schedule-box');
+
+  // [A] 날짜별 경기 데이터 (예시)
+  const scheduleData = {
+    "2025-08-01": [
+      {
+        time: "17:00",
+        league: "LoL",
+        teams: [
+          { name: "GEN", logo: "#", score: 0 },
+          { name: "KT",  logo: "#", score: 0 }
+        ],
+        status: "upcoming"
+      }
+    ],
+    "2025-08-02": [
+      {
+        time: "18:00",
+        league: "LoL",
+        teams: [
+          { name: "T1", logo: "#", score: 0 },
+          { name: "DK", logo: "#", score: 0 }
+        ],
+        status: "upcoming"
+      }
+    ],
+    "2025-08-03": []
+  };
+
+  // [B] 버튼 순서에 맞춰 날짜키 매핑 (HTML 건드리기 싫으면 이렇게)
+  //   → 화면에 보이는 29/Tue, 30/Wed... 순서에 대응시켜주세요.
+  const dateKeys = [
+    "2025-07-29",
+    "2025-07-30",
+    "2025-07-31",
+    "2025-08-01",
+    "2025-08-02",
+    "2025-08-03",
+    "2025-08-04"
+  ];
+  dayButtons.forEach((btn, i) => {
+    btn.dataset.date = dateKeys[i]; // HTML 수정 없이 data-date 주입
+  });
+
+  // 유틸: 오늘/그외 라벨
+  const todayKey = new Date().toISOString().split('T')[0];
+  const dateLabel = (dateKey) =>
+    dateKey === todayKey
+      ? 'today'
+      : new Date(dateKey).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric', weekday: 'short' });
+
+  // [C] 경기 카드 템플릿
+  function matchTemplate(dateKey, m) {
+    return `
+      <div class="match">
+        <div class="match-header">
+          <div class="match__time">${dateLabel(dateKey)}, ${m.time}</div>
+          <button class="match__result-button">
+            ${m.status === 'finished' ? '상세보기' : '경기결과'}
+          </button>
+        </div>
+        <div class="match__content">
+          <div class="team">
+            <div class="team__logo"><img src="${m.teams[0].logo}" alt="${m.teams[0].name} 로고"></div>
+            <div class="team__name">${m.teams[0].name}</div>
+            <div class="team__score"><span>${m.teams[0].score ?? '-'}</span></div>
+          </div>
+          <div class="vs">vs</div>
+          <div class="team">
+            <div class="team__logo"><img src="${m.teams[1].logo}" alt="${m.teams[1].name} 로고"></div>
+            <div class="team__name">${m.teams[1].name}</div>
+            <div class="team__score"><span>${m.teams[1].score ?? '-'}</span></div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // [D] 렌더 함수
+  function renderMatches(dateKey) {
+    const list = scheduleData[dateKey] || [];
+    scheduleBox.innerHTML = list.length
+      ? list.map(m => matchTemplate(dateKey, m)).join('')
+      : `<div class="match match--empty">해당 날짜에 경기가 없습니다.</div>`;
+  }
+
+  // [E] 하이라이트 이동
+  function setActiveDay(btn) {
+    dayButtons.forEach(b => b.classList.remove('calendar__day--highlight'));
+    btn.classList.add('calendar__day--highlight');
+  }
+
+  // [F] 클릭 이벤트: 하이라이트 + 렌더
+  calendar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.calendar__day');
+    if (!btn) return;
+    setActiveDay(btn);
+    renderMatches(btn.dataset.date);
+  });
+
+  // [G] 초기 렌더: 기존 하이라이트 버튼 또는 첫 버튼
+  const initialBtn = calendar.querySelector('.calendar__day--highlight') || dayButtons[0];
+  const initialDate = initialBtn?.dataset.date || dateKeys[0];
+  if (initialBtn) setActiveDay(initialBtn);
+  renderMatches(initialDate);
 });

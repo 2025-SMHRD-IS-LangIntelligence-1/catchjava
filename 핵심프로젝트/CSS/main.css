@@ -117,7 +117,7 @@ a {
     background-color: #f9fafb;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding-top: 20px;
-    z-index: 1;
+    z-index: 3;
     display: none;
 }
 
@@ -645,6 +645,31 @@ a {
     background-color: #f9fafb;
 }
 
+.nickname-combo { 
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    width: 336px;
+}
+
+.nickname-combo .form-control { 
+    flex:1 1 auto; 
+}
+
+#summoner-name {
+    width: 80px;
+}
+
+.nickname-combo .tag { 
+    flex:0 0 80px; 
+    text-align:center; 
+}
+
+.hash-sep { 
+    font-weight:700;
+    padding-bottom: 18px;
+}
+
 /* 저장 버튼 */
 .btn-outline-primary {
     width: 330px;
@@ -655,6 +680,7 @@ a {
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.32), 0 1px 2px rgba(0, 0, 0, 0.44);
+    border: 1px solid rgba(225, 25, 35, 1);
 }
 
 .btn-outline-primary:hover {
@@ -899,7 +925,7 @@ a {
 /* 버튼 컨테이너 */
 .modal-actions {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 10px;
 }
 
@@ -938,7 +964,6 @@ a {
 .btn:active {
     transform: translateY(1px);
 }
-
 
 /* 제목 */
 .modal-title {
@@ -1105,6 +1130,33 @@ a {
     border:1px solid #e5e7eb;
     border-radius:999px; 
     padding:4px 10px;
+}
+
+.sigh-up-btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.sign-up-btn {
+    padding: 10px 12px;
+    margin-top: 20px;
+    width: calc(33.33% - 8px); /* 한 줄에 3개 배치 */
+    height: 44px;
+    border-radius: 8px;
+    border: 1.5px solid rgba(225, 25, 35, 1);
+    color: rgba(225, 25, 35, 1);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+/* 마우스 오버 시 */
+.sign-up-btn:hover {
+    background-color: rgba(225, 25, 35, 0.1);
+    transform: translateY(-1px);
 }
 
 /* 호버 효과(선택) */

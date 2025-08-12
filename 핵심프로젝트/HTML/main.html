@@ -15,7 +15,7 @@
 <body>
     <div class="background">
         <div class="mobile-container">
-            <!-- 포지션 모달 오버레이 -->
+            <!-- 모달 오버레이 -->
             <div class="modal-overlay" id="Modal">
 
                 <!-- 주포지션 모달 -->
@@ -147,14 +147,15 @@
                         <div class="section__title">
                             <p>Esports 경기 일정</p>
                         </div>
+                        <!-- <div class="calendar"></div> -->
                         <div class="calendar">
-                            <button class="calendar__day">29<br>Tue</button>
-                            <button class="calendar__day">30<br>Wed</button>
-                            <button class="calendar__day">31<br>Thu</button>
-                            <button class="calendar__day calendar__day--highlight">1<br>Fri</button>
-                            <button class="calendar__day">2<br>Sat</button>
-                            <button class="calendar__day">3<br>Sun</button>
-                            <button class="calendar__day">4<br>Mon</button>
+                            <button class="calendar__day" data-date="2025-07-29">29<br>Tue</button>
+                            <button class="calendar__day" data-date="2025-07-30">30<br>Wed</button>
+                            <button class="calendar__day" data-date="2025-07-31">31<br>Thu</button>
+                            <button class="calendar__day calendar__day--highlight" data-date="2025-08-01">1<br>Fri</button>
+                            <button class="calendar__day" data-date="2025-08-02">2<br>Sat</button>
+                            <button class="calendar__day" data-date="2025-08-03">3<br>Sun</button>
+                            <button class="calendar__day" data-date="2025-08-04">4<br>Mon</button>
                         </div>
                         <div class="schedule-header">
                             <div class="schedule-header__title">League of Legend</div>
@@ -243,9 +244,16 @@
                                     <div class="game-profile-form-input">
                                         <!-- 게임 닉네임 -->
                                         <div class="input input-name">
-                                            <label for="name" class="form-label">게임 닉네임을 입력해주세요</label>
-                                            <input type="text" class="form-control" id="name"
-                                                placeholder="소환사이름#0000" />
+                                            <label for="summoner-name" class="form-label">게임 닉네임을 입력해주세요</label>
+                                            <div class="input-group nickname-combo underline-row">
+                                                <input type="text" class="form-control input-plain" id="summoner-name"
+                                                    name="summonerName" placeholder="소환사이름" autocomplete="username"
+                                                    maxlength="16" required />
+                                                <span class="hash-sep">#</span>
+                                                <input type="text" class="form-control input-plain tag" id="tagline"
+                                                    name="tagline" placeholder="0000" inputmode="text"
+                                                    pattern="[0-9A-Za-z]{3,5}" maxlength="5" aria-label="태그" required />
+                                            </div>
                                         </div>
                                         <!-- hidden input: 서버 전송용 -->
                                         <input type="hidden" id="PositionInput" name="position" value="">
@@ -261,7 +269,7 @@
                                         </button>
 
                                         <!-- hidden input: 서버 전송용 -->
-                                        <input type="hidden" id="mainPositionInput" name="sub_position" value="">
+                                        <input type="hidden" id="mainPositionInput" name="input-time" value="">
                                         <!-- 시간대 선택 -->
                                         <button type="button" class="input input-time">
                                             <div class="input-time-box">
@@ -275,9 +283,10 @@
 
                                         <!-- 저장 버튼 -->
                                         <div class="save-btn">
-                                            <button type="submit" class="btn btn-outline-primary">저장</button>
+                                            <button type="submit" class="btn-outline-primary">저장</button>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
@@ -311,6 +320,9 @@
                                     <div class="guild-card__body">
                                         <span class="guild-card__intro">길드 한줄 소개</span>
                                         <span class="guild-card__need">필요 라인</span>
+                                    </div>
+                                    <div class="sigh-up-btn-wrapper">
+                                        <button class="sign-up-btn">가입</button>
                                     </div>
                                 </div>
                             </div>
@@ -637,4 +649,4 @@
     <script src="../JS/main.js"></script>
 </body>
 
-</html>`
+</html>

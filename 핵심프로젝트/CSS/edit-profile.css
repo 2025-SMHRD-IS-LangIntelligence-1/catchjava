@@ -62,7 +62,7 @@ a {
     background-color: #f9fafb;
     font-size: 30px;
     position: relative;
-    left: 15px;
+    left: 20px;
     top: 10px;
 }
 
@@ -138,14 +138,14 @@ a {
 
 /* 프로필 수정 섹션 */
 .profile-section--personal {
-    display: none;
+    display: block;
 }
 
-/* 프로필 수정 폼 */
+/* 가입 폼 */
 .edit-profile-form {
     margin-top: 30px;
     text-align: left;
-    max-width: 305px;
+    max-width: 320px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -158,7 +158,34 @@ a {
     margin-bottom: 4px;
 }
 
+.input-group {
+    display:flex;
+    grid-template-columns: 1fr auto; /* 인풋=가변, 버튼=내용만큼 */
+    align-items: end;                /* 두 요소의 바닥선을 맞춤 */
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.input-group .form-control {
+    flex: 1;
+    min-width: 0;
+}
+
+.underline-row {
+    border-bottom: 2px solid #E11923;
+    padding-bottom: 6px;             /* 선과 내용 사이 여백 */
+}
+
+.input-plain {
+    border: 0 !important;            /* 기존 bottom-border 무시 */
+    background: transparent;
+    height: 38px;                    /* 버튼과 비슷한 높이 */
+    padding: 0;                      /* 줄 정렬 깔끔하게 */
+    outline: none;
+}
+
 /* 입력 필드 */
+input[type="email"],
 input[type="text"],
 input[type="password"] {
     background-color: #f9fafb;
@@ -169,10 +196,10 @@ input[type="password"] {
     outline: none;
     padding-left: 3px;
     width: 100%;
-    margin-bottom: 20px;
     font-size: 16px;
 }
 
+input[type="email"]:focus,
 input[type="text"]:focus,
 input[type="password"]:focus {
     box-shadow: none;
@@ -180,56 +207,35 @@ input[type="password"]:focus {
     background-color: #f9fafb;
 }
 
-.form-control {
-    height: 38px;
+.input-confirm-password {
+    margin-top: 20px;
 }
 
 /* 중복확인 버튼 */
 .duplicate-check-btn {
-    position: relative;
-    bottom: 0px;
-    border-color: rgba(225, 25, 35, 1);
-    color: rgba(225, 25, 35, 1);
-    font-size: small;
-    height: 38px;
+    flex:0 0 auto;
+    height:38px;
+    padding:0 12px;
+    line-height:38px;     /* 수직 중앙 정렬 */
+    border:1.5px solid #E11923;
+    background:#f9fafb;   /* 두 화면 배경과 동일 */
+    color:#E11923;
+    font-size:12px;
+    font-weight:700;
+    white-space:nowrap;   /* 버튼 글자 줄바꿈 방지 */
+    cursor:pointer;
+    transition:background-color .15s ease,color .15s ease,filter .15s ease;
 }
 
 .duplicate-check-btn:hover {
-    background-color: rgba(225, 25, 35, 1);
-    color: #f9fafb;
-    border-color: rgba(225, 25, 35, 1);
-}
-
-/* 주민번호 입력 */
-.input-birth-group {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#residentIdFront {
-    width: 80px;
-    text-align: center;
-}
-
-#residentIdBack {
-    width: 36px;
-    text-align: center;
-}
-
-.hyphen {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-}
-
-.mask {
-    letter-spacing: 2px;
-    color: rgba(24, 23, 28, 1);
+    background:#E11923;
+    color:#fff;
+    filter:brightness(.98);
 }
 
 /* 저장 버튼 */
-.btn-outline-primary {
+.personal-btn {
+    margin-top: 30px;
     width: 100%;
     height: 40px;
     border-color: rgba(225, 25, 35, 1);
@@ -238,13 +244,15 @@ input[type="password"]:focus {
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(225, 25, 35, 1);
 }
 
-.btn-outline-primary:hover {
+.personal-btn:hover {
     background-color: rgba(225, 25, 35, 1);
     color: #f9fafb;
 }
 
+/* 게임 프로필 섹션 */
 .profile-section--game {
     display: none;
 }
@@ -252,7 +260,7 @@ input[type="password"]:focus {
 /* 게임 프로필 탭 */
 .edit-game-profile {
     position: relative;
-    top: 30px;
+    top: 40px;
     justify-content: center;
     display: flex;
 }
@@ -281,7 +289,7 @@ input[type="password"]:focus {
 }
 
 /* 입력 필드 */
-.edit-game-profile-form-input input[type="text"] {
+.game-profile-form-input input[type="text"] {
     background-color: #f9fafb;
     border: none;
     border-bottom: 2px solid rgba(225, 25, 35, 1);
@@ -289,19 +297,45 @@ input[type="password"]:focus {
     font-weight: bold;
     outline: none;
     padding-left: 3px;
-    width: 330px;
+    width: 100px;
     margin-bottom: 20px;
     font-size: 16px;
 }
 
-.edit-game-profile-form-input input[type="text"]:focus {
+.game-profile-form-input input[type="text"]:focus {
     box-shadow: none;
     border-color: rgba(225, 25, 35, 1);
     background-color: #f9fafb;
 }
 
+.nickname-combo { 
+    display:flex; 
+    align-items:center; 
+    gap:8px; 
+    width: 336px;
+}
+
+.nickname-combo .form-control { 
+    flex:1 1 auto; 
+}
+
+#summoner-name {
+    width: 80px;
+}
+
+.nickname-combo .tag { 
+    flex:0 0 80px; 
+    text-align:center; 
+}
+
+.hash-sep { 
+    font-weight:700;
+    padding-top: 3px;
+}
+
 /* 저장 버튼 */
-.btn-outline-primary {
+.game-btn {
+    margin-top: 10px;
     width: 330px;
     height: 40px;
     border-color: rgba(225, 25, 35, 1);
@@ -310,14 +344,16 @@ input[type="password"]:focus {
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(225, 25, 35, 1);
 }
 
-.btn-outline-primary:hover {
+.game-btn:hover {
     background-color: rgba(225, 25, 35, 1);
     color: #f9fafb;
 }
 
-.input-line {
+.input-line,
+.input-time {
     width: 70%;
     height: 65px;
     margin-bottom: 25px;
@@ -332,19 +368,22 @@ input[type="password"]:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.input-line:hover {
+.input-line:hover
+.input-time:hover {
     border-color: rgba(225, 25, 35, 1);
     box-shadow: 0 4px 8px rgba(225, 25, 35, 0.1);
     cursor: pointer;
 }
 
-.input-line-box {
+.input-line-box,
+.input-time-box {
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
-.input-line-question {
+.input-line-question,
+.input-time-question {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -352,28 +391,27 @@ input[type="password"]:focus {
     width: 290px;
 }
 
-.line {
+.line,
+.time {
     color: rgba(24, 23, 28, 1);
 }
 
-.line-question {
+.my-line,
+.my-time {
     font-size: 15px;
     font-weight: 600;
     color: rgba(24, 23, 28, 1);
 }
 
-.my-line {
-    font-size: 14px;
-    color: rgba(150, 150, 150, 1);
-}
-
-.input-position-btn {
+.input-position-btn,
+.input-time-btn {
     font-size: 20px;
     color: rgba(200, 200, 200, 1);
     transition: color 0.2s;
 }
 
-.input-line:hover .input-position-btn {
+.input-line:hover .input-position-btn,
+.input-time:hover .input-time-btn {
     color: rgba(225, 25, 35, 1);
 }
 
@@ -404,28 +442,23 @@ input[type="password"]:focus {
 }
 
 /* 모달 전체 배경 (어두운 반투명) */
-.modal-overlay {
+#Modal {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    /* 전체 모바일 화면 덮음 */
-    background-color: rgba(0, 0, 0, 0.5);
-    /* 회색 반투명 */
+    height: 100%; /* 전체 모바일 화면 덮음 */
+    background-color: rgba(0, 0, 0, 0.5); /* 회색 반투명 */
     z-index: 10;
     justify-content: center;
-    align-items: flex-end;
-    /* 하단에 고정 */
-    display: none;
-    /* JS로 display: flex 처리 */
+    align-items: flex-end; /* 하단에 고정 */
+    display: none; /* JS로 display: flex 처리 */
 }
 
 /* 모달 박스 내용 */
 .modal-content {
     width: 100%;
-    max-width: 100%;
-    /* 480px 대신 100%로 설정 */
+    max-width: 100%; /* 480px 대신 100%로 설정 */
     background: white;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -475,29 +508,32 @@ input[type="password"]:focus {
 .day-option {
     padding: 8px 12px;
     margin: 4px;
-    width: 100%;
-    height: 50px;
+    width: calc(33.33% - 8px); /* 한 줄에 3개 배치 */
+    height: 44px;
     border-radius: 8px;
-    border: 1px solid rgba(225, 25, 35, 1);
+    border: 1.5px solid rgba(225, 25, 35, 1);
     color: rgba(225, 25, 35, 1);
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    cursor: pointer;
 }
 
+/* 마우스 오버 시 */
 .day-option:hover {
-    background-color: rgba(225, 25, 35, 1);
-    color: #f9fafb;
+    background-color: rgba(225, 25, 35, 0.1);
+    transform: translateY(-1px);
 }
 
-.form-time {
-    margin-bottom: 50px;
-}
-
+/* 선택 상태 */
 .day-option.selected {
-    background-color: #333;
-    color: white;
-    font-weight: bold;
+    background-color: rgba(225, 25, 35, 1);
+    color: #fff;
+    border-color: rgba(225, 25, 35, 1);
+    box-shadow: 0 3px 6px rgba(225, 25, 35, 0.3);
+    transform: translateY(-1px);
 }
 
 .position-option {
@@ -541,6 +577,51 @@ input[type="password"]:focus {
     border-color: #E11923;
     color: #E11923;
     cursor: pointer;
+}
+
+/* 요일 취소, 저장 버튼 */
+/* 버튼 컨테이너 */
+.modal-actions {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+/* 공통 버튼 스타일 */
+.btn {
+    flex: 1; /* 두 버튼이 동일한 너비 차지 */
+    max-width: 150px;
+    height: 48px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* 취소 버튼 */
+.btn-cancel {
+    background-color: #e5e7eb; /* 연회색 */
+    color: #374151; /* 진한 회색 글씨 */
+}
+.btn-cancel:hover {
+    background-color: #d1d5db;
+}
+
+/* 저장 버튼 */
+.btn-save {
+    background-color: #ef4444; /* 빨강 */
+    color: white;
+}
+.btn-save:hover {
+    background-color: #dc2626;
+}
+
+/* 클릭 시 살짝 눌리는 효과 */
+.btn:active {
+    transform: translateY(1px);
 }
 
 /* 제목 */
