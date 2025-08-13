@@ -132,10 +132,17 @@
                     <img src="../img/logo.png" class="logo" alt="로고">
                 </div>
                 <div class="header__right">
-                    <button class="button--profile" type="button">
-                        <i class="fa-solid fa-circle-user"></i>
+                    <button class="button--msg" type="button">
+                        <i class="fa-regular fa-bell"></i>
+                        <!-- 메시지 개수 공간 -->
+                        <span class="msg-badge"></span>
                     </button>
-                    <a href="login.html" class="link--login">로그인</a>
+                    <div class="user-actions">
+                        <button class="button--profile" type="button">
+                            <i class="fa-solid fa-circle-user"></i>
+                        </button>
+                        <a href="login.html" class="link--login">로그인</a>
+                    </div>
                     <!-- 프로필 클릭 시 나오는 -->
                     <div class="user-panel">
                         <div class="user-panel__header">
@@ -166,6 +173,36 @@
                         </div>
                     </div>
                 </div>
+                <!-- 메시지 모달 -->
+                <div id="noticeOverlay" class="modal-overlay" aria-hidden="true">
+                    <div class="notice-card" role="dialog" aria-modal="true" aria-labelledby="noticeTitle">
+
+                        <!-- 헤더 -->
+                        <header class="notice-card__header">
+                            <h3 id="noticeTitle" class="notice-card__name">알람</h3>
+                            <button class="icon-btn notice-card__close" aria-label="닫기">×</button>
+                        </header>
+
+                        <!-- 본문 (공지 내용 목록) -->
+                        <div class="notice-card__body">
+                            <ul class="notice-list">
+                                <li class="notice-item">
+                                    <h4 class="notice-title">8월 길드 이벤트 안내</h4>
+                                    <p class="notice-content">8월 20일 저녁 8시에 길드 이벤트가 진행됩니다.</p>
+                                    <span class="notice-date">2025-08-10</span>
+                                </li>
+                                <li class="notice-item">
+                                    <h4 class="notice-title">신규 길드원 모집</h4>
+                                    <p class="notice-content">현재 서포터 포지션 우선 모집 중입니다.</p>
+                                    <span class="notice-date">2025-08-08</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+
             </header>
             <!-- 유저 패널 바깥 클릭 감지용 오버레이 -->
             <div class="user-panel__overlay"></div>
@@ -179,7 +216,7 @@
                     <!-- esports 경기 일정 -->
                     <section class="section esports-schedule">
                         <div class="section__title">
-                            <p>Esports 경기 일정</p>
+                            <p class="esports-schedule-title">Esports 경기 일정</p>
                         </div>
                         <div class="calendar"></div>
                         <!-- <div class="calendar">
@@ -239,7 +276,7 @@
                     <!-- esports 뉴스 -->
                     <section class="section esports-news">
                         <div class="section__title">
-                            <p>Esports 뉴스</p>
+                            <p class="esports-news-title">Esports 뉴스</p>
                         </div>
                         <div class="news-category">
                             <button class="news-category__button">All</button>
@@ -282,401 +319,433 @@
                                             <label for="summoner-name" class="form-label">게임 닉네임을 입력해주세요</label>
                                             <div class="input-group nickname-combo underline-row">
                                                 <input type="text" class="form-control input-plain" id="riot-id"
-                                                    name="riotId" placeholder="소환사이름#태그 (예: Hide on bush#KR1)" autocomplete="username"
-                                                    maxlength="40" inputmode="text" required pattern="^[^#\s].{1,30}#[A-Za-z0-9]{3,5}$"/>
-                                        </div>
-                                    </div>
-                                    <!-- hidden input: 서버 전송용 -->
-                                    <input type="hidden" id="PositionInput" name="position" value="">
-                                    <!-- 주포지션 -->
-                                    <button type="button" class="input input-line">
-                                        <div class="input-line-box">
-                                            <div class="input-line-question">
-                                                <span class="line line-question">주/부포지션을 선택해주세요</span>
-                                                <span class="line my-line">주포지션 : ㅇㅇ</span>
+                                                    name="riotId" placeholder="소환사이름#태그 (예: Hide on bush#KR1)"
+                                                    autocomplete="username" maxlength="40" inputmode="text" required
+                                                    pattern="^[^#\s].{1,30}#[A-Za-z0-9]{3,5}$" />
                                             </div>
-                                            <i class="fa-solid fa-angle-right input-position-btn"></i>
                                         </div>
-                                    </button>
-
-                                    <!-- hidden input: 서버 전송용 -->
-                                    <input type="hidden" id="mainPositionInput" name="input-time" value="">
-                                    <!-- 시간대 선택 -->
-                                    <button type="button" class="input input-time">
-                                        <div class="input-time-box">
-                                            <div class="input-time-question">
-                                                <span class="time time-question">주로 게임하는 시간대를 골라주세요!</span>
-                                                <span class="time my-time">주 시간대 : ㅇㅇ</span>
+                                        <!-- hidden input: 서버 전송용 -->
+                                        <input type="hidden" id="PositionInput" name="position" value="">
+                                        <!-- 주포지션 -->
+                                        <button type="button" class="input input-line">
+                                            <div class="input-line-box">
+                                                <div class="input-line-question">
+                                                    <span class="line line-question">주/부포지션을 선택해주세요</span>
+                                                    <span class="line my-line">주포지션 : ㅇㅇ</span>
+                                                </div>
+                                                <i class="fa-solid fa-angle-right input-position-btn"></i>
                                             </div>
-                                            <i class="fa-solid fa-angle-right input-time-btn"></i>
+                                        </button>
+
+                                        <!-- hidden input: 서버 전송용 -->
+                                        <input type="hidden" id="mainPositionInput" name="input-time" value="">
+                                        <!-- 시간대 선택 -->
+                                        <button type="button" class="input input-time">
+                                            <div class="input-time-box">
+                                                <div class="input-time-question">
+                                                    <span class="time time-question">주로 게임하는 시간대를 골라주세요!</span>
+                                                    <span class="time my-time">주 시간대 : ㅇㅇ</span>
+                                                </div>
+                                                <i class="fa-solid fa-angle-right input-time-btn"></i>
+                                            </div>
+                                        </button>
+
+                                        <!-- 저장 버튼 -->
+                                        <div class="save-btn">
+                                            <button type="submit" class="btn-outline-primary">저장</button>
                                         </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="guild-find">
+                            <div class="guild-section__title">
+                                <P>길드 찾기</P>
+                            </div>
+                            <div class="guild-search">
+                                <form class="guild-search__form" action="" method="get">
+                                    <input class="guild-search__input" type="text" name="" placeholder="길드를 입력하세요">
+                                    <button class="guild-search__button" type="submit">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
-
-                                    <!-- 저장 버튼 -->
-                                    <div class="save-btn">
-                                        <button type="submit" class="btn-outline-primary">저장</button>
-                                    </div>
+                                </form>
                             </div>
-
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="guild-find">
-                        <div class="guild-section__title">
-                            <P>길드 찾기</P>
-                        </div>
-                        <div class="guild-search">
-                            <form class="guild-search__form" action="" method="get">
-                                <input class="guild-search__input" type="text" name="" placeholder="길드를 입력하세요">
-                                <button class="guild-search__button" type="submit">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </form>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="guild-list">
-                            <div class="guild-card">
-                                <div class="guild-card__header">
-                                    <img src="../img/guild-icon.png" class="guild-card__icon">
-                                    <div class="guild-card__top">
-                                        <div class="guild-card__info">
-                                            <img src="../img/guild-tier.png" class="guild-card__tier-icon">
-                                            <span class="guild-card__name">길드 이름</span>
-                                            <span class="guild-card__count">1/5</span>
-                                        </div>
-                                        <span class="guild-card__leader">(길드 개설자 이름)의 길드</span>
-                                    </div>
-                                </div>
-                                <div class="guild-card__body">
-                                    <span class="guild-card__intro">길드 한줄 소개</span>
-                                    <span class="guild-card__need">필요 라인</span>
-                                </div>
-                                <div class="sigh-up-btn-wrapper">
-                                    <button class="sign-up-btn">가입</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 길드 생성 플로팅 버튼 -->
-                        <div class="fab-create-guild" aria-hidden="false">
-                            <button class="fab-btn" type="button" aria-label="길드 생성" onclick="openCreateGuild()">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-        </div>
-
-        <!-- 길드 있을 때 -->
-        <div class="guild-section--have">
-            <div class="guild-page">
-                <div class="guild-scroll-area">
-                    <div class="guild-header">
-                        <img src="../img/guild-icon.png" class="guild-own__icon">
-                        <div class="guild-own__meta">
-                            <div class="guild-own__info">
-                                <span class="guild-own__name">길드 이름</span>
-                                <span class="guild-own__count">1/5</span>
-                            </div>
-                            <div class="guild-own__tier">
-                                <img src="../img/guild-tier.png" class="guild-own__tier-icon">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0"
-                                        aria-valuemax="5">
-                                        2승
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="guild-own__notice">
-                        <div class="notice-box">
-                            <span class="notice-box__title">공지제목</span>
                             <div class="divider"></div>
-                            <span class="notice-box__content">공지내용</span>
-                        </div>
-                    </div>
-                    <!-- 길드 매칭 버튼 길드장만 볼 수 있음 -->
-                    <div class="guild-matching-button-wrapper">
-                        <button class="matching-button">매칭</button>
-                    </div>
-                    <!-- 로딩 오버레이 -->
-                    <div class="loading-overlay">
-                        <div class="loading-spinner"></div>
-                        <p>매칭 대기 중...</p>
-                    </div>
-                    <!-- 매칭 수락 모달 -->
-                    <div id="matchOverlay" class="modal-overlay">
-                        <div class="match-card" role="dialog" aria-modal="true" aria-labelledby="matchTitle">
-                            <header class="match-card__header">
-                                <div class="match-card__title">
-                                    <img src="guild-tier.png" alt="" class="match-card__emblem" />
-                                    <h3 id="matchTitle" class="match-card__name">상대 길드 이름</h3>
-                                </div>
-                            </header>
-
-                            <div class="match-card__body">
-                                <div class="match-card__stats">
-                                    <span class="pill">전적 <b>10승 2패</b></span>
-                                    <span class="pill">평균 티어 <b>골드 III</b></span>
-                                </div>
-                                <p class="match-card__desc">즐겜해요 😊 매너 플레이 환영!</p>
-                            </div>
-
-                            <footer class="match-card__actions">
-                                <button class="btn btn--secondary">거절</button>
-                                <button class="btn btn--primary">수락</button>
-                            </footer>
-                        </div>
-                    </div>
-
-                    <div class="guild-members">
-                        <span class="guild-members__title">길드 멤버</span>
-                        <div class="guild-members__list">
-                            <!-- 반복되는 멤버 카드 -->
-                            <div class="guild-member">
-                                <img src="../img/profile.jpg" class="guild-member__profile" />
-                                <div class="guild-member-info">
-                                    <div class="guild-member-top">
-                                        <img src="../img/guild-tier.png" class="guild-member__tier" />
-                                        <span class="guild-member__name">이름</span>
-                                        <span class="guild-member__role">길드장</span>
+                            <div class="guild-list">
+                                <div class="guild-card">
+                                    <div class="guild-card__header">
+                                        <img src="../img/guild-icon.png" class="guild-card__icon">
+                                        <div class="guild-card__top">
+                                            <div class="guild-card__info">
+                                                <img src="../img/guild-tier.png" class="guild-card__tier-icon">
+                                                <span class="guild-card__name">길드 이름</span>
+                                                <span class="guild-card__count">1/5</span>
+                                            </div>
+                                            <span class="guild-card__leader">(길드 개설자 이름)의 길드</span>
+                                        </div>
                                     </div>
-                                    <div class="guild-member-lines">
-                                        <span class="guild-member__line-main">주라인 : 미드</span>
-                                        <span class="guild-member__line-sub">부라인 : 원딜</span>
+                                    <div class="guild-card__body">
+                                        <span class="guild-card__intro">길드 한줄 소개</span>
+                                        <span class="guild-card__need">필요 라인</span>
+                                    </div>
+                                    <div class="sigh-up-btn-wrapper">
+                                        <button class="sign-up-btn">가입</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="guild-member">
-                                <img src="../img/profile.jpg" class="guild-member__profile" />
-                                <div class="guild-member-info">
-                                    <div class="guild-member-top">
-                                        <img src="../img/guild-tier.png" class="guild-member__tier" />
-                                        <span class="guild-member__name">이름</span>
-                                        <span class="guild-member__role">길드원</span>
-                                    </div>
-                                    <div class="guild-member-lines">
-                                        <span class="guild-member__line-main">주라인 : 미드</span>
-                                        <span class="guild-member__line-sub">부라인 : 원딜</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="guild-member">
-                                <img src="../img/profile.jpg" class="guild-member__profile" />
-                                <div class="guild-member-info">
-                                    <div class="guild-member-top">
-                                        <img src="../img/guild-tier.png" class="guild-member__tier" />
-                                        <span class="guild-member__name">이름</span>
-                                        <span class="guild-member__role">길드원</span>
-                                    </div>
-                                    <div class="guild-member-lines">
-                                        <span class="guild-member__line-main">주라인 : 미드</span>
-                                        <span class="guild-member__line-sub">부라인 : 원딜</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="guild-member">
-                                <img src="../img/profile.jpg" class="guild-member__profile" />
-                                <div class="guild-member-info">
-                                    <div class="guild-member-top">
-                                        <img src="../img/guild-tier.png" class="guild-member__tier" />
-                                        <span class="guild-member__name">이름</span>
-                                        <span class="guild-member__role">길드원</span>
-                                    </div>
-                                    <div class="guild-member-lines">
-                                        <span class="guild-member__line-main">주라인 : 미드</span>
-                                        <span class="guild-member__line-sub">부라인 : 원딜</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="guild-member">
-                                <img src="../img/profile.jpg" class="guild-member__profile" />
-                                <div class="guild-member-info">
-                                    <div class="guild-member-top">
-                                        <img src="../img/guild-tier.png" class="guild-member__tier" />
-                                        <span class="guild-member__name">이름</span>
-                                        <span class="guild-member__role">길드원</span>
-                                    </div>
-                                    <div class="guild-member-lines">
-                                        <span class="guild-member__line-main">주라인 : 미드</span>
-                                        <span class="guild-member__line-sub">부라인 : 원딜</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </section>
-            <section class="match-section">
-                <header class="match-header">
-
-                </header>
-
-                <!-- 레드 진형 -->
-                <section class="guild-block guild-block--red">
-                    <div class="guild-summary">
-                        <div class="guild-summary__header">
-                            <img src="../img/guild-icon.png" class="guild-summary__emblem" alt="">
-                            <div class="guild-summary__meta">
-                                <h3 class="guild-summary__name">우리 길드 이름</h3>
-                                <div class="guild-summary__pills">
-                                    <span class="pill">전적 <b>12승 4패</b></span>
-                                    <span class="pill">평균 티어 <b>플래 IV</b></span>
-                                </div>
-                                <!-- <p class="guild-summary__note">멘트(옵션)</p> -->
+                            <!-- 길드 생성 플로팅 버튼 -->
+                            <div class="fab-create-guild" aria-hidden="false">
+                                <button class="fab-btn" type="button" aria-label="길드 생성" onclick="openCreateGuild()">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <section class="roster">
-                        <h4 class="roster__title">레드 진형 라인업</h4>
-                        <ul class="roster__list">
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임1</span>
-                                    <span class="member-tier">
-                                        <img src="../img/guild-tier.png">
-                                        골드 I
-                                    </span>
-                                    <span class="member-line">주라인: 미드 / 부라인: 원딜</span>
+                    <!-- 길드 있을 때 -->
+                    <div class="guild-section--have">
+                        <div class="guild-page">
+                            <div class="guild-scroll-area">
+                                <div class="guild-header">
+                                    <img src="../img/guild-icon.png" class="guild-own__icon">
+                                    <div class="guild-own__meta">
+                                        <div class="guild-own__info">
+                                            <span class="guild-own__name">길드 이름</span>
+                                            <span class="guild-own__count">1/5</span>
+                                        </div>
+                                        <div class="guild-own__tier">
+                                            <img src="../img/guild-tier.png" class="guild-own__tier-icon">
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="2"
+                                                    aria-valuemin="0" aria-valuemax="5">
+                                                    2승
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임2</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        골드 II
-                                    </span>
-                                    <span class="member-line">주라인: 탑 / 부라인: 정글</span>
+                                <div class="guild-own__notice">
+                                    <div class="notice-box">
+                                        <span class="notice-box__title">공지제목</span>
+                                        <div class="divider"></div>
+                                        <span class="notice-box__content">공지내용</span>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임3</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        플래티넘 IV
-                                    </span>
-                                    <span class="member-line">주라인: 원딜 / 부라인: 서포터</span>
+                                <!-- 길드 매칭 버튼 길드장만 볼 수 있음 -->
+                                <div class="guild-matching-button-wrapper">
+                                    <button class="matching-button">매칭</button>
                                 </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임4</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        골드 III
-                                    </span>
-                                    <span class="member-line">주라인: 정글 / 부라인: 미드</span>
+                                <!-- 로딩 오버레이 -->
+                                <div class="loading-overlay">
+                                    <div class="loading-spinner"></div>
+                                    <p>매칭 대기 중...</p>
                                 </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임5</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        실버 I
-                                    </span>
-                                    <span class="member-line">주라인: 서포터 / 부라인: 탑</span>
+                                <!-- 매칭 수락 모달 -->
+                                <div id="matchOverlay" class="modal-overlay">
+                                    <div class="match-card" role="dialog" aria-modal="true"
+                                        aria-labelledby="matchTitle">
+                                        <header class="match-card__header">
+                                            <div class="match-card__title">
+                                                <img src="guild-tier.png" alt="" class="match-card__emblem" />
+                                                <h3 id="matchTitle" class="match-card__name">상대 길드 이름</h3>
+                                            </div>
+                                        </header>
+
+                                        <div class="match-card__body">
+                                            <div class="match-card__stats">
+                                                <span class="pill">전적 <b>10승 2패</b></span>
+                                                <span class="pill">평균 티어 <b>골드 III</b></span>
+                                            </div>
+                                            <p class="match-card__desc">즐겜해요 😊 매너 플레이 환영!</p>
+                                        </div>
+
+                                        <footer class="match-card__actions">
+                                            <button class="btn btn--secondary">거절</button>
+                                            <button class="btn btn--primary">수락</button>
+                                        </footer>
+                                    </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </section>
+
+                                <div class="guild-members">
+                                    <div class="guild-members-header">
+                                        <span class="guild-members__title">길드 멤버</span>
+                                        <!-- 초대 버튼(새로 추가) -->
+                                        <button class="guild-members-invite-btn">초대</button>
+                                    </div>
+                                    <!-- 초대 모달(새로 추가) -->
+                                    <div id="inviteOverlay" class="modal-overlay" aria-hidden="true">
+                                        <div class="invite-card" role="dialog" aria-modal="true"
+                                            aria-labelledby="inviteTitle">
+                                            <header class="invite-card__header">
+                                                <h3 id="inviteTitle" class="invite-card__name">길드원 초대하기</h3>
+                                                <button class="icon-btn invite-card__close" aria-label="닫기">×</button>
+                                            </header>
+
+                                            <div class="invite-card__body">
+                                                <!-- 검색창 -->
+                                                <form class="invite-card__search" role="search" onsubmit="return false">
+                                                    <input id="inviteSearch" type="search" class="input"
+                                                        placeholder="닉네임을 입력하면 바로 검색됩니다" aria-label="길드원 검색" />
+                                                </form>
+
+                                                <!-- 결과 개수 -->
+                                                <p id="inviteResultInfo" class="section-title" aria-live="polite"></p>
+
+                                                <!-- 추천 목록 -->
+                                                <ul class="invite-list" role="list"></ul>
+                                                <p class="empty" hidden>추천할 유저가 없습니다.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="guild-members__list">
+                                        <!-- 반복되는 멤버 카드 -->
+                                        <div class="guild-member">
+                                            <img src="../img/profile.jpg" class="guild-member__profile" />
+                                            <div class="guild-member-info">
+                                                <div class="guild-member-top">
+                                                    <img src="../img/guild-tier.png" class="guild-member__tier" />
+                                                    <span class="guild-member__name">이름</span>
+                                                    <span class="guild-member__role">길드장</span>
+                                                </div>
+                                                <div class="guild-member-lines">
+                                                    <span class="guild-member__line-main">주라인 : 미드</span>
+                                                    <span class="guild-member__line-sub">부라인 : 원딜</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="guild-member">
+                                            <img src="../img/profile.jpg" class="guild-member__profile" />
+                                            <div class="guild-member-info">
+                                                <div class="guild-member-top">
+                                                    <img src="../img/guild-tier.png" class="guild-member__tier" />
+                                                    <span class="guild-member__name">이름</span>
+                                                    <span class="guild-member__role">길드원</span>
+                                                </div>
+                                                <div class="guild-member-lines">
+                                                    <span class="guild-member__line-main">주라인 : 미드</span>
+                                                    <span class="guild-member__line-sub">부라인 : 원딜</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="guild-member">
+                                            <img src="../img/profile.jpg" class="guild-member__profile" />
+                                            <div class="guild-member-info">
+                                                <div class="guild-member-top">
+                                                    <img src="../img/guild-tier.png" class="guild-member__tier" />
+                                                    <span class="guild-member__name">이름</span>
+                                                    <span class="guild-member__role">길드원</span>
+                                                </div>
+                                                <div class="guild-member-lines">
+                                                    <span class="guild-member__line-main">주라인 : 미드</span>
+                                                    <span class="guild-member__line-sub">부라인 : 원딜</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="guild-member">
+                                            <img src="../img/profile.jpg" class="guild-member__profile" />
+                                            <div class="guild-member-info">
+                                                <div class="guild-member-top">
+                                                    <img src="../img/guild-tier.png" class="guild-member__tier" />
+                                                    <span class="guild-member__name">이름</span>
+                                                    <span class="guild-member__role">길드원</span>
+                                                </div>
+                                                <div class="guild-member-lines">
+                                                    <span class="guild-member__line-main">주라인 : 미드</span>
+                                                    <span class="guild-member__line-sub">부라인 : 원딜</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="guild-member">
+                                            <img src="../img/profile.jpg" class="guild-member__profile" />
+                                            <div class="guild-member-info">
+                                                <div class="guild-member-top">
+                                                    <img src="../img/guild-tier.png" class="guild-member__tier" />
+                                                    <span class="guild-member__name">이름</span>
+                                                    <span class="guild-member__role">길드원</span>
+                                                </div>
+                                                <div class="guild-member-lines">
+                                                    <span class="guild-member__line-main">주라인 : 미드</span>
+                                                    <span class="guild-member__line-sub">부라인 : 원딜</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </section>
+                <section class="match-section">
+                    <header class="match-header">
 
-                <!-- VS -->
-                <div class="vs-sep">VS</div>
+                    </header>
 
-                <!-- 블루 진형 -->
-                <section class="guild-block guild-block--blue">
-                    <div class="guild-summary">
-                        <div class="guild-summary__header">
-                            <img src="../img/guild-icon.png" class="guild-summary__emblem" alt="">
-                            <div class="guild-summary__meta">
-                                <h3 class="guild-summary__name">상대 길드 이름</h3>
-                                <div class="guild-summary__pills">
-                                    <span class="pill">전적 <b>10승 6패</b></span>
-                                    <span class="pill">평균 티어 <b>골드 I</b></span>
+                    <!-- 레드 진형 -->
+                    <section class="guild-block guild-block--red">
+                        <div class="guild-summary">
+                            <div class="guild-summary__header">
+                                <img src="../img/guild-icon.png" class="guild-summary__emblem" alt="">
+                                <div class="guild-summary__meta">
+                                    <h3 class="guild-summary__name">우리 길드 이름</h3>
+                                    <div class="guild-summary__pills">
+                                        <span class="pill">전적 <b>12승 4패</b></span>
+                                        <span class="pill">평균 티어 <b>플래 IV</b></span>
+                                    </div>
+                                    <!-- <p class="guild-summary__note">멘트(옵션)</p> -->
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <section class="roster">
-                        <h4 class="roster__title">블루 진형 라인업</h4>
-                        <ul class="roster__list">
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임A</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        플래티넘 IV
-                                    </span>
-                                    <span class="member-line">주라인: 미드 / 부라인: 원딜</span>
-                                </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임B</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        골드 I
-                                    </span>
-                                    <span class="member-line">주라인: 탑 / 부라인: 정글</span>
-                                </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임C</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        골드 II
-                                    </span>
-                                    <span class="member-line">주라인: 원딜 / 부라인: 서포터</span>
-                                </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임D</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        실버 II
-                                    </span>
-                                    <span class="member-line">주라인: 정글 / 부라인: 미드</span>
-                                </div>
-                            </li>
-                            <li class="member-card">
-                                <img src="profile.jpg" alt="프로필" class="member-profile">
-                                <div class="member-info">
-                                    <span class="member-name">닉네임E</span>
-                                    <span class="member-tier">
-                                        <img src="#">
-                                        브론즈 I
-                                    </span>
-                                    <span class="member-line">주라인: 서포터 / 부라인: 탑</span>
-                                </div>
-                            </li>
-                        </ul>
+
+                        <section class="roster">
+                            <h4 class="roster__title">레드 진형 라인업</h4>
+                            <ul class="roster__list">
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임1</span>
+                                        <span class="member-tier">
+                                            <img src="../img/guild-tier.png">
+                                            골드 I
+                                        </span>
+                                        <span class="member-line">주라인: 미드 / 부라인: 원딜</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임2</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            골드 II
+                                        </span>
+                                        <span class="member-line">주라인: 탑 / 부라인: 정글</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임3</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            플래티넘 IV
+                                        </span>
+                                        <span class="member-line">주라인: 원딜 / 부라인: 서포터</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임4</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            골드 III
+                                        </span>
+                                        <span class="member-line">주라인: 정글 / 부라인: 미드</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임5</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            실버 I
+                                        </span>
+                                        <span class="member-line">주라인: 서포터 / 부라인: 탑</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
                     </section>
+
+                    <!-- VS -->
+                    <div class="vs-sep">VS</div>
+
+                    <!-- 블루 진형 -->
+                    <section class="guild-block guild-block--blue">
+                        <div class="guild-summary">
+                            <div class="guild-summary__header">
+                                <img src="../img/guild-icon.png" class="guild-summary__emblem" alt="">
+                                <div class="guild-summary__meta">
+                                    <h3 class="guild-summary__name">상대 길드 이름</h3>
+                                    <div class="guild-summary__pills">
+                                        <span class="pill">전적 <b>10승 6패</b></span>
+                                        <span class="pill">평균 티어 <b>골드 I</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="roster">
+                            <h4 class="roster__title">블루 진형 라인업</h4>
+                            <ul class="roster__list">
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임A</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            플래티넘 IV
+                                        </span>
+                                        <span class="member-line">주라인: 미드 / 부라인: 원딜</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임B</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            골드 I
+                                        </span>
+                                        <span class="member-line">주라인: 탑 / 부라인: 정글</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임C</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            골드 II
+                                        </span>
+                                        <span class="member-line">주라인: 원딜 / 부라인: 서포터</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임D</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            실버 II
+                                        </span>
+                                        <span class="member-line">주라인: 정글 / 부라인: 미드</span>
+                                    </div>
+                                </li>
+                                <li class="member-card">
+                                    <img src="profile.jpg" alt="프로필" class="member-profile">
+                                    <div class="member-info">
+                                        <span class="member-name">닉네임E</span>
+                                        <span class="member-tier">
+                                            <img src="#">
+                                            브론즈 I
+                                        </span>
+                                        <span class="member-line">주라인: 서포터 / 부라인: 탑</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </section>
+                    </section>
+                    <footer class="match-actions">
+                        <button class="btn btn--secondary">취소</button>
+                        <button class="btn btn--primary">확정</button>
+                    </footer>
                 </section>
-                <footer class="match-actions">
-                    <button class="btn btn--secondary">취소</button>
-                    <button class="btn btn--primary">확정</button>
-                </footer>
-            </section>
             </main>
-
         </div>
+    </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

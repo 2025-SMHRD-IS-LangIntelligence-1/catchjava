@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cur = new Date(d);
             const btn = createDayButton(cur);
             if (ymd(cur) === ymd(today)) btn.classList.add('calendar__day--highlight'); // 오늘 표시
-            frag.appendChild(btn); 
+            frag.appendChild(btn);
         }
         calendarEl.appendChild(frag);
         calendarEl.appendChild(rightSpacer);
@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const active = calendarEl.querySelector('.calendar__day--highlight');
         if (active) scrollToCenter(active);
     });
-    
+
     // 실행
     generateCalendar();
 });
@@ -590,3 +590,276 @@ document.addEventListener("DOMContentLoaded", () => {
         shell.classList.remove('no-scroll');     // 스크롤 잠금 해제
     });
 });
+
+
+
+
+// 여기부터 추가
+
+// 길드원 검색 모달
+document.addEventListener("DOMContentLoaded", () => {
+    const overlay = document.getElementById('inviteOverlay');
+    const input = document.getElementById('inviteSearch');
+    const list = document.querySelector('.invite-list');
+    const empty = document.querySelector('.empty');
+    const info = document.getElementById('inviteResultInfo');
+
+    // ===== 모달 열기 =====
+    function openInvite() {
+        overlay.classList.add('show');
+        overlay.removeAttribute('aria-hidden');
+        input.focus();
+        searchMembers(''); // 모달 열릴 때 기본 목록 로드
+    }
+
+    // ===== 모달 닫기 =====
+    function closeInvite() {
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    // ===== 이벤트 바인딩 =====
+    document.addEventListener('click', (e) => {
+        // 초대 버튼 클릭 시
+        if (e.target.closest('.guild-members-invite-btn')) {
+            openInvite();
+        }
+        // 닫기 버튼 또는 오버레이 클릭 시
+        if (e.target.closest('.invite-card__close') || e.target === overlay) {
+            closeInvite();
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('show')) closeInvite();
+    });
+
+    // ===== 디바운스 =====
+    const debounce = (fn, ms = 300) => {
+        let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+    };
+
+    // ===== API 검색 =====
+    let controller = null;
+    async function searchMembers(query) {
+        if (info) info.textContent = query ? `“${query}” 검색 중…` : '추천 불러오는 중…';
+        if (controller) controller.abort();
+        controller = new AbortController();
+
+        try {
+            const res = await fetch(`/api/invite/search?q=${encodeURIComponent(query)}`, {
+                signal: controller.signal
+            });
+            if (!res.ok) throw new Error('검색 실패');
+            const data = await res.json();
+            renderList(data);
+        } catch (err) {
+            if (err.name === 'AbortError') return;
+            console.error(err);
+            renderList([]);
+            if (info) info.textContent = '검색 중 오류 발생';
+        }
+    }
+
+    // ===== 리스트 렌더링 =====
+    function renderList(users) {
+        list.innerHTML = '';
+        if (!users || users.length === 0) {
+            empty.hidden = false;
+            if (info) info.textContent = '검색 결과: 0명';
+            return;
+        }
+        empty.hidden = true;
+        users.forEach(u => {
+            const li = document.createElement('li');
+            li.className = 'invite-item';
+            li.innerHTML = `
+      <img class="invite-item__avatar" src="${u.avatar || 'https://via.placeholder.com/80x80'}" alt="">
+      <div class="invite-item__meta">
+        <span class="invite-item__name">${u.name}</span>
+        <span class="invite-item__tags">주라인: ${u.line || '-'} · 티어: ${u.tier || '-'}</span>
+      </div>
+      <button class="btn btn--primary btn--sm" data-userid="${u.id}">초대</button>
+    `;
+            list.appendChild(li);
+        });
+        if (info) info.textContent = `검색 결과: ${users.length}명`;
+    }
+
+    // ===== 입력 시 자동 검색 =====
+    let composing = false;
+    input.addEventListener('compositionstart', () => composing = true);
+    input.addEventListener('compositionend', () => { composing = false; debouncedSearch(); });
+    input.addEventListener('input', debounce(() => { if (!composing) debouncedSearch(); }, 300));
+
+    const debouncedSearch = debounce(() => {
+        searchMembers(input.value.trim());
+    }, 0);
+
+    // ===== 초대 버튼 토글 예시 =====
+    overlay.addEventListener('click', (e) => {
+        if (e.target.matches('.invite-item .btn--primary.btn--sm, .invite-item .btn--secondary.btn--sm')) {
+            const btn = e.target;
+            const invited = btn.dataset.invited === '1';
+            btn.textContent = invited ? '초대' : '취소';
+            btn.dataset.invited = invited ? '0' : '1';
+            btn.classList.toggle('btn--secondary');
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    function updateBadge(count) {
+        const badge = document.querySelector('.msg-badge');
+        if (!badge) return;
+
+        if (count > 0) {
+            badge.textContent = count;
+            badge.style.display = 'inline-block';
+        } else {
+            badge.style.display = 'none'; // 0이면 숨김
+        }
+    }
+
+    // 예시: 알림 5개
+    updateBadge(5);
+})
+
+
+// ============ 요소 참조 ============
+const noticeOverlay = document.getElementById('noticeOverlay');
+const noticeList = document.getElementById('noticeList') || document.querySelector('.notice-list');
+const closeBtnSel = '.notice-card__close';
+
+// (선택) 헤더의 공지 버튼(기존 메시지 버튼 자리에 사용)
+const noticeBtn = document.querySelector('.button--msg');
+
+// (선택) 배지 업데이트용
+function updateNoticeBadge(count) {
+    const badge = document.querySelector('.button--msg .msg-badge');
+    if (!badge) return;
+    if (count > 0) { badge.textContent = count; badge.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; }
+}
+
+// ============ 모달 열기/닫기 ============
+function openNotice() {
+    noticeOverlay.classList.add('show');
+    noticeOverlay.removeAttribute('aria-hidden');
+    // 처음 오픈 시 데이터 로드 (이미 로드시 중복 요청 막고 싶으면 state 관리)
+    loadNotices();
+}
+function closeNotice() {
+    noticeOverlay.classList.remove('show');
+    noticeOverlay.setAttribute('aria-hidden', 'true');
+}
+
+// 트리거/닫기 이벤트
+document.addEventListener('click', (e) => {
+    if (e.target.closest('.button--msg')) openNotice();              // 공지 버튼
+    if (e.target.closest(closeBtnSel) || e.target === noticeOverlay) closeNotice(); // 닫기, 오버레이
+});
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && noticeOverlay.classList.contains('show')) closeNotice();
+});
+
+// ============ 데이터 로드 ============
+let loading = false;
+async function loadNotices() {
+    if (loading) return;
+    loading = true;
+
+    // 로딩 상태 표시
+    renderNotices({ loading: true });
+
+    try {
+        // ▼ 서버 API 맞춰서 경로/파라미터 수정 가능
+        // 기대 응답 예시:
+        // [{ id:1, title:"...", content:"...", createdAt:"2025-08-10T12:30:00Z", unread:true }, ...]
+        const res = await fetch('/api/notices');
+        if (!res.ok) throw new Error('공지 조회 실패');
+        const data = await res.json();
+
+        renderNotices({ items: data });
+
+        // (선택) 미확인 개수 배지 갱신
+        const unreadCount = (data || []).filter(n => n.unread).length;
+        updateNoticeBadge(unreadCount);
+
+    } catch (err) {
+        console.error(err);
+        renderNotices({ error: '공지 목록을 불러오지 못했습니다.' });
+    } finally {
+        loading = false;
+    }
+}
+
+// ============ 렌더링 ============
+function renderNotices({ loading = false, error = null, items = [] } = {}) {
+    if (!noticeList) return;
+
+    if (loading) {
+        noticeList.innerHTML = `
+      <li class="notice-item"><p class="notice-content">로딩 중…</p></li>
+    `;
+        return;
+    }
+
+    if (error) {
+        noticeList.innerHTML = `
+      <li class="notice-item"><p class="notice-content" style="color:#d33">${error}</p></li>
+    `;
+        return;
+    }
+
+    if (!items || items.length === 0) {
+        noticeList.innerHTML = `
+      <li class="notice-item"><p class="notice-content">표시할 공지가 없습니다.</p></li>
+    `;
+        return;
+    }
+
+    // 공지 최신순 정렬(선택)
+    items.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+
+    // 템플릿 렌더
+    const html = items.map(n => `
+    <li class="notice-item${n.unread ? ' is-unread' : ''}" data-id="${n.id}">
+      <h4 class="notice-title">${escapeHtml(n.title || '')}</h4>
+      <p class="notice-content">${escapeHtml(n.content || '')}</p>
+      <span class="notice-date">${formatDate(n.createdAt)}</span>
+    </li>
+  `).join('');
+    noticeList.innerHTML = html;
+}
+
+// ============ 유틸 ============
+function formatDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
+}
+function escapeHtml(s) {
+    const div = document.createElement('div');
+    div.textContent = s ?? '';
+    return div.innerHTML;
+}
+
+/* ▼ 선택: 공지 읽음 처리 API 호출 예시
+noticeList?.addEventListener('click', (e)=>{
+  const item = e.target.closest('.notice-item');
+  if (!item) return;
+  const id = item.dataset.id;
+  // 읽음 처리
+  fetch(`/api/notices/${id}/read`, { method:'POST' }).catch(console.error);
+  item.classList.remove('is-unread');
+  // 배지 감소
+  const left = noticeList.querySelectorAll('.notice-item.is-unread').length;
+  updateNoticeBadge(left);
+});
+*/
+
+
