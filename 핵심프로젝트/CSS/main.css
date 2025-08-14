@@ -132,7 +132,7 @@ a {
         font-size: 40px;
         color: rgba(225, 25, 35, 1);
         margin-bottom: 3px;
-        display: block;
+        display: none;
 }
 
 /* 메시지 모달 */
@@ -2227,45 +2227,36 @@ a {
     filter: brightness(.96); 
 }
 
-/* 길드 생성 모달 */
-/* 길드 생성 모달 기본 숨김 */
-.modal-step--guildcreate { 
-    display: none; 
-}
-
-/* 모달 열릴 때 배경 스크롤 잠금 */
-.mobile-container.modal-open { 
-    overflow: hidden; 
-}
-
-/* === 길드 생성 모달 전용 스타일 === */
+/* === 길드 생성 모달 === */
 .modal-step--guildcreate {
-    max-width: 440px;
+    width: 90%;                /* 화면 크기에 비례 (반응형) */
+    max-width: 600px;          /* 최대 폭 제한 */
     background: #fff;
-    border-radius: 16px 16px 0 0; /* 하단 시트 느낌 */
+    border-radius: 16px;       /* 전체 모서리 둥글게 */
     padding: 24px 20px;
-    box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     animation: slideUp 0.25s ease-out;
 }
 
 /* 제목 */
 .modal-step--guildcreate .modal-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
     margin-bottom: 20px;
     text-align: center;
 }
 
-/* 입력 필드 스타일 */
+/* 입력 필드 */
 .modal-step--guildcreate .form-control.input-plain {
     width: 100%;
-    padding: 10px 12px;
+    padding: 10px 14px;
     border: 1px solid #ddd;
     border-radius: 8px;
     font-size: 15px;
     margin-bottom: 16px;
     background: #fafafa;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.2s ease, background 0.2s ease;
 }
 .modal-step--guildcreate .form-control.input-plain:focus {
     border-color: #ef4444;
@@ -2279,16 +2270,16 @@ a {
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 16px;
+    justify-content: flex-start;
 }
 
 .line-select-buttons button {
-    flex: 0 0 calc(33.333% - 8px); /* 항상 3개 크기로 고정 */
-    padding: 8px;
+    flex: 0 0 125px;
+    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 8px;
     background: #fafafa;
     cursor: pointer;
-    text-align: center;
     transition: all 0.2s;
 }
 
@@ -2299,13 +2290,28 @@ a {
     font-weight: bold;
 }
 
-
 /* 버튼 영역 */
 .modal-step--guildcreate .modal-actions {
-    margin-top: 10px;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
 }
+
 .modal-step--guildcreate .btn {
+    flex: 1;
     height: 44px;
     border-radius: 8px;
     font-weight: bold;
+}
+
+/* 애니메이션 */
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
