@@ -94,7 +94,7 @@ a {
     text-decoration-line: none;
     color: rgba(24, 23, 28, 1);
     font-weight: bold;
-    display: none;
+    display: block;
 }
 
 .link--login:hover {
@@ -106,7 +106,7 @@ a {
         position: relative;
         border: none;
         object-fit: cover;
-        font-size: 40px;
+        font-size: 35px;
         color: rgba(225, 25, 35, 1);
         display: block;
 }
@@ -136,6 +136,43 @@ a {
 }
 
 /* 메시지 모달 */
+#noticeOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .4);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+}
+#noticeOverlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== 모달 카드 ===== */
+/* 메시지 모달 */
+#noticeOverlay .notice-card {
+    width: min(520px, 92vw);
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(12px);
+    opacity: 0;
+    transition: transform .18s ease, opacity .18s ease;
+}
+
+#noticeOverlay.show .notice-card {
+    transform: translateY(0);
+    opacity: 1;
+}
+
 .notice-card {
     width: min(480px, 92vw);
     background: #fff;
@@ -1731,8 +1768,8 @@ a {
 
 
 /* 모달 오버레이 새로 추가한거 */
-/* ===== 모달 오버레이 ===== */
-.modal-overlay {
+/* ===== 초대 모달 오버레이 ===== */
+#inviteOverlay {
     position: fixed;
     inset: 0;
     display: flex;
@@ -1744,13 +1781,13 @@ a {
     pointer-events: none;
     transition: opacity .2s;
 }
-.modal-overlay.show {
+#inviteOverlay.show {
     opacity: 1;
     pointer-events: auto;
 }
 
 /* ===== 모달 카드 ===== */
-.invite-card {
+#inviteOverlay .invite-card {
     width: min(520px, 92vw);
     background: #fff;
     border-radius: 16px;
@@ -1763,7 +1800,7 @@ a {
     transition: transform .18s ease, opacity .18s ease;
 }
 
-.modal-overlay.show .invite-card {
+#inviteOverlay.show .invite-card {
     transform: translateY(0);
     opacity: 1;
 }
@@ -1886,6 +1923,7 @@ a {
     border-radius: 10px;
     font-size: 14px;
 }
+
 
 
 
