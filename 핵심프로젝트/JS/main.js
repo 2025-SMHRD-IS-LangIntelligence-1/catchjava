@@ -599,84 +599,84 @@ document.addEventListener("DOMContentLoaded", () => {
 // 길드원 검색 모달
 document.addEventListener("DOMContentLoaded", () => {
     // invite-modal.js
-(() => {
-  // ===== 요소 =====
-  const overlay = document.getElementById('inviteOverlay');
-  const input   = document.getElementById('inviteSearch');
-  const list    = document.querySelector('.invite-list');
-  const emptyEl = document.querySelector('.empty');
-  const info    = document.getElementById('inviteResultInfo');
+    (() => {
+        // ===== 요소 =====
+        const overlay = document.getElementById('inviteOverlay');
+        const input = document.getElementById('inviteSearch');
+        const list = document.querySelector('.invite-list');
+        const emptyEl = document.querySelector('.empty');
+        const info = document.getElementById('inviteResultInfo');
 
-  if (!overlay) return; // 페이지에 없으면 조용히 종료
+        if (!overlay) return; // 페이지에 없으면 조용히 종료
 
-  // ===== 유틸 =====
-  const debounce = (fn, ms = 300) => {
-    let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
-  };
+        // ===== 유틸 =====
+        const debounce = (fn, ms = 300) => {
+            let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); };
+        };
 
-  // ===== 열기/닫기 =====
-  function openInvite() {
-    overlay.classList.add('show');
-    overlay.removeAttribute('aria-hidden');
-    input?.focus();
-    searchMembers(''); // 열릴 때 추천 로드
-  }
-  function closeInvite() {
-    overlay.classList.remove('show');
-    overlay.setAttribute('aria-hidden', 'true');
-  }
+        // ===== 열기/닫기 =====
+        function openInvite() {
+            overlay.classList.add('show');
+            overlay.removeAttribute('aria-hidden');
+            input?.focus();
+            searchMembers(''); // 열릴 때 추천 로드
+        }
+        function closeInvite() {
+            overlay.classList.remove('show');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
 
-  // 외부에서 트리거(초대 버튼)
-  document.addEventListener('click', (e) => {
-    // 초대 버튼 → 열기
-    if (e.target.closest('.guild-members-invite-btn')) {
-      openInvite();
-      return;
-    }
-    // 닫기(X) 또는 오버레이 클릭 → 닫기
-    if (e.target.closest('.invite-card__close') || e.target === overlay) {
-      closeInvite();
-    }
-  });
+        // 외부에서 트리거(초대 버튼)
+        document.addEventListener('click', (e) => {
+            // 초대 버튼 → 열기
+            if (e.target.closest('.guild-members-invite-btn')) {
+                openInvite();
+                return;
+            }
+            // 닫기(X) 또는 오버레이 클릭 → 닫기
+            if (e.target.closest('.invite-card__close') || e.target === overlay) {
+                closeInvite();
+            }
+        });
 
-  // ESC 닫기
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) closeInvite();
-  });
+        // ESC 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('show')) closeInvite();
+        });
 
-  // ===== 검색 API =====
-  let controller = null;
-  async function searchMembers(query) {
-    if (info) info.textContent = query ? `“${query}” 검색 중…` : '추천 불러오는 중…';
-    if (controller) controller.abort();
-    controller = new AbortController();
-    try {
-      const res = await fetch(`/api/invite/search?q=${encodeURIComponent(query)}`, { signal: controller.signal });
-      if (!res.ok) throw new Error('검색 실패');
-      const data = await res.json();
-      renderList(data);
-    } catch (err) {
-      if (err.name === 'AbortError') return;
-      console.error(err);
-      renderList([]);
-      if (info) info.textContent = '검색 중 오류 발생';
-    }
-  }
+        // ===== 검색 API =====
+        let controller = null;
+        async function searchMembers(query) {
+            if (info) info.textContent = query ? `“${query}” 검색 중…` : '추천 불러오는 중…';
+            if (controller) controller.abort();
+            controller = new AbortController();
+            try {
+                const res = await fetch(`/api/invite/search?q=${encodeURIComponent(query)}`, { signal: controller.signal });
+                if (!res.ok) throw new Error('검색 실패');
+                const data = await res.json();
+                renderList(data);
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                console.error(err);
+                renderList([]);
+                if (info) info.textContent = '검색 중 오류 발생';
+            }
+        }
 
-  function renderList(users) {
-    if (!list) return;
-    list.innerHTML = '';
-    if (!users || users.length === 0) {
-      if (emptyEl) emptyEl.hidden = false;
-      if (info) info.textContent = '검색 결과: 0명';
-      return;
-    }
-    if (emptyEl) emptyEl.hidden = true;
+        function renderList(users) {
+            if (!list) return;
+            list.innerHTML = '';
+            if (!users || users.length === 0) {
+                if (emptyEl) emptyEl.hidden = false;
+                if (info) info.textContent = '검색 결과: 0명';
+                return;
+            }
+            if (emptyEl) emptyEl.hidden = true;
 
-    users.forEach(u => {
-      const li = document.createElement('li');
-      li.className = 'invite-item';
-      li.innerHTML = `
+            users.forEach(u => {
+                const li = document.createElement('li');
+                li.className = 'invite-item';
+                li.innerHTML = `
         <img class="invite-item__avatar" src="${u.avatar || 'https://via.placeholder.com/80x80'}" alt="">
         <div class="invite-item__meta">
           <span class="invite-item__name">${u.name}</span>
@@ -684,153 +684,300 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <button class="btn btn--primary btn--sm" data-userid="${u.id}">초대</button>
       `;
-      list.appendChild(li);
-    });
-    if (info) info.textContent = `검색 결과: ${users.length}명`;
-  }
+                list.appendChild(li);
+            });
+            if (info) info.textContent = `검색 결과: ${users.length}명`;
+        }
 
-  // 입력 디바운스 + IME 대응
-  if (input) {
-    let composing = false;
-    const doSearch = () => searchMembers(input.value.trim());
+        // 입력 디바운스 + IME 대응
+        if (input) {
+            let composing = false;
+            const doSearch = () => searchMembers(input.value.trim());
 
-    input.addEventListener('compositionstart', () => composing = true);
-    input.addEventListener('compositionend',   () => { composing = false; debounced(); });
+            input.addEventListener('compositionstart', () => composing = true);
+            input.addEventListener('compositionend', () => { composing = false; debounced(); });
 
-    input.addEventListener('input', debounce(() => {
-      if (!composing) debounced();
-    }, 300));
+            input.addEventListener('input', debounce(() => {
+                if (!composing) debounced();
+            }, 300));
 
-    const debounced = debounce(doSearch, 0);
-  }
+            const debounced = debounce(doSearch, 0);
+        }
 
-  // 초대/취소 토글 (예시)
-  overlay.addEventListener('click', (e) => {
-    if (e.target.matches('.invite-item .btn--primary.btn--sm, .invite-item .btn--secondary.btn--sm')) {
-      const btn = e.target;
-      const invited = btn.dataset.invited === '1';
-      btn.textContent = invited ? '초대' : '취소';
-      btn.dataset.invited = invited ? '0' : '1';
-      btn.classList.toggle('btn--secondary');
-      // TODO: 실제 초대/취소 API 연동
-    }
-  });
-})();
+        // 초대/취소 토글 (예시)
+        overlay.addEventListener('click', (e) => {
+            if (e.target.matches('.invite-item .btn--primary.btn--sm, .invite-item .btn--secondary.btn--sm')) {
+                const btn = e.target;
+                const invited = btn.dataset.invited === '1';
+                btn.textContent = invited ? '초대' : '취소';
+                btn.dataset.invited = invited ? '0' : '1';
+                btn.classList.toggle('btn--secondary');
+                // TODO: 실제 초대/취소 API 연동
+            }
+        });
+    })();
 
 });
 
 // 메시지 모달
 document.addEventListener("DOMContentLoaded", () => {
     // notice-modal.js
-(() => {
-  // ===== 요소 =====
-  const overlay   = document.getElementById('noticeOverlay');
-  const listEl    = document.getElementById('noticeList') || document.querySelector('.notice-list');
+    (() => {
+        // ===== 요소 =====
+        const overlay = document.getElementById('noticeOverlay');
+        const listEl = document.getElementById('noticeList') || document.querySelector('.notice-list');
 
-  if (!overlay) return;
+        if (!overlay) return;
 
-  // ===== 열기/닫기 =====
-  function openNotice() {
-    overlay.classList.add('show');
-    overlay.removeAttribute('aria-hidden');
-    loadNotices();
-  }
-  function closeNotice() {
-    overlay.classList.remove('show');
-    overlay.setAttribute('aria-hidden', 'true');
-  }
+        // ===== 열기/닫기 =====
+        function openNotice() {
+            overlay.classList.add('show');
+            overlay.removeAttribute('aria-hidden');
+            loadNotices();
+        }
+        function closeNotice() {
+            overlay.classList.remove('show');
+            overlay.setAttribute('aria-hidden', 'true');
+        }
 
-  // 트리거: 헤더의 메시지(벨) 버튼
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.button--msg')) {
-      openNotice();
-      return;
-    }
-    if (e.target.closest('.notice-card__close') || e.target === overlay) {
-      closeNotice();
-    }
-  });
+        // 트리거: 헤더의 메시지(벨) 버튼
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.button--msg')) {
+                openNotice();
+                return;
+            }
+            if (e.target.closest('.notice-card__close') || e.target === overlay) {
+                closeNotice();
+            }
+        });
 
-  // ESC 닫기
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('show')) closeNotice();
-  });
+        // ESC 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('show')) closeNotice();
+        });
 
-  // ===== 데이터 로드/렌더 =====
-  let loading = false;
+        // ===== 데이터 로드/렌더 =====
+        let loading = false;
 
-  async function loadNotices() {
-    if (loading) return;
-    loading = true;
-    render({ loading: true });
+        async function loadNotices() {
+            if (loading) return;
+            loading = true;
+            render({ loading: true });
 
-    try {
-      // 기대 응답: [{id, title, content, createdAt, unread}]
-      const res = await fetch('/api/notices');
-      if (!res.ok) throw new Error('공지 조회 실패');
-      const data = await res.json();
-      render({ items: data });
-      // 선택: 미확인 배지 갱신
-      // updateMsgBadge((data || []).filter(n => n.unread).length);
-    } catch (err) {
-      console.error(err);
-      render({ error: '공지 목록을 불러오지 못했습니다.' });
-    } finally {
-      loading = false;
-    }
-  }
+            try {
+                // 기대 응답: [{id, title, content, createdAt, unread}]
+                const res = await fetch('/api/notices');
+                if (!res.ok) throw new Error('공지 조회 실패');
+                const data = await res.json();
+                render({ items: data });
+                // 선택: 미확인 배지 갱신
+                // updateMsgBadge((data || []).filter(n => n.unread).length);
+            } catch (err) {
+                console.error(err);
+                render({ error: '공지 목록을 불러오지 못했습니다.' });
+            } finally {
+                loading = false;
+            }
+        }
 
-  function render({ loading=false, error=null, items=[] } = {}) {
-    if (!listEl) return;
+        function render({ loading = false, error = null, items = [] } = {}) {
+            if (!listEl) return;
 
-    if (loading) {
-      listEl.innerHTML = `<li class="notice-item"><p class="notice-content">로딩 중…</p></li>`;
-      return;
-    }
-    if (error) {
-      listEl.innerHTML = `<li class="notice-item"><p class="notice-content" style="color:#d33">${error}</p></li>`;
-      return;
-    }
-    if (!items || items.length === 0) {
-      listEl.innerHTML = `<li class="notice-item"><p class="notice-content">표시할 공지가 없습니다.</p></li>`;
-      return;
-    }
+            if (loading) {
+                listEl.innerHTML = `<li class="notice-item"><p class="notice-content">로딩 중…</p></li>`;
+                return;
+            }
+            if (error) {
+                listEl.innerHTML = `<li class="notice-item"><p class="notice-content" style="color:#d33">${error}</p></li>`;
+                return;
+            }
+            if (!items || items.length === 0) {
+                listEl.innerHTML = `<li class="notice-item"><p class="notice-content">표시할 공지가 없습니다.</p></li>`;
+                return;
+            }
 
-    items.sort((a,b) => new Date(b.createdAt||0) - new Date(a.createdAt||0));
-    listEl.innerHTML = items.map(n => `
+            items.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+            listEl.innerHTML = items.map(n => `
       <li class="notice-item${n.unread ? ' is-unread' : ''}" data-id="${n.id}">
         <h4 class="notice-title">${escapeHtml(n.title || '')}</h4>
         <p class="notice-content">${escapeHtml(n.content || '')}</p>
         <span class="notice-date">${fmtDate(n.createdAt)}</span>
       </li>
     `).join('');
-  }
+        }
 
-  function fmtDate(iso) {
-    if (!iso) return '';
-    const d = new Date(iso); if (Number.isNaN(d.getTime())) return '';
-    const y = d.getFullYear();
-    const m = String(d.getMonth()+1).padStart(2,'0');
-    const day = String(d.getDate()).padStart(2,'0');
-    return `${y}-${m}-${day}`;
-  }
-  function escapeHtml(s) {
-    const div = document.createElement('div');
-    div.textContent = s ?? '';
-    return div.innerHTML;
-  }
+        function fmtDate(iso) {
+            if (!iso) return '';
+            const d = new Date(iso); if (Number.isNaN(d.getTime())) return '';
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}-${m}-${day}`;
+        }
+        function escapeHtml(s) {
+            const div = document.createElement('div');
+            div.textContent = s ?? '';
+            return div.innerHTML;
+        }
 
-  // (선택) 메시지 배지 업데이트 유틸
-  function updateMsgBadge(n) {
-    const b = document.querySelector('.button--msg .msg-badge');
-    if (!b) return;
-    if (n > 0) { b.textContent = n; b.style.display = 'inline-block'; }
-    else { b.style.display = 'none'; }
-  }
+        // (선택) 메시지 배지 업데이트 유틸
+        function updateMsgBadge(n) {
+            const b = document.querySelector('.button--msg .msg-badge');
+            if (!b) return;
+            if (n > 0) { b.textContent = n; b.style.display = 'inline-block'; }
+            else { b.style.display = 'none'; }
+        }
 
-  // 외부에서 쓸 수 있게 window에 공개(선택)
-  window.__noticeModal = { open: openNotice, close: closeNotice, updateBadge: updateMsgBadge };
-})();
+        // 외부에서 쓸 수 있게 window에 공개(선택)
+        window.__noticeModal = { open: openNotice, close: closeNotice, updateBadge: updateMsgBadge };
+    })();
 
 
+});
+
+// 네비게이션 밑줄 유지
+document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll('.nav-bar__link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // 페이지 이동 막기 (display none/block 쓸 거니까)
+
+            // 기존 active 제거
+            navLinks.forEach(l => l.classList.remove('active'));
+
+            // 클릭한 요소에 active 부여
+            link.classList.add('active');
+
+            // 여기서 아래 섹션 display none/block 처리
+            const tabId = link.textContent.trim(); // '홈', '길드' 이런 텍스트
+            document.querySelectorAll('.tab-section').forEach(sec => {
+                sec.style.display = (sec.dataset.tab === tabId) ? 'block' : 'none';
+            });
+        });
+    });
+});
+
+// 채팅
+document.addEventListener("DOMContentLoaded", () => {
+    /* 채팅 FAB 드래그 + 위치 저장 */
+    (() => {
+        const fab = document.getElementById('chatFab');           // FAB 래퍼
+        const overlay = document.getElementById('chatOverlay');    // 채팅 모달
+        const inputEl = document.getElementById('chatInput');      // 입력창
+        const frame = document.querySelector('.mobile-container'); // 480px 프레임 경계
+
+        if (!fab) return;
+
+        let dragging = false;
+        let startX = 0, startY = 0;
+        let startLeft = 0, startTop = 0;
+        const THRESHOLD = 5; // 클릭/드래그 구분 임계값(px)
+
+        // 저장된 위치 복원
+        const saved = JSON.parse(localStorage.getItem('guildChatFabPos') || 'null');
+        if (saved && Number.isFinite(saved.left) && Number.isFinite(saved.top)) {
+            fab.style.left = saved.left + 'px';
+            fab.style.top = saved.top + 'px';
+            fab.style.right = 'auto';
+            fab.style.bottom = 'auto';
+        }
+
+        fab.addEventListener('pointerdown', (e) => {
+            if (e.button !== 0) return; // 좌클릭만
+            dragging = false;
+
+            const rect = fab.getBoundingClientRect();
+            startLeft = rect.left;
+            startTop = rect.top;
+            startX = e.clientX;
+            startY = e.clientY;
+
+            // 드래그 좌표 계산을 위해 left/top 기준으로 전환
+            fab.style.left = startLeft + 'px';
+            fab.style.top = startTop + 'px';
+            fab.style.right = 'auto';
+            fab.style.bottom = 'auto';
+
+            fab.setPointerCapture(e.pointerId);
+
+            const onMove = (ev) => {
+                const dx = ev.clientX - startX;
+                const dy = ev.clientY - startY;
+
+                if (!dragging && (Math.abs(dx) > THRESHOLD || Math.abs(dy) > THRESHOLD)) {
+                    dragging = true;
+                }
+                if (!dragging) return;
+
+                // 경계: .mobile-container 안으로 클램프 (없으면 창 크기 기준)
+                const bound = frame?.getBoundingClientRect() || {
+                    left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight
+                };
+                const fabRect = fab.getBoundingClientRect();
+                const w = fabRect.width, h = fabRect.height;
+
+                let nextLeft = startLeft + dx;
+                let nextTop = startTop + dy;
+
+                nextLeft = Math.max(bound.left, Math.min(bound.right - w, nextLeft));
+                nextTop = Math.max(bound.top, Math.min(bound.bottom - h, nextTop));
+
+                fab.style.left = nextLeft + 'px';
+                fab.style.top = nextTop + 'px';
+            };
+
+            const onUp = () => {
+                fab.releasePointerCapture(e.pointerId);
+                window.removeEventListener('pointermove', onMove);
+                window.removeEventListener('pointerup', onUp);
+
+                if (dragging) {
+                    // 드래그였다면 위치 저장
+                    const r = fab.getBoundingClientRect();
+                    localStorage.setItem('guildChatFabPos', JSON.stringify({ left: r.left, top: r.top }));
+                } else {
+                    // 드래그가 아니면 클릭으로 처리 → 모달 열기
+                    overlay?.classList.add('show');
+                    overlay?.setAttribute('aria-hidden', 'false');
+                    setTimeout(() => inputEl?.focus(), 80);
+                }
+            };
+
+            window.addEventListener('pointermove', onMove);
+            window.addEventListener('pointerup', onUp, { once: true });
+        });
+    })();
+
+    // 닫기 (X 버튼/배경 공통) — 기존 핸들러 교체
+    function closeOverlay(sel) {
+        const modal = document.querySelector(sel);
+        if (!modal) return;
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+    }
+
+    document.addEventListener('click', (e) => {
+        // 1) X 버튼(혹은 내부 아이콘) 클릭: data-close로 지정된 타겟 닫기
+        const closer = e.target.closest('[data-close]');
+        if (closer) {
+            const sel = closer.getAttribute('data-close');
+            if (sel) closeOverlay(sel);
+            return;
+        }
+
+        // 2) 배경(오버레이) 클릭: 그 오버레이 자체 닫기
+        const overlay = document.getElementById('chatOverlay');
+        if (overlay && e.target === overlay) {
+            closeOverlay('#chatOverlay');
+        }
+    });
+
+    // ESC로 닫기 (옵션이지만 UX 좋아짐)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeOverlay('#chatOverlay');
+        }
+    });
+    
 });

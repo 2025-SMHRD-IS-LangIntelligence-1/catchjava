@@ -208,7 +208,7 @@
             <div class="user-panel__overlay"></div>
             <!-- 네비게이션 바 -->
             <nav class="nav-bar">
-                <div class="nav-bar__item btn-home"><a href="#" class="nav-bar__link">홈</a></div>
+                <div class="nav-bar__item btn-home"><a href="#" class="nav-bar__link active">홈</a></div>
                 <div class="nav-bar__item btn-guild"><a href="#" class="nav-bar__link">길드</a></div>
             </nav>
             <main>
@@ -216,7 +216,7 @@
                     <!-- esports 경기 일정 -->
                     <section class="section esports-schedule">
                         <div class="section__title">
-                            <p class="esports-schedule-title">Esports 경기 일정</p>
+                            <p class="esports-schedule-title">E-Sports 경기 일정</p>
                         </div>
                         <div class="calendar"></div>
                         <!-- <div class="calendar">
@@ -276,7 +276,7 @@
                     <!-- esports 뉴스 -->
                     <section class="section esports-news">
                         <div class="section__title">
-                            <p class="esports-news-title">Esports 뉴스</p>
+                            <p class="esports-news-title">E-Sports 뉴스</p>
                         </div>
                         <div class="news-category">
                             <button class="news-category__button">All</button>
@@ -338,7 +338,7 @@
                                         </button>
 
                                         <!-- hidden input: 서버 전송용 -->
-                                        <input type="hidden" id="mainPositionInput" name="input-time" value="">
+                                        <input type="hidden" id="TimeInput" name="input-time" value="">
                                         <!-- 시간대 선택 -->
                                         <button type="button" class="input input-time">
                                             <div class="input-time-box">
@@ -576,6 +576,49 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 채팅 버튼 -->
+                        <div class="fab-chat draggable" id="chatFab">
+                            <button class="fab-btn fab-btn--chat" type="button" id="openChatBtn"
+                                aria-label="채팅 열기">💬</button>
+                        </div>
+
+                        <!-- 채팅 모달 -->
+                        <div id="chatOverlay" class="modal-overlay" aria-hidden="true">
+                            <div class="chat-card" role="dialog" aria-modal="true" aria-labelledby="chatTitle">
+                                <header class="chat-card__header">
+                                    <h3 id="chatTitle" class="chat-card__title">길드 채팅</h3>
+                                    <button class="icon-btn chat-card__close" data-close="#chatOverlay"
+                                        aria-label="닫기">×</button>
+                                </header>
+
+                                <div class="chat-card__body">
+                                    <!-- 메시지 영역 -->
+                                    <div class="chat-messages" id="chatMessages" aria-live="polite">
+                                        <!-- 예시 메시지 -->
+                                        <div class="msg">
+                                            <div class="msg__bubble">
+                                                <div class="msg__meta">길드원A · 18:20</div>
+                                                <div class="msg__text">오늘 9시에 스크림 ㄱㄱ?</div>
+                                            </div>
+                                        </div>
+                                        <div class="msg msg--me">
+                                            <div class="msg__bubble">
+                                                <div class="msg__meta">나 · 18:21</div>
+                                                <div class="msg__text">오케이!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 입력 영역 -->
+                                    <form class="chat-input" id="chatForm" autocomplete="off">
+                                        <input id="chatInput" type="text" class="chat-input__field"
+                                            placeholder="메시지를 입력하세요 (Enter로 전송)" aria-label="메시지 입력" required />
+                                        <button class="chat-input__send" type="submit">전송</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 <section class="match-section">
                     <header class="match-header">

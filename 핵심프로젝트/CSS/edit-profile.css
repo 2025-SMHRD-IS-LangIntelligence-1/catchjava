@@ -102,9 +102,9 @@ a {
 .nav-bar__link::after {
     content: "";
     position: absolute;
-    left: 0;
+    left: 10%;
     bottom: -4px; /* 밑줄을 아래로 */
-    width: 100%;
+    width: 80%;
     height: 2px;
     background-color: rgba(225, 25, 35, 1);
     transform: scaleX(0);
@@ -113,6 +113,10 @@ a {
 }
 
 .nav-bar__link:hover::after {
+    transform: scaleX(1);
+}
+
+.nav-bar__link.active::after {
     transform: scaleX(1);
 }
 

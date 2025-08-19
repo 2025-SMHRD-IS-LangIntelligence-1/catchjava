@@ -171,3 +171,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // TODO: 모달 닫기
     });
 });
+
+// 네비게이션 밑줄 유지
+document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll('.nav-bar__link');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // 페이지 이동 막기 (display none/block 쓸 거니까)
+
+            // 기존 active 제거
+            navLinks.forEach(l => l.classList.remove('active'));
+
+            // 클릭한 요소에 active 부여
+            link.classList.add('active');
+
+            // 여기서 아래 섹션 display none/block 처리
+            const tabId = link.textContent.trim(); // '홈', '길드' 이런 텍스트
+            document.querySelectorAll('.tab-section').forEach(sec => {
+                sec.style.display = (sec.dataset.tab === tabId) ? 'block' : 'none';
+            });
+        });
+    });
+});
